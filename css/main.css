@@ -4684,7 +4684,7 @@ blockquote {
   background-color: var(--primary);
   border-radius: 20px;
   flex-direction: column;
-  width: 40%;
+  width: 100%;
   padding: 30px;
   display: flex;
 }
@@ -4749,8 +4749,8 @@ blockquote {
 }
 
 .hero-inputs-wrapper {
-  grid-column-gap: 15px;
-  grid-row-gap: 0px;
+  grid-column-gap: 5px;
+  grid-row-gap: 15px;
   grid-template-rows: auto;
   grid-template-columns: 1fr 1fr 1fr;
   grid-auto-columns: 1fr;
@@ -6206,7 +6206,7 @@ blockquote {
 }
 
 .heading-banner.large {
-  letter-spacing: -4.5px;
+  letter-spacing: -2.5px;
   /* max-width: 420px; */
   margin-bottom: 25px;
   line-height: 1em;
@@ -7052,7 +7052,7 @@ blockquote {
 }
 
 .input.padding {
-  padding-right: 28px;
+  padding-right: 20px;
 }
 
 .right-footer-block {
@@ -8380,7 +8380,7 @@ blockquote {
   }
 
   .contacts-content-wrapper {
-    padding: 50px;
+    padding: 40px;
   }
 
   .footer-social-icons-wrapper {
@@ -8404,12 +8404,12 @@ blockquote {
   }
 
   .grid-card-wrapper {
-    grid-column-gap: 50px;
+    grid-column-gap: 10px;
     grid-row-gap: 50px;
   }
 
   .grid-card-item {
-    padding: 30px;
+    padding: 10px;
   }
 
   .service-details-sidebar-wrapper {
@@ -8505,7 +8505,7 @@ blockquote {
 
   .shop-details-wrapper {
     grid-column-gap: 70px;
-    grid-template-columns: 1.12fr 1fr;
+    grid-template-columns: 1fr;
     align-items: start;
   }
 
@@ -9305,7 +9305,7 @@ blockquote {
   }
 
   .contacts-content-wrapper {
-    width: 55%;
+    width: 80%;
   }
 
   .adress-cards-wrapper {
@@ -10648,6 +10648,7 @@ blockquote {
 
   .heading-banner.large {
     max-width: 300px;
+    letter-spacing: -2px;
   }
 
   .heading-banner.home-3 {
@@ -12245,7 +12246,8 @@ blockquote {
 .banner-image {
   object-fit: cover;
   width: 100%;
-  height: 400px;
+  height: auto;
+  max-height: 400px
 }
 
 .testimonial-author-image-three {
@@ -12425,6 +12427,10 @@ blockquote {
   padding: 5rem 0;
 }
 
+.py-3 {
+  padding: 3rem 0;
+}
+
 .p-1 {
   padding: 1rem;
 }
@@ -12464,3 +12470,7 @@ blockquote {
 .p-0 {
   padding: 0px !important;
 }
+
+/* .d-none {
+  display: none !important;
+} */
