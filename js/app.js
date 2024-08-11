@@ -11,6 +11,11 @@ const id = getId() ?? '8e691157-d606-440d-aa61-60ab5fd6d42d';
 let editControl = false;
 document.getElementById('saveButton').style.display = 'none';
 
+
+// const domNode = document.getElementById('app');
+// const root = ReactDOM.createRoot(domNode);
+// root.render('<h1>Develop. Preview. Ship.</h1>');
+
 if(id) {
     // document.getElementById('editingNotificationBannner').style.display = 'block';
     // document.querySelectorAll('[contenteditable=false]').forEach((e) => { e.setAttribute('contenteditable', 'true') });
