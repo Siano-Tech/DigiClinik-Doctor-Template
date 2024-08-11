@@ -3,7 +3,7 @@
 // Function to get the last segment of the URL path
 function getId() {
     const pathArray = window.location.search.split('=')?.pop();
-    return pathArray ?? null;
+    return pathArray.length > 0 ? pathArray : null;
 }
 
 // Get the last URL segment
