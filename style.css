@@ -302,6 +302,10 @@
     flex-direction: column;
 }
 
+#main-navbar {
+    margin-top: 50px;
+}
+
 /* .content-to-edit::before {
     font-family: "Font Awesome 6 Free";
     content: "\f095";
@@ -316,6 +320,10 @@
 
 /* Mobiles */
 @media screen and (max-width: 479px) {
+
+    #main-navbar {
+        margin-top: 60px;
+    }
 
     .doctor-details {
         display: flex;
@@ -638,7 +646,6 @@
 }
 
 
-
 /* Tablets */
 @media screen and (max-width: 767px) { 
     .mb-50.home-2-banner {
@@ -657,6 +664,10 @@
         justify-content: center;
         align-items: center;
     }
+
+    .category-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 }
 
 
@@ -673,6 +684,10 @@
         background: whitesmoke;
         opacity: 0.35;
     } */
+
+    .category-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 }
 
 /* Desktops */
@@ -721,5 +736,59 @@
     .doctor-block.doctor-image {
         left: 40%;
         top: 20%
+    }
+}
+
+.popover-dialog {
+    border-radius: 20px;
+    padding: 20px;
+    min-width: 50%;
+    min-height: 50%;
+}
+
+.popover-close-btn {
+    padding: 5px 13px;
+    border-radius: 100%;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+}
+
+.popover-title {
+    margin-top: 20px;
+    margin-right: 30px;
+}
+
+.popover-divider {
+    margin-bottom: 20px;
+    margin-top: 15px;
+}
+
+[popover] {
+    &, &::backdrop {
+      transition: 
+        display .5s allow-discrete, 
+        overlay .5s allow-discrete, 
+        opacity .5s;
+      opacity: 0;
+    }
+  
+    &::backdrop {
+      background: black;
+    }
+  
+    &:popover-open {
+      opacity: 1;
+  
+      &::backdrop {
+        opacity: 0.5;
+      }
+    }
+  
+    @starting-style {
+      &:popover-open,
+      &:popover-open::backdrop {
+        opacity: 0;
+      }
     }
 }

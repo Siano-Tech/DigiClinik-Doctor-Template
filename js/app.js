@@ -10,6 +10,7 @@ function getId() {
 const id = getId() ?? '8e691157-d606-440d-aa61-60ab5fd6d42d';
 let editControl = false;
 document.getElementById('saveButton').style.display = 'none';
+let clinicData, selectedTheme, selectedThemeIndex, selectedFont, selectedFontIndex;
 
 
 // const domNode = document.getElementById('app');
@@ -17,7 +18,7 @@ document.getElementById('saveButton').style.display = 'none';
 // root.render('<h1>Develop. Preview. Ship.</h1>');
 
 if(id) {
-    // document.getElementById('editingNotificationBannner').style.display = 'block';
+    // document.getElementById('edit-notification-bar').style.display = 'block';
     // document.querySelectorAll('[contenteditable=false]').forEach((e) => { e.setAttribute('contenteditable', 'true') });
     // editControl = true;
     // document.styleSheets[0].insertRule('image-cover:hover { opacity: 0.5; }', 0);
@@ -26,76 +27,109 @@ if(id) {
     // document.querySelectorAll('[contenteditable=false]').forEach((e) => { 
     //     e.classList.add('content-to-edit');
     // });
+    getDetails();
 }
 
-axios.post('http://localhost:5000/api/clinic/clinicData',{
-    headers: { 'Access-Control-Allow-Origin': '*' },
-    "id": id
-}).then((d) => {
-    console.log(d);
-    if(d.status === 200) {
-        if(d.data.data) {
-            if(d.data.data.doctorName) {
-                const {doctorName, speciality, experience, patientsConsulted, ratings, clinicGallery} = d.data.data;
-                const {headerTitle, heroTitle, heroSubTitle, qualification, about, doctorPic, diagnosis, procedures} = d.data.data;
-                const {kh1, kh2, kh3, dm, dmName, dmDesignation} = d.data.data;
-                document.getElementById('header-title').textContent = headerTitle ?? doctorName;
-                document.getElementById('hero-title').textContent = heroTitle;
-                document.getElementById('hero-sub-title').textContent = heroSubTitle;
-                document.getElementById('customersServed').textContent = patientsConsulted;
-                document.getElementById('ratings').textContent = ratings + '/5';
-                document.getElementById('doctorDetails-Pic').setAttribute('src', doctorPic);
-                document.getElementById('doctorDetails-Name').textContent = doctorName;
-                document.getElementById('doctorDetails-Speciality').textContent = speciality;
-                document.getElementById('doctorDetails-Experience').textContent = experience + ' Years of Experience';
-                document.getElementById('doctorDetails-Qualification').textContent = qualification;
-                document.getElementById('doctorDetails-About').textContent = about;
-                document.getElementById('dm-pic').setAttribute('src', doctorPic);
-                document.getElementById('dm-name').textContent = dmName ?? doctorName;
-                document.getElementById('dm-designation').textContent = dmDesignation ?? speciality;
+function getDetails() {
+    axios.post('http://localhost:5000/api/clinic/clinicData',{
+        headers: { 'Access-Control-Allow-Origin': '*' },
+        "id": id
+    }).then((d) => {
+        console.log(d);
+        if(d.status === 200) {
+            if(d.data.data) {
+                if(d.data.data.doctorName) {
+                    clinicData = d.data.data;
+                    const {doctorName, speciality, experience, patientsConsulted, ratings, clinicGallery} = d.data.data;
+                    const {headerTitle, heroTitle, heroSubTitle, qualification, about, doctorPic, diagnosis, procedures} = d.data.data;
+                    const {kh1, kh2, kh3, dm, dmName, dmDesignation, selectedFont, selectedTheme, city} = d.data.data;
+                    const {heroDoctorName, workExperience, qualificationDets, awards} = d.data.data;
+                    document.getElementById('header-title').textContent = headerTitle ?? doctorName;
+                    // document.getElementById('hero-title').textContent = `Trusted Skin Care by Dr. ${doctorName} – Leading Dermatologist in ${city}`;
+                    // document.getElementById('hero-sub-title').textContent = heroSubTitle;
+                    document.getElementById('customersServed').textContent = patientsConsulted;
+                    document.getElementById('ratings').textContent = ratings + '/5';
+                    document.getElementById('doctorDetails-Pic').setAttribute('src', doctorPic);
+                    document.getElementById('doctorDetails-Name').textContent = doctorName;
+                    document.getElementById('doctorDetails-Speciality').textContent = `Consultant ${speciality}`;
+                    document.getElementById('doctorDetails-Experience').textContent = experience + ' Years of Experience';
+                    document.getElementById('doctorDetails-Qualification').textContent = qualification;
+                    const exp = workExperience.map(e => e.hospitalName).join(' and ');
+                    const abt = `Dr. ${doctorName} is a distinguished dermatologist with over ${experience} years of experience in treating various skin conditions. A graduate of ${qualificationDets[0].collegeName}, Dr. ${doctorName} refined their skills at renowned institutions like ${exp}, where they earned a reputation for delivering exceptional patient care. Specializing in ${speciality}, Dr. ${doctorName} is dedicated to using the latest dermatological advancements to provide personalized treatment plans tailored to each patient's unique needs.`
+                    document.getElementById('doctorDetails-About').textContent = abt ?? about;
+                    document.getElementById('dm-pic').setAttribute('src', doctorPic);
+                    const dmname = dmName ?? doctorName;;
+                    document.getElementById('dm-name').textContent = 'Dr. ' + dmname;
+                    document.getElementById('dm-designation').textContent = dmDesignation ?? speciality;
+                    document.getElementById('clinic-loc').textContent = `Conveniently located in ${city}, our clinic offers comprehensive dermatological care with easy access and modern facilities.`;
 
-                
-                updatePopularTreatments(diagnosis);
-                updatePopularTreatmentsMobile(diagnosis);
-                updatePopularDiagnosis(procedures);
-                updateClinicImages(clinicGallery);
-                updateClinicAddress(d.data.data);
-
-                if(heroTitle) {
-                    document.getElementById('hero-title').textContent = heroTitle;
+                    updatePopularTreatments(diagnosis);
+                    updatePopularTreatmentsMobile(diagnosis);
+                    updatePopularDiagnosis(procedures);
+                    updateClinicImages(clinicGallery);
+                    updateClinicAddress(d.data.data);
+    
+                    // if(heroTitle) {
+                        document.getElementById('hero-title').innerHTML = `Trusted Skin Care by <span class="blue-text" id="hero-doctorName" contenteditable="false">Dr. ${heroDoctorName ?? doctorName}</span> – Leading Dermatologist in <span class="blue-text" id="city" contenteditable="false">${city}</span>`;
+                    // }
+                    // if(heroSubTitle) {
+                        
+                        document.getElementById('hero-sub-title').textContent = heroSubTitle ?? `Dr. ${heroDoctorName ?? doctorName}, with over ${experience} years of experience in dermatology, has been transforming the skin health of patients in ${city}. Having previously served at esteemed hospitals such as ${exp}, Dr. ${doctorName} combines deep expertise with a personalized approach to provide top-tier skin care tailored to your unique needs.`;
+                    // }
+                    // if(kh1) {
+                        const k1 = `Dr. ${doctorName} completed their medical education at ${qualificationDets?.pop()?.collegeName}, graduating with a ${qualificationDets?.pop()?.qualification} in ${qualificationDets?.pop()?.yog}. This comprehensive education laid a strong foundation for their extensive expertise in the field of dermatology.`
+                        document.getElementById('keyHighlights-1').textContent = kh1 ?? k1;
+                    // }
+                    // if(kh2) {
+                        const k2 = `Dr. ${doctorName} began their career at ${workExperience?.pop()?.hospitalName}, where they worked from ${workExperience?.pop()?.workYrs} till now. During their time at these esteemed institutions, Dr. ${doctorName} gained invaluable experience and developed a reputation for excellence in dermatological care.`
+                        document.getElementById('keyHighlights-2').textContent = kh2 ?? k2;
+                    // }
+                    // if(kh3) {
+                        document.getElementById('keyHighlights-3').textContent = awards;
+                    // }
+                    if(dm) {
+                        document.getElementById('doctor-message').textContent = dm;
+                    }
+                    if(selectedTheme) {
+                        setSelectedTheme(d.data.data)
+                    }
+                    if(selectedFont) {
+                        setSelectedFont(d.data.data)
+                    }
+                    addEditControls()
                 }
-                if(heroSubTitle) {
-                    document.getElementById('hero-sub-title').textContent = heroSubTitle;
-                }
-                if(kh1) {
-                    document.getElementById('keyHighlights-1').textContent = kh1;
-                }
-                if(kh2) {
-                    document.getElementById('keyHighlights-2').textContent = kh2;
-                }
-                if(kh3) {
-                    document.getElementById('keyHighlights-3').textContent = kh3;
-                }
-                if(dm) {
-                    document.getElementById('doctor-message').textContent = dm;
-                }
-                // addEditControls()
             }
         }
-    }
-});
-
-function addEditControls() {
-    if(id) {
-        document.getElementById('editingNotificationBannner').style.display = 'block';
-        document.querySelectorAll('[contenteditable=false]').forEach((e) => { e.setAttribute('contenteditable', 'true') });
-        editControl = true;
-        document.styleSheets[0].insertRule('image-cover:hover { background-color: red; }', 0);
-        ocument.styleSheets[0].cssRules[0].style.backgroundColor= 'red';
-    }
+    });
 }
 
+function addEditControls() {
+    // if(id) {
+    //     document.getElementById('edit-notification-bar').style.display = 'block';
+    //     document.querySelectorAll('[contenteditable=false]').forEach((e) => { e.setAttribute('contenteditable', 'true') });
+    //     editControl = true;
+    //     document.styleSheets[0].insertRule('image-cover:hover { background-color: red; }', 0);
+    //     ocument.styleSheets[0].cssRules[0].style.backgroundColor= 'red';
+    // }
 
+    document.getElementById('edit-notification-bar').style.display = 'none';
+    document.getElementById('footer-nav-bar').style.display = 'none';
+    document.getElementById('announcement-bar').style.display = 'block';
+    document.getElementById('main-menu-bar').style.display = 'block';
+    document.getElementById('edit-menu-bar').style.display = 'none';
+    document.getElementById('editButton').style.display = 'none';
+}
+
+function setSelectedTheme(clinicData) {
+    const {selectedTheme, selectedThemeIndex} = clinicData;
+    const htmlElement = document.documentElement;
+    htmlElement.classList.add(selectedTheme);
+}
+
+function setSelectedFont(clinicData) {
+    const {selectedFont} = clinicData;
+    document.body.style.fontFamily = selectedFont;
+}
 
 function updatePopularTreatmentsMobile(clinicData) {
     const gridCardWrapper = document.querySelector('.popular-diagnosis-mobile');
@@ -337,10 +371,11 @@ function updateClinicAddress(clinicData) {
 
 function publish() {
     const headerTitle = document.getElementById('header-title').textContent;
+    const heroDoctorName = document.getElementById('hero-doctorName').textContent;
     const heroTitle = document.getElementById('hero-title').textContent;
     const heroSubTitle = document.getElementById('hero-sub-title').textContent;
     const patientsConsulted = document.getElementById('customersServed').textContent;
-    const ratings = document.getElementById('ratings').textContent;
+    const ratings = document.getElementById('ratings').textContent?.split('/5')[0];
     const doctorName = document.getElementById('doctorDetails-Name').textContent;
     const qualification = document.getElementById('doctorDetails-Qualification').textContent;
     const speciality = document.getElementById('doctorDetails-Speciality').textContent;
@@ -350,6 +385,7 @@ function publish() {
     const kh2 = document.getElementById('keyHighlights-2').textContent;
     const kh3 = document.getElementById('keyHighlights-3').textContent;
     const dm = document.getElementById('doctor-message').textContent;
+    const city = document.getElementById('city').textContent;
     const faq = getFAQData();
     console.log(faq);
     
@@ -370,18 +406,25 @@ function publish() {
         kh3,
         dm,
         faq,
+        selectedTheme,
+        selectedThemeIndex,
+        selectedFont,
+        selectedFontIndex,
+        city,
+        heroDoctorName,
         uid: id
     };
 
     console.log('Data to publish : ', formData);
 
-    // axios.post('http://localhost:5000/api/clinic/saveForm', formData, {
-    //     headers: { 'Access-Control-Allow-Origin': '*' },
-    // }).then((d) => {
-    //     console.log('Publish response : ', d);
-    //     if(d.status === 200) {
-    //     }
-    // });
+    axios.post('http://localhost:5000/api/clinic/saveForm', formData, {
+        headers: { 'Access-Control-Allow-Origin': '*' },
+    }).then((d) => {
+        console.log('Publish response : ', d);
+        if(d.status === 200) {
+            getDetails();
+        }
+    });
 }
 
 // Function to get FAQ data
@@ -408,39 +451,48 @@ function getFAQData() {
     return faqData;
 }
 
-  
-
 function toggleEditControl() {
     // In edit mode
     if(editControl) {
         editControl = false;
-        document.getElementById('editingNotificationBannner').style.display = 'none';
+        document.getElementById('edit-notification-bar').style.display = 'none';
+        // document.getElementById('main-navbar').style.marginTop = '0';
         document.querySelectorAll('[contenteditable=true]').forEach((e) => { 
             e.setAttribute('contenteditable', 'false');
             e.classList.remove('content-to-edit');
         });
-        document.getElementById('editButton').style.display = 'block';
+        document.getElementById('editButton').style.display = 'none';
         document.getElementById('saveButton').style.display = 'none';
+        document.getElementById('main-menu-bar').style.display = 'block';
+        document.getElementById('edit-menu-bar').style.display = 'none';
         publish();
     } 
     // In normal mode
     else {
         editControl = true;
-        document.getElementById('editingNotificationBannner').style.display = 'block';
+        document.getElementById('edit-notification-bar').style.display = 'block';
+        // document.getElementById('main-navbar').style.marginTop = '35px';
         document.querySelectorAll('[contenteditable=false]').forEach((e) => { 
             e.setAttribute('contenteditable', 'true');
             e.classList.add('content-to-edit');
         });
         document.getElementById('editButton').style.display = 'none';
         document.getElementById('saveButton').style.display = 'block';
+        document.getElementById('main-menu-bar').style.display = 'none';
+        document.getElementById('edit-menu-bar').style.display = 'block';
     }
-}
 
+    // document.getElementById('edit-notification-bar').style.display = 'none';
+    // document.getElementById('footer-nav-bar').style.display = 'none';
+    // document.getElementById('announcement-bar').style.display = 'block';
+    // document.getElementById('main-menu-bar').style.display = 'block';
+}
 
 const baseUrl = 'https://digi-clinik-backend.vercel.app/';
 const newsLetterApi = baseUrl + "api/newsletters/subs/create";
 const contactUsApi = baseUrl + "api/contacts/create";
 const appointmentsApi = baseUrl + "api/appointments/create";
+const getInTouchApi = baseUrl + "api/getintouch";
 const clientId = id ?? "admin";
 
 function convertFormToJSON(form) {
@@ -576,4 +628,100 @@ $(`form[action="${appointmentsApi}"]`).each(function(i, el) {
         });
     });
 });
+
+// Get In Touch form function.
+$(`form[action="${getInTouchApi}"]`).each(function(i, el) {
+    let form = $(el);
+    form.submit(function(e) {
+        e.preventDefault();
+        form = $(e.target);
+        let data = convertFormToJSON(form);
+        console.log('formData : ', data);
+        let action = contactUsApi
+        //form.attr("action");
+        disableSubmitButton()
+        $.ajax({
+            url: action,
+            method: "POST",
+            data: JSON.stringify(data),
+            headers: {
+                "client_id": 'digiclinik-form-builder'
+            },
+            contentType: "application/json",
+            dataType: "json",
+            success: function() {
+                let parent = $(form.parent());
+                // Hide the form
+                enableSubmitButton()
+                parent.children("form").css("display", "none");
+                // Display the "Done" block
+                parent.children(".w-form-done").css("display", "block");
+            },
+            error: function() {
+                let parent = $(form.parent());
+                enableSubmitButton()
+                // Display the "Failed" block
+                parent.find(".w-form-fail").css("display", "block");
+            },
+        });
+    });
+});
    
+function openWhatsApp() {
+    const phone = clinicData.phoneNo;
+    window.open(`https://wa.me/${phone}`)
+}
+
+
+function requestCallback() {
+    axios.post
+}
+
+const themes = ['light-theme', 'pastel-theme', 'earthy-theme', 'monochrome-theme', 'vibrant-theme', 'root'];
+let currentThemeIndex = 0;
+
+const themeSwitcher = document.getElementById('themeSwitcher');
+const htmlElement = document.documentElement;
+
+themeSwitcher.addEventListener('click', () => {
+    // Remove the current theme class
+    htmlElement.classList.remove(themes[currentThemeIndex]);
+
+    // Update the index to the next theme
+    currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+
+    // Add the new theme class
+    htmlElement.classList.add(themes[currentThemeIndex]);
+
+    // Optionally, update the button text
+    themeSwitcher.textContent = `${themes[(currentThemeIndex) % themes.length]}`;
+    selectedTheme = themes[currentThemeIndex];
+    selectedThemeIndex = currentThemeIndex;
+});
+
+let fonts = [
+    "'Poppins', sans-serif",
+    "'Open Sans', sans-serif",
+    "'Nunito Sans', sans-serif",
+    "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+    "'Roboto', sans-serif",
+    "sans-serif"
+  ];
+  
+let currentFontIndex = 0;
+  
+function changeFont() {
+    currentFontIndex = (currentFontIndex + 1) % fonts.length;
+    document.body.style.fontFamily = fonts[currentFontIndex];
+    selectedFont = fonts[currentFontIndex];
+    selectedFontIndex = currentFontIndex;
+}
+
+// function switchTheme() {
+//   currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+//   let theme = themes[currentThemeIndex];
+  
+//   for (let variable in theme) {
+//     document.documentElement.style.setProperty(variable, theme[variable]);
+//   }
+// }

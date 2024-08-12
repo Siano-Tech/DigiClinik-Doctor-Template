@@ -16,6 +16,10 @@
   <!-- <link rel="stylesheet" type="text/css" href="./vendor/bottom-sheet/bottom-sheet.css"> -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
   <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
@@ -37,9 +41,10 @@
 </head>
 
 <body>
-  <div id="announcement-bar"></div>
-  <div id="editingNotificationBannner" data-animation="over-left" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease"
-    data-doc-height="1" role="banner" class="navbar w-nav" style="display: none;border-bottom: 1px dashed gray;background: bisque;padding: 5px;position: fixed;">
+  <!-- Please don't remove this body-tag, as this is the placeholder for theme and other stuff -->
+  <div id="body-tag"></div>
+  <div id="announcement-bar" data-animation="over-left" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease"
+    data-doc-height="1" role="banner" class="navbar w-nav" style="border-bottom: 1px dashed gray;background: bisque;padding: 5px;position: fixed; top: 0;z-index: 9999">
     <div class="nav-container w-container">
       <div class="nav-menu-wrapper">
         <!-- <a href="" aria-current="page" class="brand w-nav-brand w--current">
@@ -48,14 +53,58 @@
             loading="lazy" width="136" height="18" alt="">
         </a> -->
         <a>
-          <h1 class="small-text">The website is in editing mode, don't forget to save & publish your changes once editing is done</h1>
+          <h1 class="small-text">This is a demo site, you can make deploy this site by opting to our plan</h1>
         </a>
         <nav role="navigation" class="nav-menu w-nav-menu">
           <div class="menu-wrap">
-            <div class="button-header-tablet"><button onclick="publish()" class="primary-button w-button" style="padding: 2px 10px;font-size: 14px;">Save & Publish</button></div>
+            <div class="button-header-tablet"><button popovertarget="paidPlanForm" class="primary-button w-button" style="padding: 2px 10px;font-size: 14px;">Request Callback</button></div>
           </div>
         </nav>
-        <div class="button-header" style="display: block;"><button onclick="publish()" class="primary-button w-button" style="padding: 2px 10px;font-size: 14px;">Save & Publish</button></div>
+        <div class="button-header" style="display: block;"><button popovertarget="paidPlanForm" class="primary-button w-button" style="padding: 2px 10px;font-size: 14px;">Request Callback</button></div>
+        <div popover class="popover-dialog" id="paidPlanForm">
+          <button class="popover-close-btn" popovertarget="paidPlanForm" popovertargetaction="hide">x</button>
+          <h2 class="popover-title">Buy our plan</h2>
+          <hr class="popover-divider">
+          <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="post"
+            data-wf-page-id="64c23c6fc82b2204b21af28f" data-wf-element-id="0a852d8a-afde-6322-209f-a564a8171fa9"
+            action="https://digi-clinik-backend.vercel.app/api/getintouch">
+            <div class="hero-inputs-wrapper-hori">
+              <input class="input dark padding w-input" maxlength="256" name="name"
+                data-name="name" placeholder="Enter name*" type="text" id="name" required="" />
+              <input class="input dark padding w-input" maxlength="256" name="phoneNo"
+                data-name="phoneNo" placeholder="Enter Phone*" type="tel" id="phoneNo" required="" />
+              <input type="submit" data-wait="Please wait..." style="margin-top: 20px;"
+              class="primary-button full-white w-button" value="Get in touch">
+            </div>
+          </form>
+          <div class="success-message w-form-done">
+            <div>Thank you! Your submission has been received!</div>
+          </div>
+          <div class="error-message w-form-fail">
+            <div>Oops! Something went wrong while submitting the form.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="edit-notification-bar" data-animation="over-left" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease"
+    data-doc-height="1" role="banner" class="navbar w-nav" style="display: none;border-bottom: 1px dashed gray;background: bisque;padding: 5px;position: fixed;top: 0;z-index: 9999">
+    <div class="nav-container w-container">
+      <div class="nav-menu-wrapper">
+        <!-- <a href="" aria-current="page" class="brand w-nav-brand w--current">
+          <img
+            src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64c8e992b501f1edb9149f78_curemed%C2%AE.svg"
+            loading="lazy" width="136" height="18" alt="">
+        </a> -->
+        <a>
+          <h1 class="small-text">The website is in editing mode, don't forget to save & update your changes once editing is done</h1>
+        </a>
+        <nav role="navigation" class="nav-menu w-nav-menu">
+          <div class="menu-wrap">
+            <div class="button-header-tablet"><button onclick="publish()" class="primary-button w-button" style="padding: 2px 10px;font-size: 14px;">Save & Update</button></div>
+          </div>
+        </nav>
+        <div class="button-header" style="display: block;"><button onclick="publish()" class="primary-button w-button" style="padding: 2px 10px;font-size: 14px;">Save & Update</button></div>
       </div>
     </div>
   </div>
@@ -68,7 +117,7 @@
   </button>
   
   <div data-animation="over-left" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease"
-    data-doc-height="1" role="banner" class="navbar w-nav">
+    data-doc-height="1" role="banner" class="navbar w-nav" id="main-navbar">
     <div class="nav-container w-container">
       <div class="nav-menu-wrapper">
         <!-- <a href="" aria-current="page" class="brand w-nav-brand w--current">
@@ -77,7 +126,7 @@
             loading="lazy" width="136" height="18" alt="">
         </a> -->
         <a>
-          <h1 class="heading-banner large" id="header-title" contenteditable="false">Dr. Ankush Kaushik</h1>
+          <h1 class="heading-banner large" id="header-title" contenteditable="false">Dr. [Doctor Name]</h1>
         </a>
         <nav role="navigation" class="nav-menu w-nav-menu">
           <div class="tablet-menu"><a href="" aria-current="page" class="brand-tablet w-nav-brand w--current"><img
@@ -319,7 +368,7 @@
   </div> -->
 
   <!-- Hero Section With Reviews -->
-  <div class="home-banner-section home-2 section-background">
+  <div class="home-banner-section home-2 section-background" id="book-appointment">
     <!-- Mobile CTA Form -->
     <div style="padding: 15px;">
       <div class="hero-form-wrapper w-form mobile">
@@ -392,8 +441,8 @@
       <div data-w-id="efd49cc9-45ba-9609-51c0-45e0b241cd3f" class="top-banner-content home-2">
         <div data-w-id="1b40bc42-850a-5b3b-89a4-e5e5e6bb2ac2" class="text-content-home-2">
           <!-- <div class="line-absolute position"></div> -->
-          <h1 class="heading-banner large" id="hero-title" contenteditable="false">Transform Your Health with Expert Physiotherapy Care in <span class="blue-text">Gurgaon & Faridabad</span></h1>
-          <p class="mb-50 home-2-banner text-left" id="hero-sub-title" contenteditable="false">Experience personalized physiotherapy and yoga sessions with Dr. Ankush Kaushik, a specialist with over 23 years of experience from Apollo and Medanta. Start your journey to better health and mobility today.</p>
+          <h1 class="heading-banner large" id="hero-title">Trusted Skin Care by Dr. <span class="blue-text">[Doctor's Name]</span> – Leading Dermatologist in <span class="blue-text">[City]</span></h1>
+          <p class="mb-50 home-2-banner text-left" id="hero-sub-title" contenteditable="false">Dr. [Doctor's Name], with over [X] years of experience in dermatology, has been transforming the skin health of patients in [City]. Having previously served at esteemed hospitals such as [Hospital 1] and [Hospital 2], Dr. [Doctor's Name] combines deep expertise with a personalized approach to provide top-tier skin care tailored to your unique needs.</p>
           <!-- <div class="buttons-banner-wrap justify">
             <a href="../about-us/" class="primary-button w-button">About Us</a>
             <a href="../contact-us/" class="secondary-button w-button">Request Callback</a>
@@ -625,11 +674,11 @@
             style="height: 200px;"
             src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64ca487dabe6b787c37f9eab_Ellipse%201203.webp"
             loading="lazy" alt=""></div>
-        <h6 id="doctorDetails-Name" contenteditable="false">Dr Ankush Kaushik</h6>
-        <span id="doctorDetails-Speciality" class="small-text" contenteditable="false">Consultant Physiotherapist</span>
-        <span id="doctorDetails-Qualification" class="small-text" contenteditable="false">BPTh/BPT, MPTh/MPT</span>
-        <span id="doctorDetails-Experience" class="small-text" contenteditable="false">23 Years of Experience</span>
-        <p id="doctorDetails-About" contenteditable="false">Dr. Ankush Kaushik is a highly experienced physiotherapist and yoga trainer with over 23 years of expertise, including tenures at Apollo and Medanta hospitals. He is dedicated to providing personalized care to help patients achieve optimal health and mobility.</p>
+        <h6 id="doctorDetails-Name" contenteditable="false">Dr [Doctor Name]</h6>
+        <span id="doctorDetails-Speciality" class="small-text" contenteditable="false">Consultant Dermatologist</span>
+        <span id="doctorDetails-Qualification" class="small-text" contenteditable="false">[Qualification]</span>
+        <span id="doctorDetails-Experience" class="small-text" contenteditable="false">[X] Years of Experience</span>
+        <p id="doctorDetails-About" contenteditable="false">Dr. [Doctor's Name] is a distinguished dermatologist with over [X] years of experience in treating various skin conditions. A graduate of [Medical School], Dr. [Doctor's Name] refined their skills at renowned institutions like [Hospital 1] and [Hospital 2], where they earned a reputation for delivering exceptional patient care. Specializing in [specific areas of expertise], Dr. [Doctor's Name] is dedicated to using the latest dermatological advancements to provide personalized treatment plans tailored to each patient's unique needs.</p>
         <!-- <div>Heart Surgeon, London</div> -->
         <a href="../schedule/" class="primary-button mt-20 w-button">Book Appointment</a>
       </div>
@@ -645,7 +694,7 @@
               loading="lazy" width="34" height="34" alt=""></div>
           <div class="text-row">
             <h1 class="white-text heading-banner large" style="font-size: 24px; margin-bottom: 0px; padding-left: 0px;">Educational Excellence </h1>
-            <div class="white-text" id="keyHighlights-1" contenteditable="false">Dr. Kaushik holds a BPTh/BPT from Chaudhary Charan Singh University and an MPTh/MPT in Cardiovascular & Pulmonary Physiotherapy from Harvard University.</div>
+            <div class="white-text" id="keyHighlights-1" contenteditable="false">Dr. [Doctor's Name] completed their medical education at [Medical School], graduating with a [Degree, e.g., MBBS] in [Year]. They further specialized in dermatology, obtaining their [Specialization Degree, e.g., MD] in [Year]. This comprehensive education laid a strong foundation for their extensive expertise in the field of dermatology.</div>
           </div>
         </div>
         <div class="row-benefit">
@@ -654,7 +703,7 @@
               loading="lazy" width="34" height="34" alt=""></div>
           <div class="text-row">
             <h1 class="white-text heading-banner large" style="font-size: 24px; margin-bottom: 0px; padding-left: 0px;">Extensive Experience</h1>
-            <div class="white-text" id="keyHighlights-2" contenteditable="false">With over 23 years of experience, Dr. Kaushik has worked at renowned hospitals such as Apollo and Medanta, providing top-notch physiotherapy care.</div>
+            <div class="white-text" id="keyHighlights-2" contenteditable="false">Dr. [Doctor's Name] began their career at [Hospital 1], where they worked from [Start Year] to [End Year]. They then continued their professional journey at [Hospital 2], serving from [Start Year] to [End Year]. During their time at these esteemed institutions, Dr. [Doctor's Name] gained invaluable experience and developed a reputation for excellence in dermatological care.</div>
           </div>
         </div>
         <div class="row-benefit" style="margin-bottom: 12px;">
@@ -663,7 +712,7 @@
               loading="lazy" width="34" height="34" alt=""></div>
           <div class="text-row">
             <h1 class="white-text heading-banner large" style="font-size: 24px; margin-bottom: 0px; padding-left: 0px;">Awards and Recognitions</h1>
-            <div class="white-text" id="keyHighlights-3" contenteditable="false">Dr. Kaushik has been honored with multiple awards for his exceptional contributions to physiotherapy and patient care.</div>
+            <div class="white-text" id="keyHighlights-3" contenteditable="false">Awards and Recognitions</div>
           </div>
         </div>
       </div>
@@ -674,8 +723,8 @@
   <div class="section without-bottom-spacing section-background">
     <div class="base-container w-container">
       <div class="text-center w-100">
-        <h1 class="heading-banner large text-left">Explore Our Complete Treatment Options</h1>
-        <p class="mb-50 home-2-banner text-left">Discover our most sought-after treatment options tailored to address a variety of conditions and promote optimal health and wellness.</p>
+        <h1 class="heading-banner large text-left">Explore Our Complete Treatment Solutions</h1>
+        <p class="mb-50 home-2-banner text-left">Explore a range of skin conditions expertly managed by Dr. [Doctor's Name]. From common issues like acne and eczema to more complex concerns, our personalized treatment plans are designed to address your specific needs and restore your skin’s health and confidence.</p>
       </div>
       <div class="service-wrapper">
         <div class="srvc-list-wrapper w-dyn-list">
@@ -785,46 +834,35 @@
       <div class="grid-card-wrapper-hori">
         <div>
           <div class="grid-card-item-hori">
-            <p class="grid-card-content">"I've been using Healthcare's virtual doctor consultations for a year
-              now, and it's been a game-changer. No more waiting rooms, and I get medical advice from the comfort of my</p>
-              <h4 class="grid-card-title">Sarah M.</h4>
+            <p class="grid-card-content">"Dr. [Doctor's Name] transformed my skin with their expert acne treatment. After trying numerous products with no success, I finally found relief and clear skin. Their personalized approach made all the difference."</p>
+              <h4 class="grid-card-title">Aarav Patel</h4>
           </div>
           <div class="grid-card-item-hori mt-10">
-            <p class="grid-card-content">"I've been using Healthcare's virtual doctor consultations for a year
-              now, and it's been a game-changer. No more waiting rooms, and I get medical advice from the comfort of my</p>
-              <h4 class="grid-card-title">Sarah M.</h4>
+            <p class="grid-card-content">"I struggled with eczema for years, and Dr. [Doctor's Name] was a game-changer. The treatment plan and advice provided have brought me incredible relief and improved my quality of life."</p>
+              <h4 class="grid-card-title">Priya Sharma</h4>
           </div>
         </div>
         <div>
           <div class="grid-card-item-hori">
-            <p class="grid-card-content">"The Healthwise nutrition coaching has been a turning point for my health
-              journey. Thanks to their guidance, I've lost weight and feel more energetic than ever. Truly life-changing!"
-              <h4 class="grid-card-title">John P.</h4>
-            </p>
+            <p class="grid-card-content">"Dr. [Doctor's Name] provided excellent care for my psoriasis. Their thorough explanation of the condition and the tailored treatment plan helped manage my symptoms effectively. I feel much better now."</p>
+            <h4 class="grid-card-title">Rohan Gupta</h4>
           </div>
           <div class="grid-card-item-hori mt-10">
-            <p class="grid-card-content">"The Healthwise nutrition coaching has been a turning point for my health
-              journey. Thanks to their guidance, I've lost weight and feel more energetic than ever. Truly life-changing!"
-              <h4 class="grid-card-title">John P.</h4>
-            </p>
+            <p class="grid-card-content">"I was struggling with rosacea, but Dr. [Doctor's Name]'s expertise made a huge difference. The customized treatment plan has significantly reduced redness and improved my skin’s appearance."</p>
+            <h4 class="grid-card-title">Ananya Rao</h4>
           </div>
         </div>
         <div>
           <div class="grid-card-item-hori">
-            <p class="grid-card-content">"I can't thank MentalWell enough for their online therapy sessions. It's
-              like having a supportive friend to talk to anytime I need it. My mental health has improved significantly."
-              <h4 class="grid-card-title">Emily T.</h4>
-            </p>
+            <p class="grid-card-content">"Receiving treatment for skin cancer from Dr. [Doctor's Name] was a relief. Their professionalism, clear communication, and effective treatment plan gave me confidence and hope. I’m very thankful."</p>
+            <h4 class="grid-card-title">Vikram Singh</h4>
           </div>
           <div class="grid-card-item-hori mt-10">
-            <p class="grid-card-content">"I can't thank MentalWell enough for their online therapy sessions. It's
-              like having a supportive friend to talk to anytime I need it. My mental health has improved significantly."
-              <h4 class="grid-card-title">Emily T.</h4>
-            </p>
+            <p class="grid-card-content">"Dr. [Doctor's Name] addressed my hyperpigmentation issue with remarkable expertise. The results have been fantastic, and I appreciate their thorough and attentive care."</p>
+            <h4 class="grid-card-title">Neha Patel</h4>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -941,7 +979,7 @@
     <div class="base-container w-container">
       <div class="text-center w-100">
         <h1 class="heading-banner large text-left">Our Impact in Numbers</h1>
-        <p class="mb-50 home-2-banner text-left">Explore the measurable impact of our physiotherapy care through key statistics and figures.</p>
+        <p class="mb-50 home-2-banner text-left">From successful treatments to patient satisfaction, these numbers reflect our commitment to exceptional dermatological care.</p>
       </div>
       <div data-w-id="912145b2-b350-5f85-6613-12473e042231" class="video-wrap">
         <div
@@ -994,7 +1032,7 @@
             </div>
             <div class="counter-block">
               <div class="large-number-text blue">000 %</div>
-              <div style="color: #2b2b2b;">Saw improvement in mobility & pain levels </div>
+              <div style="color: #2b2b2b;">Saw improvement in skin and hair problems</div>
             </div>
             <div class="counter-block">
               <div class="large-number-text blue">23+</div>
@@ -1101,11 +1139,11 @@
   </div> -->
 
   <!-- Location Map -->
-  <div data-w-id="85c93132-9d64-3bf2-dfe4-548b597a0d06" class="section section-background">
+  <div id="clinic-locations" data-w-id="85c93132-9d64-3bf2-dfe4-548b597a0d06" class="section section-background">
     <div class="base-container w-container">
       <div class="text-center w-100">
         <h1 class="heading-banner large text-left">Clinic Locations</h1>
-        <p class="mb-50 home-2-banner text-left">Visit our conveniently located clinic in Gurgaon to experience expert physiotherapy care firsthand.</p>  
+        <p class="mb-50 home-2-banner text-left" id="clinic-loc">Conveniently located in [City], our clinic offers comprehensive dermatological care with easy access and modern facilities.</p>  
       </div>
       <div class="clinic-location" id="clinic-location">
         <div class="location-container">
@@ -1197,10 +1235,7 @@
   <div class="blue-section">
     <div class="w-layout-blockcontainer base-container w-container">
       <div data-w-id="acaf8126-a21d-bb98-035c-db3acc07db71" style="opacity:0" class="section-content">
-        <div class="white-large-text" id="doctor-message" contenteditable="false">In my role as CEO, my vision goes beyond merely leading a company; it is about
-          cultivating a collective spirit that fuels innovation, fosters growth, and creates a positive impact.
-          Together, we view challenges as opportunities for growth, failures as stepping stones towards improvement, and
-          successes as significant milestones on our journey towards achieving greatness.</div>
+        <div class="white-large-text" id="doctor-message" contenteditable="false">Welcome to our practice. As the founder, my mission is to ensure every patient receives the highest standard of dermatological care. With years of experience and a commitment to advancing skin health, I am dedicated to providing personalized treatments that address your unique needs. Our team and I are here to support you on your journey to healthier, more radiant skin. Thank you for trusting us with your care. We look forward to partnering with you to achieve your skin care goals.</div>
         <div class="author-quote">
           <img
             id="dm-pic"
@@ -1220,9 +1255,7 @@
     <div class="base-container w-container">
       <div class="text-center w-100">
         <h1 class="heading-banner large text-left">The most common questions</h1>
-        <p class="mb-50 home-2-banner text-left">As a token of our appreciation, we're delighted to offer you a FREE
-          consultation with one of our experienced healthcare professionals.
-        </p>  
+        <p class="mb-50 home-2-banner text-left">Find answers to common questions about our dermatological services, treatments, and clinic procedures. If you have any other queries, feel free to contact us for more personalized information.</p>  
       </div>
       <div class="accordion-wrapper">
         <div class="accordion-wrap">
@@ -1633,19 +1666,21 @@
     <div class="nav-container w-container">
       <div class="footer-menu-layout">
         <!-- <img src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64d0e68487019288d97e9b47_Group.webp" alt="" srcset=""> -->
-        <button class="footer-menu-button" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/siano-tech/appointments'});return false;">
+        <!-- <button class="footer-menu-button" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/siano-tech/appointments'});return false;"> -->
+        <a href="#book-appointment" class="footer-menu-button">
           <span style="padding-right: 5px;">
             <img src="./assets/images/calendar.png" alt="whats-app-icon" width="25px" height="25px">
           </span>
           Appointment
-        </button>
-        <button class="footer-menu-button-sec">
+        </a>
+        <a href="#clinic-locations" class="footer-menu-button-sec">
           <span style="padding-right: 5px;">
             <img src="./assets/images/pin.png" alt="whats-app-icon" width="25px" height="25px">
           </span>
           Location
-        </button>
-        <button class="footer-menu-button-sec" style="border: 1px solid #30b844;">
+        </a>
+        <button class="footer-menu-button-sec" style="border: 1px solid #30b844;"
+          onclick="openWhatsApp()">
           <span style="padding-right: 5px;">
             <img src="./assets/images/whats-app-icon.png" alt="whats-app-icon" width="25px" height="25px">
           </span>
@@ -1655,31 +1690,83 @@
     </div>
   </div>
 
-  <!-- <div id="main-menu-bar" data-animation="over-left" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease"
+  <div id="main-menu-bar" data-animation="over-left" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease"
     data-doc-height="1" role="banner" class="navbar w-nav footer-bar mobile" style="padding: 10px 0px;z-index:2">
     <div class="nav-container w-container">
       <div class="footer-menu-layout">
-        <button class="footer-menu-button" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/siano-tech/appointments'});return false;">
+        <button class="footer-menu-button" onclick="publish()">
           <span style="padding-right: 5px;">
-            <img src="./assets/images/calendar.png" alt="whats-app-icon" width="25px" height="25px">
+            <img src="./assets/images/publish.png" alt="whats-app-icon" width="25px" height="25px">
           </span>
-          Appointment
+          Publish my site
         </button>
-        <button class="footer-menu-button-sec">
+        <button class="footer-menu-button-sec" onclick="toggleEditControl()">
           <span style="padding-right: 5px;">
-            <img src="./assets/images/pin.png" alt="whats-app-icon" width="25px" height="25px">
+            <img src="./assets/images/edit-icon-dark.png" alt="whats-app-icon" width="25px" height="25px">
           </span>
-          Location
+          Edit Mode
         </button>
-        <button class="footer-menu-button-sec" style="border: 1px solid #30b844;">
+        <!-- <button class="footer-menu-button-sec" style="border: 1px solid #30b844;">
           <span style="padding-right: 5px;">
             <img src="./assets/images/whats-app-icon.png" alt="whats-app-icon" width="25px" height="25px">
           </span>
           Chat
+        </button> -->
+      </div>
+    </div>
+  </div>
+
+  <div id="edit-menu-bar" data-animation="over-left" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease"
+    data-doc-height="1" role="banner" class="navbar w-nav footer-bar mobile" style="padding: 10px 0px;z-index:2">
+    <div class="nav-container w-container">
+      <div class="footer-menu-layout">
+        <button class="footer-menu-button" id="themeSwitcher">
+          <span style="padding-right: 5px;">
+            <img src="./assets/images/change-icon.png" alt="whats-app-icon" width="25px" height="25px">
+          </span>
+          Color
+        </button>
+        <button class="footer-menu-button-sec" onclick="changeFont()">
+          <span style="padding-right: 5px;">
+            <img src="./assets/images/change-icon-dark.png" alt="whats-app-icon" width="25px" height="25px">
+          </span>
+          Font
+        </button>
+        <button class="footer-menu-button" onclick="toggleEditControl()">
+          <span style="padding-right: 5px;">
+            <img src="./assets/images/publish.png" alt="whats-app-icon" width="25px" height="25px">
+          </span>
+          Save
         </button>
       </div>
     </div>
-  </div> -->
+  </div>
+
+  <div id="color-menu-bar" data-animation="over-left" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease"
+    data-doc-height="1" role="banner" class="navbar w-nav footer-bar mobile" style="padding: 10px 0px;z-index:2">
+    <div class="nav-container w-container">
+      <div class="footer-menu-layout">
+        <button class="footer-menu-button" id="themeSwitcher">
+          <span style="padding-right: 5px;">
+            <img src="./assets/images/change-icon.png" alt="whats-app-icon" width="25px" height="25px">
+          </span>
+          Color
+        </button>
+        <button class="footer-menu-button-sec" onclick="changeFont()">
+          <span style="padding-right: 5px;">
+            <img src="./assets/images/change-icon-dark.png" alt="whats-app-icon" width="25px" height="25px">
+          </span>
+          Font
+        </button>
+        <button class="footer-menu-button" onclick="publish()">
+          <span style="padding-right: 5px;">
+            <img src="./assets/images/publish.png" alt="whats-app-icon" width="25px" height="25px">
+          </span>
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
 
   <div id="main-menu-bar"></div>
   <!-- <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=64c23c6ec82b2204b21af185"
