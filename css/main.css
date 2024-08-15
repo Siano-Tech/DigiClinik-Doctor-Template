@@ -9777,7 +9777,7 @@ blockquote {
 
   .heading-banner.large {
     letter-spacing: -2px;
-    max-width: 400px;
+    /* max-width: 400px; */
   }
 
   .heading-banner.home-3 {
@@ -10720,7 +10720,7 @@ blockquote {
   }
 
   .heading-banner.large {
-    max-width: 300px;
+    /* max-width: 300px; */
     letter-spacing: -2px;
   }
 

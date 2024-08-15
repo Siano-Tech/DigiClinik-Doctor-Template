@@ -10,7 +10,7 @@ function getId() {
 const id = getId() ?? '8e691157-d606-440d-aa61-60ab5fd6d42d';
 let editControl = false;
 document.getElementById('saveButton').style.display = 'none';
-let clinicData, selectedTheme, selectedThemeIndex, selectedFont, selectedFontIndex;
+let clinicData, userSelectedTheme='root', userSelectedThemeIndex, userSelectedFont, userSelectedFontIndex;
 
 
 // const domNode = document.getElementById('app');
@@ -42,9 +42,11 @@ function getDetails() {
                     clinicData = d.data.data;
                     const {doctorName, speciality, experience, patientsConsulted, ratings, clinicGallery} = d.data.data;
                     const {headerTitle, heroTitle, heroSubTitle, qualification, about, doctorPic, diagnosis, procedures} = d.data.data;
-                    const {kh1, kh2, kh3, dm, dmName, dmDesignation, selectedFont, selectedTheme, city} = d.data.data;
-                    const {heroDoctorName, workExperience, qualificationDets, awards} = d.data.data;
+                    const {kh1, kh2, kh3, dm, dmName, dmDesignation, selectedFont, selectedTheme, selectedFontIndex, city} = d.data.data;
+                    const {heroDoctorName, workExperience, qualificationDets, awards, clinicAddr, faq, testimonials} = d.data.data;
                     document.getElementById('header-title').textContent = headerTitle ?? doctorName;
+                    document.getElementById('bookappointment-title').textContent = `Book Your Appointment at ${clinicAddr[0]?.clinicName} Today`;
+                    document.getElementById('bookappointment-desc').textContent = `Schedule a consultation with Dr. ${doctorName} at ${clinicAddr[0]?.clinicName} and take the first step towards healthier, glowing skin. Quick and easy booking available`;
                     // document.getElementById('hero-title').textContent = `Trusted Skin Care by Dr. ${doctorName} – Leading Dermatologist in ${city}`;
                     // document.getElementById('hero-sub-title').textContent = heroSubTitle;
                     document.getElementById('customersServed').textContent = patientsConsulted;
@@ -60,17 +62,22 @@ function getDetails() {
                     document.getElementById('dm-pic').setAttribute('src', doctorPic);
                     const dmname = dmName ?? doctorName;;
                     document.getElementById('dm-name').textContent = 'Dr. ' + dmname;
-                    document.getElementById('dm-designation').textContent = dmDesignation ?? speciality;
+                    document.getElementById('dm-designation').textContent = dmDesignation ?? speciality ;
+                    document.getElementById('impact-numbers').textContent = patientsConsulted + '+' ?? '100+';
+                    document.getElementById('impact-percentage').textContent = '90%';
+                    document.getElementById('impact-experience').textContent = experience;
                     document.getElementById('clinic-loc').textContent = `Conveniently located in ${city}, our clinic offers comprehensive dermatological care with easy access and modern facilities.`;
 
-                    updatePopularTreatments(diagnosis);
-                    updatePopularTreatmentsMobile(diagnosis);
-                    updatePopularDiagnosis(procedures);
+                    updatePopularTreatments(procedures);
+                    updatePopularTreatmentsMobile(procedures);
+                    updatePopularDiagnosis(diagnosis);
                     updateClinicImages(clinicGallery);
                     updateClinicAddress(d.data.data);
+                    updateFaqData(faq);
+                    updateTestimonialData(testimonials, doctorName)
     
                     // if(heroTitle) {
-                        document.getElementById('hero-title').innerHTML = `Trusted Skin Care by <span class="blue-text" id="hero-doctorName" contenteditable="false">Dr. ${heroDoctorName ?? doctorName}</span> – Leading Dermatologist in <span class="blue-text" id="city" contenteditable="false">${city}</span>`;
+                        document.getElementById('hero-title').innerHTML = `Trusted Skin Care by Dr. <span class="blue-text" id="hero-doctorName" contenteditable="false"> ${heroDoctorName ?? doctorName}</span> – Leading Dermatologist in <span class="blue-text" id="city" contenteditable="false">${city}</span>`;
                     // }
                     // if(heroSubTitle) {
                         
@@ -91,9 +98,12 @@ function getDetails() {
                         document.getElementById('doctor-message').textContent = dm;
                     }
                     if(selectedTheme) {
+                        userSelectedTheme = selectedTheme;
                         setSelectedTheme(d.data.data)
                     }
                     if(selectedFont) {
+                        userSelectedFont = selectedFont;
+                        userSelectedFontIndex = selectedFontIndex
                         setSelectedFont(d.data.data)
                     }
                     addEditControls()
@@ -121,14 +131,16 @@ function addEditControls() {
 }
 
 function setSelectedTheme(clinicData) {
-    const {selectedTheme, selectedThemeIndex} = clinicData;
+    const {selectedTheme} = clinicData;
     const htmlElement = document.documentElement;
     htmlElement.classList.add(selectedTheme);
+    document.getElementById(selectedTheme).classList.add('selected');
 }
 
 function setSelectedFont(clinicData) {
-    const {selectedFont} = clinicData;
+    const {selectedFont, selectedFontIndex} = clinicData;
     document.body.style.fontFamily = selectedFont;
+    document.getElementById('font-palette-'+selectedFontIndex??0).classList.add('selected');
 }
 
 function updatePopularTreatmentsMobile(clinicData) {
@@ -369,6 +381,40 @@ function updateClinicAddress(clinicData) {
     container.appendChild(locationContainer);
 }
 
+function updateFaqData(faqData) {
+  
+    if(!faqData || faqData.length === 0) {
+        return;
+    }
+    // Iterate over the FAQ data
+    faqData.forEach((faq, index) => {
+      // Create the accordion-wrap div
+      let id = faq.id;
+      let qid = id+'q';
+      let aid = id+'a';
+
+      document.getElementById(qid).textContent = faq.question;
+      document.getElementById(aid).textContent = faq.answer;
+    });
+
+}
+
+function updateTestimonialData(testimonialData, doctorName) {
+    if(!testimonialData || testimonialData.length === 0) {
+        return;
+    }
+    // Iterate over the FAQ data
+    testimonialData.forEach((testimonial, index) => {
+      // Create the accordion-wrap div
+      let id = testimonial.id;
+      let contentId = 'testimonial-content-'+id;
+      let authorId = 'testimonial-author-'+id;
+
+      document.getElementById(contentId).textContent = testimonial.content?.replace("[Doctor's Name]", doctorName);
+      document.getElementById(authorId).textContent = testimonial.author;
+    });
+}
+
 function publish() {
     const headerTitle = document.getElementById('header-title').textContent;
     const heroDoctorName = document.getElementById('hero-doctorName').textContent;
@@ -376,7 +422,7 @@ function publish() {
     const heroSubTitle = document.getElementById('hero-sub-title').textContent;
     const patientsConsulted = document.getElementById('customersServed').textContent;
     const ratings = document.getElementById('ratings').textContent?.split('/5')[0];
-    const doctorName = document.getElementById('doctorDetails-Name').textContent;
+    const doctorName = document.getElementById('doctorDetails-Name').textContent?.replace('Dr.', '');
     const qualification = document.getElementById('doctorDetails-Qualification').textContent;
     const speciality = document.getElementById('doctorDetails-Speciality').textContent;
     const experience = document.getElementById('doctorDetails-Experience').textContent.split('Years')[0].trim();
@@ -387,7 +433,8 @@ function publish() {
     const dm = document.getElementById('doctor-message').textContent;
     const city = document.getElementById('city').textContent;
     const faq = getFAQData();
-    console.log(faq);
+    const testimonials = getTestimonialData();
+    console.log(faq, testimonials);
     
     
     const formData = {
@@ -406,12 +453,12 @@ function publish() {
         kh3,
         dm,
         faq,
-        selectedTheme,
-        selectedThemeIndex,
-        selectedFont,
-        selectedFontIndex,
+        selectedTheme: userSelectedTheme,
+        selectedFont: userSelectedFont,
+        selectedFontIndex: userSelectedFontIndex,
         city,
         heroDoctorName,
+        testimonials,
         uid: id
     };
 
@@ -449,6 +496,30 @@ function getFAQData() {
     }
   
     return faqData;
+}
+
+// Function to get FAQ data
+function getTestimonialData() {
+    const testimonialData = [];
+  
+    for (let i = 1; i <= 6; i++) {
+        // Get the question element by ID
+        let content = document.getElementById(`testimonial-content-${i}`);
+        // Get the answer element by ID
+        let author = document.getElementById(`testimonial-author-${i}`);
+        
+        // Create an object with the question and answer
+        let testimonialObject = {
+            id: i,
+            content: content ? content.textContent.trim() : '',
+            author: author ? author.textContent.trim() : ''
+        };
+        
+        // Push the object to the faqArray
+        testimonialData.push(testimonialObject);
+    }
+  
+    return testimonialData;
 }
 
 function toggleEditControl() {
@@ -677,51 +748,62 @@ function requestCallback() {
     axios.post
 }
 
+// Required by switchTheme Method
 const themes = ['light-theme', 'pastel-theme', 'earthy-theme', 'monochrome-theme', 'vibrant-theme', 'root'];
-let currentThemeIndex = 0;
+// let currentThemeIndex = 0;
 
-const themeSwitcher = document.getElementById('themeSwitcher');
-const htmlElement = document.documentElement;
+// const themeSwitcher = document.getElementById('themeSwitcher');
+// const htmlElement = document.documentElement;
 
-themeSwitcher.addEventListener('click', () => {
-    // Remove the current theme class
-    htmlElement.classList.remove(themes[currentThemeIndex]);
+// themeSwitcher.addEventListener('click', () => {
+//     // Remove the current theme class
+//     htmlElement.classList.remove(themes[currentThemeIndex]);
 
-    // Update the index to the next theme
-    currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+//     // Update the index to the next theme
+//     currentThemeIndex = (currentThemeIndex + 1) % themes.length;
 
-    // Add the new theme class
-    htmlElement.classList.add(themes[currentThemeIndex]);
+//     // Add the new theme class
+//     htmlElement.classList.add(themes[currentThemeIndex]);
 
-    // Optionally, update the button text
-    themeSwitcher.textContent = `${themes[(currentThemeIndex) % themes.length]}`;
-    selectedTheme = themes[currentThemeIndex];
-    selectedThemeIndex = currentThemeIndex;
-});
+//     // Optionally, update the button text
+//     themeSwitcher.textContent = `${themes[(currentThemeIndex) % themes.length]}`;
+//     selectedTheme = themes[currentThemeIndex];
+//     selectedThemeIndex = currentThemeIndex;
+// });
 
 let fonts = [
+    "",
     "'Poppins', sans-serif",
     "'Open Sans', sans-serif",
     "'Nunito Sans', sans-serif",
-    "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
-    "'Roboto', sans-serif",
-    "sans-serif"
-  ];
+    "'Courier', sans-serif",
+    "'Arial', sans-serif"
+];
   
 let currentFontIndex = 0;
   
-function changeFont() {
-    currentFontIndex = (currentFontIndex + 1) % fonts.length;
-    document.body.style.fontFamily = fonts[currentFontIndex];
-    selectedFont = fonts[currentFontIndex];
-    selectedFontIndex = currentFontIndex;
+function switchFont(index) {
+    // currentFontIndex = (currentFontIndex + 1) % fonts.length;
+    document.body.style.fontFamily = fonts[index];
+    document.getElementById('font-palette-'+index).classList.add('selected');
+    document.getElementById('font-palette-'+(userSelectedFontIndex??0)).classList.remove('selected');
+    userSelectedFont = fonts[index];
+    userSelectedFontIndex = index;
 }
 
-// function switchTheme() {
-//   currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-//   let theme = themes[currentThemeIndex];
-  
-//   for (let variable in theme) {
-//     document.documentElement.style.setProperty(variable, theme[variable]);
-//   }
+// function toggleFaqAccordion(ev) {
+//     let id;
+//     if(ev) {
+//         id = ev.target.id.split('faq').pop().replace('q', 'a')
+//         document.getElementById(id).style.display=document.getElementById(id).style.display === 'block' ? 'none' : 'block'
+//     }
 // }
+
+function switchTheme(theme) {
+    const htmlElement = document.documentElement;
+    htmlElement.classList.remove(userSelectedTheme);
+    htmlElement.classList.add(theme);
+    document.getElementById(userSelectedTheme).classList.remove('selected');
+    document.getElementById(theme).classList.add('selected');
+    userSelectedTheme = theme;
+}

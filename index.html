@@ -101,10 +101,10 @@
         </a>
         <nav role="navigation" class="nav-menu w-nav-menu">
           <div class="menu-wrap">
-            <div class="button-header-tablet"><button onclick="publish()" class="primary-button w-button" style="padding: 2px 10px;font-size: 14px;">Save & Update</button></div>
+            <div class="button-header-tablet"><button onclick="toggleEditControl()" class="primary-button w-button" style="padding: 2px 10px;font-size: 14px;">Save & Update</button></div>
           </div>
         </nav>
-        <div class="button-header" style="display: block;"><button onclick="publish()" class="primary-button w-button" style="padding: 2px 10px;font-size: 14px;">Save & Update</button></div>
+        <div class="button-header" style="display: block;"><button onclick="toggleEditControl()" class="primary-button w-button" style="padding: 2px 10px;font-size: 14px;">Save & Update</button></div>
       </div>
     </div>
   </div>
@@ -372,8 +372,8 @@
     <!-- Mobile CTA Form -->
     <div style="padding: 15px;">
       <div class="hero-form-wrapper w-form mobile">
-        <h2 class="heading-banner large" style="text-align: center; color: white;">Request a Call Back for Expert Physiotherapy Care</h2>
-        <p class="mb-50 home-2-banner" style="text-align: center; color: white;">Have questions or ready to book your first session?</p>
+        <h2 id="bookappointment-title" class="heading-banner large" style="text-align: center; color: white;">Book Your Appointment at [Clinic Name] Today</h2>
+        <p id="bookappointment-desc" class="mb-50 home-2-banner" style="text-align: center; color: white;">Schedule a consultation with Dr. [Doctor's Name] at [Clinic Name] and take the first step towards healthier, glowing skin. Quick and easy booking available</p>
         <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="post" class="contacts-3-form"
           data-wf-page-id="64c23c6fc82b2204b21af28f" data-wf-element-id="0a852d8a-afde-6322-209f-a564a8171fa9"
           action="https://digi-clinik-backend.vercel.app/api/appointments/create">
@@ -448,7 +448,7 @@
             <a href="../contact-us/" class="secondary-button w-button">Request Callback</a>
           </div> -->
           <div class="hero-form-wrapper w-form desktop">
-            <h2 class="heading-banner large" style="text-align: center; color: white;">Enter your details to get callback</h2>
+            <h2 class="heading-banner large" style="text-align: center; color: white;">Book Your Appointment at [Clinic Name] Today</h2>
             <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="post" class="contacts-3-form"
               data-wf-page-id="64c23c6fc82b2204b21af28f" data-wf-element-id="0a852d8a-afde-6322-209f-a564a8171fa9"
               action="https://digi-clinik-backend.vercel.app/api/appointments/create">
@@ -612,7 +612,7 @@
   <!-- Categories Desktop -->
   <section class="desktop py-3">
     <div class="container-fluid px-5">
-      <h2 class="centered-heading">Popular Diagnosis</h2>
+      <h2 class="centered-heading">Popular Cosmetic Procedures</h2>
       <p class="centered-subheading">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt sagittis eros. Quisque quis euismod lorem.</p>
       <div class="category-grid py-3">
         <div class="category-card">
@@ -834,32 +834,32 @@
       <div class="grid-card-wrapper-hori">
         <div>
           <div class="grid-card-item-hori">
-            <p class="grid-card-content">"Dr. [Doctor's Name] transformed my skin with their expert acne treatment. After trying numerous products with no success, I finally found relief and clear skin. Their personalized approach made all the difference."</p>
-              <h4 class="grid-card-title">Aarav Patel</h4>
+            <p class="grid-card-content" id="testimonial-content-1" contenteditable="false">"Dr. [Doctor's Name] transformed my skin with their expert acne treatment. After trying numerous products with no success, I finally found relief and clear skin. Their personalized approach made all the difference."</p>
+              <h4 class="grid-card-title" id="testimonial-author-1" contenteditable="false">Aarav Patel</h4>
           </div>
           <div class="grid-card-item-hori mt-10">
-            <p class="grid-card-content">"I struggled with eczema for years, and Dr. [Doctor's Name] was a game-changer. The treatment plan and advice provided have brought me incredible relief and improved my quality of life."</p>
-              <h4 class="grid-card-title">Priya Sharma</h4>
+            <p class="grid-card-content" id="testimonial-content-2" contenteditable="false">"I struggled with eczema for years, and Dr. [Doctor's Name] was a game-changer. The treatment plan and advice provided have brought me incredible relief and improved my quality of life."</p>
+              <h4 class="grid-card-title" id="testimonial-author-2" contenteditable="false">Priya Sharma</h4>
           </div>
         </div>
         <div>
           <div class="grid-card-item-hori">
-            <p class="grid-card-content">"Dr. [Doctor's Name] provided excellent care for my psoriasis. Their thorough explanation of the condition and the tailored treatment plan helped manage my symptoms effectively. I feel much better now."</p>
-            <h4 class="grid-card-title">Rohan Gupta</h4>
+            <p class="grid-card-content" id="testimonial-content-3" contenteditable="false">"Dr. [Doctor's Name] provided excellent care for my psoriasis. Their thorough explanation of the condition and the tailored treatment plan helped manage my symptoms effectively. I feel much better now."</p>
+            <h4 class="grid-card-title" id="testimonial-author-3" contenteditable="false">Rohan Gupta</h4>
           </div>
           <div class="grid-card-item-hori mt-10">
-            <p class="grid-card-content">"I was struggling with rosacea, but Dr. [Doctor's Name]'s expertise made a huge difference. The customized treatment plan has significantly reduced redness and improved my skin’s appearance."</p>
-            <h4 class="grid-card-title">Ananya Rao</h4>
+            <p class="grid-card-content" id="testimonial-content-4" contenteditable="false">"I was struggling with rosacea, but Dr. [Doctor's Name]'s expertise made a huge difference. The customized treatment plan has significantly reduced redness and improved my skin’s appearance."</p>
+            <h4 class="grid-card-title" id="testimonial-author-4" contenteditable="false">Ananya Rao</h4>
           </div>
         </div>
         <div>
           <div class="grid-card-item-hori">
-            <p class="grid-card-content">"Receiving treatment for skin cancer from Dr. [Doctor's Name] was a relief. Their professionalism, clear communication, and effective treatment plan gave me confidence and hope. I’m very thankful."</p>
-            <h4 class="grid-card-title">Vikram Singh</h4>
+            <p class="grid-card-content" id="testimonial-content-5" contenteditable="false">"Receiving treatment for skin cancer from Dr. [Doctor's Name] was a relief. Their professionalism, clear communication, and effective treatment plan gave me confidence and hope. I’m very thankful."</p>
+            <h4 class="grid-card-title" id="testimonial-author-5" contenteditable="false">Vikram Singh</h4>
           </div>
           <div class="grid-card-item-hori mt-10">
-            <p class="grid-card-content">"Dr. [Doctor's Name] addressed my hyperpigmentation issue with remarkable expertise. The results have been fantastic, and I appreciate their thorough and attentive care."</p>
-            <h4 class="grid-card-title">Neha Patel</h4>
+            <p class="grid-card-content" id="testimonial-content-6" contenteditable="false">"Dr. [Doctor's Name] addressed my hyperpigmentation issue with remarkable expertise. The results have been fantastic, and I appreciate their thorough and attentive care."</p>
+            <h4 class="grid-card-title" id="testimonial-author-6" contenteditable="false">Neha Patel</h4>
           </div>
         </div>
       </div>
@@ -1027,15 +1027,15 @@
         <div data-w-id="2d26e30e-69dc-fe62-946d-c5c08661479b" class="video-text-content">
           <div class="counter-video-block">
             <div class="counter-block">
-              <div class="large-number-text blue">000+</div>
+              <div class="large-number-text blue" id="impact-numbers">100+</div>
               <div style="color: #2b2b2b;">Patients treated till now</div>
             </div>
             <div class="counter-block">
-              <div class="large-number-text blue">000 %</div>
+              <div class="large-number-text blue" id="impact-percentage">50 %</div>
               <div style="color: #2b2b2b;">Saw improvement in skin and hair problems</div>
             </div>
             <div class="counter-block">
-              <div class="large-number-text blue">23+</div>
+              <div class="large-number-text blue" id="impact-experience">23+</div>
               <div style="color: #2b2b2b;">Years of experience</div>
             </div>
           </div>
@@ -1150,7 +1150,7 @@
           <iframe class="google-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.8724153948106!2d77.64782467486633!3d12.915920687394388!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x84bd6d67712958dd%3A0xf2cd0b28c34f9959!2sDigiClinik!5e0!3m2!1sen!2sin!4v1717911487665!5m2!1sen!2sin" width="600" height="450" style="border:0px solid white;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           <div data-w-id="fe5b652c-9ae8-5ed7-18a2-85fffdf0fc89" class="contacts-wrapper location-details">
             <div class="contacts-content-wrapper">
-              <h1 class="heading-banner large fz-26" style="color: white; text-align: center;">Healing Hands Physio Clinic</h1>
+              <h1 class="heading-banner large fz-26" style="color: white; text-align: center;">[Clinic Name]</h1>
               <div class="row-contacts">
                 <div class="icon-contacts"><img
                     src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64d0e2429480c5b67d55995f_pin_drop_white_36dp.svg"
@@ -1158,7 +1158,7 @@
                 <div class="text-contacts">
                   <p class="white-text font-size-18 m-0">Location</p><a
                     href="https://www.google.com/maps/place/5+Washington+Square+N,+New+York,+NY+10003,+%D0%A1%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B5%D0%BD%D1%96+%D0%A8%D1%82%D0%B0%D1%82%D0%B8+%D0%90%D0%BC%D0%B5%D1%80%D0%B8%D0%BA%D0%B8/@40.7311336,-73.9984815,17z/data=!3m1!4b1!4m6!3m5!1s0x89c25990bc23477b:0x57fd6b90fb96784a!8m2!3d40.7311336!4d-73.9959066!16s%2Fg%2F11c5qhgsp2?authuser=0&amp;entry=ttu"
-                    target="_blank" class="link-white font-size-15"><b>1st Floor, Sheetla Chamber, Old Delhi Road, Opposite Air Force School, Rajiv Nagar, Sector 14, Gurugram, Haryana 122002</b></a>
+                    target="_blank" class="link-white font-size-15"><b>[Clinic Address]</b></a>
                 </div>
               </div>
               <div class="row-contacts">
@@ -1178,7 +1178,7 @@
                     loading="lazy" alt=""></div>
                 <div class="text-contacts">
                   <p class="white-text font-size-18 m-0">Phone</p>
-                  <a href="tel:+919773845258" class="link-white font-size-15">+91 97738 45258</a>
+                  <a href="tel:+919773845258" class="link-white font-size-15">+91 12345 67890</a>
                 </div>
               </div>
             </div>
@@ -1190,7 +1190,7 @@
           <iframe class="google-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.8724153948106!2d77.64782467486633!3d12.915920687394388!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x84bd6d67712958dd%3A0xf2cd0b28c34f9959!2sDigiClinik!5e0!3m2!1sen!2sin!4v1717911487665!5m2!1sen!2sin" width="600" height="450" style="border:0px solid white;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           <div data-w-id="fe5b652c-9ae8-5ed7-18a2-85fffdf0fc89" class="contacts-wrapper location-details">
             <div class="contacts-content-wrapper">
-              <h1 class="heading-banner large fz-26" style="color: white; text-align: center;">Treatee Physiotherapy</h1>
+              <h1 class="heading-banner large fz-26" style="color: white; text-align: center;">[Clinic Name]</h1>
               <div class="row-contacts">
                 <div class="icon-contacts"><img
                     src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64d0e2429480c5b67d55995f_pin_drop_white_36dp.svg"
@@ -1198,7 +1198,7 @@
                 <div class="text-contacts">
                   <p class="white-text font-size-18 m-0">Location</p><a
                     href="https://www.google.com/maps/place/5+Washington+Square+N,+New+York,+NY+10003,+%D0%A1%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B5%D0%BD%D1%96+%D0%A8%D1%82%D0%B0%D1%82%D0%B8+%D0%90%D0%BC%D0%B5%D1%80%D0%B8%D0%BA%D0%B8/@40.7311336,-73.9984815,17z/data=!3m1!4b1!4m6!3m5!1s0x89c25990bc23477b:0x57fd6b90fb96784a!8m2!3d40.7311336!4d-73.9959066!16s%2Fg%2F11c5qhgsp2?authuser=0&amp;entry=ttu"
-                    target="_blank" class="link-white font-size-15"><b>Office Number - 215, Second Floor, Universal Trade tower, Sector 49, Gurugram, Haryana 122018</b></a>
+                    target="_blank" class="link-white font-size-15"><b>[Clinic Address]</b></a>
                 </div>
               </div>
               <div class="row-contacts">
@@ -1217,7 +1217,7 @@
                     loading="lazy" alt=""></div>
                 <div class="text-contacts">
                   <p class="white-text font-size-18 m-0">Phone</p>
-                  <a href="tel:+919773845258" class="link-white font-size-15">+91 97738 45258</a>
+                  <a href="tel:+919773845258" class="link-white font-size-15">+91 12345 67890</a>
                 </div>
               </div>
             </div>
@@ -1262,7 +1262,7 @@
           <div data-hover="false" data-delay="0" data-w-id="8989ee74-68aa-89b0-f9fb-c214c3221b2a"
             class="accordion-item w-dropdown">
             <div class="accordion-toggle w-dropdown-toggle">
-              <h6 class="accordion-title font-size-16" id="faq1q" contenteditable="false">What is the mission of Curemed?</h6>
+              <h6 class="accordion-title font-size-16" id="faq1q" contenteditable="false">What is the mission of [X]?</h6>
               <div class="accordion-icon">+</div>
             </div>
             <nav class="accordion-list w-dropdown-list">
@@ -1274,7 +1274,7 @@
           <div data-hover="false" data-delay="0" data-w-id="8989ee74-68aa-89b0-f9fb-c214c3221b33"
             class="accordion-item w-dropdown">
             <div class="accordion-toggle w-dropdown-toggle">
-              <h6 class="accordion-title font-size-16" id="faq2q" contenteditable="false">What types of healthcare roles are available at Curemed?</h6>
+              <h6 class="accordion-title font-size-16" id="faq2q" contenteditable="false">What types of healthcare roles are available at [X]?</h6>
               <div class="accordion-icon">+</div>
             </div>
             <nav class="accordion-list w-dropdown-list">
@@ -1312,7 +1312,7 @@
           <div data-hover="false" data-delay="0" data-w-id="8989ee74-68aa-89b0-f9fb-c214c3221b4f"
             class="accordion-item w-dropdown">
             <div class="accordion-toggle w-dropdown-toggle">
-              <h6 class="accordion-title font-size-16" id="faq5q" contenteditable="false">How can I apply for a job at Curemed??</h6>
+              <h6 class="accordion-title font-size-16" id="faq5q" contenteditable="false">How can I apply for a job at [X]?</h6>
               <div class="accordion-icon">+</div>
             </div>
             <nav class="accordion-list w-dropdown-list">
@@ -1720,13 +1720,13 @@
     data-doc-height="1" role="banner" class="navbar w-nav footer-bar mobile" style="padding: 10px 0px;z-index:2">
     <div class="nav-container w-container">
       <div class="footer-menu-layout">
-        <button class="footer-menu-button" id="themeSwitcher">
+        <button class="footer-menu-button" id="themeSwitcher" popovertarget="color-palette-dialog">
           <span style="padding-right: 5px;">
             <img src="./assets/images/change-icon.png" alt="whats-app-icon" width="25px" height="25px">
           </span>
           Color
         </button>
-        <button class="footer-menu-button-sec" onclick="changeFont()">
+        <button class="footer-menu-button-sec" popovertarget="font-palette-dialog">
           <span style="padding-right: 5px;">
             <img src="./assets/images/change-icon-dark.png" alt="whats-app-icon" width="25px" height="25px">
           </span>
@@ -1742,17 +1742,132 @@
     </div>
   </div>
 
-  <div id="color-menu-bar" data-animation="over-left" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease"
+  <!-- color-palette dialog box -->
+  <div popover class="popover-dialog" id="color-palette-dialog">
+    <button class="popover-close-btn" popovertarget="color-palette-dialog" popovertargetaction="hide">x</button>
+    <h2 class="popover-title">Choose color palette</h2>
+    <hr class="popover-divider">
+    <div class="dialog-grid">
+      <div id="root" class="dialog-grid-card selected">
+        <div class="dialog-grid-card-item" onclick="switchTheme('root')" popovertarget="color-palette-dialog" popovertargetaction="hide">
+          <div class="dialog-grid-item root-theme" style="background-color: var(--primary);"></div>
+          <div class="dialog-grid-item root-theme" style="background-color: var(--midnight-blue);"></div>
+          <div class="dialog-grid-item root-theme" style="background-color: var(--black);"></div>
+          <div class="dialog-grid-item root-theme" style="background-color: var(--white);"></div>
+          <div class="dialog-grid-item root-theme" style="background-color: var(--paragraph);"></div>
+          <div class="dialog-grid-item root-theme" style="background-color: var(--body-background);"></div>
+        </div>
+      </div>
+      <div id="light-theme" class="dialog-grid-card">
+        <div class="dialog-grid-card-item" onclick="switchTheme('light-theme')" popovertarget="color-palette-dialog" popovertargetaction="hide">
+          <div class="dialog-grid-item light-theme" style="background-color: var(--primary);"></div>
+          <div class="dialog-grid-item light-theme" style="background-color: var(--midnight-blue);"></div>
+          <div class="dialog-grid-item light-theme" style="background-color: var(--black);"></div>
+          <div class="dialog-grid-item light-theme" style="background-color: var(--white);"></div>
+          <div class="dialog-grid-item light-theme" style="background-color: var(--paragraph);"></div>
+          <div class="dialog-grid-item light-theme" style="background-color: var(--body-background);"></div>
+        </div>
+      </div>
+      <div id="pastel-theme" class="dialog-grid-card">
+        <div class="dialog-grid-card-item" onclick="switchTheme('pastel-theme')" popovertarget="color-palette-dialog" popovertargetaction="hide">
+          <div class="dialog-grid-item pastel-theme" style="background-color: var(--primary);"></div>
+          <div class="dialog-grid-item pastel-theme" style="background-color: var(--midnight-blue);"></div>
+          <div class="dialog-grid-item pastel-theme" style="background-color: var(--black);"></div>
+          <div class="dialog-grid-item pastel-theme" style="background-color: var(--white);"></div>
+          <div class="dialog-grid-item pastel-theme" style="background-color: var(--paragraph);"></div>
+          <div class="dialog-grid-item pastel-theme" style="background-color: var(--body-background);"></div>
+        </div>
+      </div>
+      <div id="earthy-theme" class="dialog-grid-card">
+        <div class="dialog-grid-card-item" onclick="switchTheme('earthy-theme')" popovertarget="color-palette-dialog" popovertargetaction="hide">
+          <div class="dialog-grid-item earthy-theme" style="background-color: var(--primary);"></div>
+          <div class="dialog-grid-item earthy-theme" style="background-color: var(--midnight-blue);"></div>
+          <div class="dialog-grid-item earthy-theme" style="background-color: var(--black);"></div>
+          <div class="dialog-grid-item earthy-theme" style="background-color: var(--white);"></div>
+          <div class="dialog-grid-item earthy-theme" style="background-color: var(--paragraph);"></div>
+          <div class="dialog-grid-item earthy-theme" style="background-color: var(--body-background);"></div>
+        </div>
+      </div>
+      <div id="monochrome-theme" class="dialog-grid-card">
+        <div class="dialog-grid-card-item" onclick="switchTheme('monochrome-theme')" popovertarget="color-palette-dialog" popovertargetaction="hide">
+          <div class="dialog-grid-item monochrome-theme" style="background-color: var(--primary);"></div>
+          <div class="dialog-grid-item monochrome-theme" style="background-color: var(--midnight-blue);"></div>
+          <div class="dialog-grid-item monochrome-theme" style="background-color: var(--black);"></div>
+          <div class="dialog-grid-item monochrome-theme" style="background-color: var(--white);"></div>
+          <div class="dialog-grid-item monochrome-theme" style="background-color: var(--paragraph);"></div>
+          <div class="dialog-grid-item monochrome-theme" style="background-color: var(--body-background);"></div>
+        </div>
+      </div>
+      <div id="vibrant-theme" class="dialog-grid-card">
+        <div class="dialog-grid-card-item" onclick="switchTheme('vibrant-theme')" popovertarget="color-palette-dialog" popovertargetaction="hide">
+          <div class="dialog-grid-item vibrant-theme" style="background-color: var(--primary);"></div>
+          <div class="dialog-grid-item vibrant-theme" style="background-color: var(--midnight-blue);"></div>
+          <div class="dialog-grid-item vibrant-theme" style="background-color: var(--black);"></div>
+          <div class="dialog-grid-item vibrant-theme" style="background-color: var(--white);"></div>
+          <div class="dialog-grid-item vibrant-theme" style="background-color: var(--paragraph);"></div>
+          <div class="dialog-grid-item vibrant-theme" style="background-color: var(--body-background);"></div>
+        </div>
+      </div>
+    </div>
+    <button class="primary-button" popovertarget="color-palette-dialog" popovertargetaction="hide" style="width: 100%; margin-top: 25px;">
+      Apply
+    </button>
+  </div>
+
+
+  <!-- font-palette dialog box -->
+  <div popover class="popover-dialog" id="font-palette-dialog">
+    <button class="popover-close-btn" popovertarget="font-palette-dialog" popovertargetaction="hide">x</button>
+    <h2 class="popover-title">Choose color palette</h2>
+    <hr class="popover-divider">
+    <div class="dialog-grid">
+      <div id="font-palette-0" class="dialog-grid-card selected">
+        <div class="dialog-grid-card-item single-item" onclick="switchFont(0)" popovertarget="font-palette-dialog" popovertargetaction="hide">
+          <div class="dialog-grid-item" style="padding: 5px; font-family: '';">This is Default font</div>
+        </div>
+      </div>
+      <div id="font-palette-1" class="dialog-grid-card">
+        <div class="dialog-grid-card-item single-item" onclick="switchFont(1)" popovertarget="font-palette-dialog" popovertargetaction="hide">
+          <div class="dialog-grid-item" style="padding: 5px; font-family: 'Poppins';">This is Poppins font</div>
+        </div>
+      </div>
+      <div id="font-palette-2" class="dialog-grid-card">
+        <div class="dialog-grid-card-item single-item" onclick="switchFont(2)" popovertarget="font-palette-dialog" popovertargetaction="hide">
+          <div class="dialog-grid-item" style="padding: 5px; font-family: 'Open Sans';">This is Open Sans font</div>
+        </div>
+      </div>
+      <div id="font-palette-3" class="dialog-grid-card">
+        <div class="dialog-grid-card-item single-item" onclick="switchFont(3)" popovertarget="font-palette-dialog" popovertargetaction="hide">
+          <div class="dialog-grid-item" style="padding: 5px; font-family: 'Nunito Sans';">This is Nunito Sans font</div>
+        </div>
+      </div>
+      <div id="font-palette-4" class="dialog-grid-card">
+        <div class="dialog-grid-card-item single-item" onclick="switchFont(4)" popovertarget="font-palette-dialog" popovertargetaction="hide">
+          <div class="dialog-grid-item" style="padding: 5px; font-family: 'Courier';">This is Courier font</div>
+        </div>
+      </div>
+      <div id="font-palette-5" class="dialog-grid-card">
+        <div class="dialog-grid-card-item single-item" onclick="switchFont(5)" popovertarget="font-palette-dialog" popovertargetaction="hide">
+          <div class="dialog-grid-item" style="padding: 5px; font-family: 'Arial';">This is Arial font</div>
+        </div>
+      </div>
+    </div>
+    <button class="primary-button" popovertarget="font-palette-dialog" popovertargetaction="hide" style="width: 100%; margin-top: 25px;">
+      Apply
+    </button>
+  </div>
+
+  <!-- <div id="color-menu-bar" data-animation="over-left" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease"
     data-doc-height="1" role="banner" class="navbar w-nav footer-bar mobile" style="padding: 10px 0px;z-index:2">
     <div class="nav-container w-container">
       <div class="footer-menu-layout">
-        <button class="footer-menu-button" id="themeSwitcher">
+        <button class="footer-menu-button" id="themeSwitcher" popovertarget="color-palette">
           <span style="padding-right: 5px;">
             <img src="./assets/images/change-icon.png" alt="whats-app-icon" width="25px" height="25px">
           </span>
           Color
         </button>
-        <button class="footer-menu-button-sec" onclick="changeFont()">
+        <button class="footer-menu-button-sec" onclick="switchFont()">
           <span style="padding-right: 5px;">
             <img src="./assets/images/change-icon-dark.png" alt="whats-app-icon" width="25px" height="25px">
           </span>
@@ -1766,7 +1881,7 @@
         </button>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div id="main-menu-bar"></div>
   <!-- <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=64c23c6ec82b2204b21af185"
