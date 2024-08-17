@@ -3,11 +3,10 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Curemed - Webflow Ecommerce website template</title>
-  <meta content="Curemed - Webflow Ecommerce website template" property="og:title">
-  <meta content="Curemed - Webflow Ecommerce website template" property="twitter:title">
+  <title>DigiClinik - Website Builder</title>
+  <meta content="DigiClinik - Website Builder" property="og:title">
+  <meta content="DigiClinik - Website Builder" property="twitter:title">
   <meta content="width=device-width, initial-scale=1" name="viewport">
-  <meta content="Webflow" name="generator">
   <link href="./css/main.css" rel="stylesheet" type="text/css">
   <link href="./style.css" rel="stylesheet" type="text/css">
   <!-- <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/> -->
@@ -27,17 +26,15 @@
     type="text/javascript">WebFont.load({ google: { families: ["Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic"] } });</script>
   <script
     type="text/javascript">!function (o, c) { var n = c.documentElement, t = " w-mod-"; n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch") }(window, document);</script>
-  <link href="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64d4ffe13c8725579b32dcf2_Favicon.png"
-    rel="shortcut icon" type="image/x-icon">
-  <link href="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64d500753863e8bca931d35c_Webclip.png"
-    rel="apple-touch-icon">
+  <link href="./assets/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+  <link href="./assets/images/apple-touch-icon.png" rel="apple-touch-icon">
   <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-BGJ3E7W08F"></script>
   <script
     type="text/javascript">window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('set', 'developer_id.dZGVlNj', true); gtag('config', 'G-BGJ3E7W08F');</script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <!-- <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> -->
 </head>
 
 <body>
@@ -47,11 +44,6 @@
     data-doc-height="1" role="banner" class="navbar w-nav" style="border-bottom: 1px dashed gray;background: bisque;padding: 5px;position: fixed; top: 0;z-index: 9999">
     <div class="nav-container w-container">
       <div class="nav-menu-wrapper">
-        <!-- <a href="" aria-current="page" class="brand w-nav-brand w--current">
-          <img
-            src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64c8e992b501f1edb9149f78_curemed%C2%AE.svg"
-            loading="lazy" width="136" height="18" alt="">
-        </a> -->
         <a>
           <h1 class="small-text">This is a demo site, you can make deploy this site by opting to our plan</h1>
         </a>
@@ -91,11 +83,6 @@
     data-doc-height="1" role="banner" class="navbar w-nav" style="display: none;border-bottom: 1px dashed gray;background: bisque;padding: 5px;position: fixed;top: 0;z-index: 9999">
     <div class="nav-container w-container">
       <div class="nav-menu-wrapper">
-        <!-- <a href="" aria-current="page" class="brand w-nav-brand w--current">
-          <img
-            src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64c8e992b501f1edb9149f78_curemed%C2%AE.svg"
-            loading="lazy" width="136" height="18" alt="">
-        </a> -->
         <a>
           <h1 class="small-text">The website is in editing mode, don't forget to save & update your changes once editing is done</h1>
         </a>
@@ -110,23 +97,18 @@
   </div>
 
   <button id="editButton" class="fixed-button" onclick="toggleEditControl()">
-    <img src="./assets/images/edit-icon.png" alt="Edit icon" width="30">
+    <img src="./assets/images/edit-icon.png" alt="Edit icon" style="width: 70%">
   </button>
   <button id="saveButton" class="fixed-button" onclick="toggleEditControl()">
-    <img src="./assets/images/save-icon.png" alt="Edit icon" width="30">
+    <img src="./assets/images/save-icon.png" alt="Edit icon" style="width: 70%">
   </button>
   
   <div data-animation="over-left" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease"
     data-doc-height="1" role="banner" class="navbar w-nav" id="main-navbar">
     <div class="nav-container w-container">
       <div class="nav-menu-wrapper">
-        <!-- <a href="" aria-current="page" class="brand w-nav-brand w--current">
-          <img
-            src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64c8e992b501f1edb9149f78_curemed%C2%AE.svg"
-            loading="lazy" width="136" height="18" alt="">
-        </a> -->
         <a>
-          <h1 class="heading-banner large" id="header-title" contenteditable="false">Dr. [Doctor Name]</h1>
+          <h1 class="heading-banner large" id="navbar-title" contenteditable="false">Dr. [Doctor Name]</h1>
         </a>
         <nav role="navigation" class="nav-menu w-nav-menu">
           <div class="tablet-menu"><a href="" aria-current="page" class="brand-tablet w-nav-brand w--current"><img
@@ -372,8 +354,8 @@
     <!-- Mobile CTA Form -->
     <div style="padding: 15px;">
       <div class="hero-form-wrapper w-form mobile">
-        <h2 id="bookappointment-title" class="heading-banner large" style="text-align: center; color: white;">Book Your Appointment at [Clinic Name] Today</h2>
-        <p id="bookappointment-desc" class="mb-50 home-2-banner" style="text-align: center; color: white;">Schedule a consultation with Dr. [Doctor's Name] at [Clinic Name] and take the first step towards healthier, glowing skin. Quick and easy booking available</p>
+        <h2 id="hero-book-appointment-title" class="heading-banner large" style="text-align: center; color: white;" contenteditable="false">Book Your Appointment at [Clinic Name] Today</h2>
+        <p id="hero-book-appointment-subtitle" class="mb-50 home-2-banner" style="text-align: center; color: white;" contenteditable="false">Schedule a consultation with Dr. [Doctor's Name] at [Clinic Name] and take the first step towards healthier, glowing skin. Quick and easy booking available</p>
         <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="post" class="contacts-3-form"
           data-wf-page-id="64c23c6fc82b2204b21af28f" data-wf-element-id="0a852d8a-afde-6322-209f-a564a8171fa9"
           action="https://digi-clinik-backend.vercel.app/api/appointments/create">
@@ -431,7 +413,7 @@
             src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64c921ad765761011d3b466d_avater.webp"
             loading="lazy" alt=""></div>
         <div class="block-customers">
-          <div id="customersServed" class="number-home-2" contenteditable="false">64,739</div>
+          <div id="customers-served" class="number-home-2" contenteditable="false">64,739</div>
           <div class="dark-text">Happy Customers</div>
         </div>
       </div>
@@ -441,14 +423,14 @@
       <div data-w-id="efd49cc9-45ba-9609-51c0-45e0b241cd3f" class="top-banner-content home-2">
         <div data-w-id="1b40bc42-850a-5b3b-89a4-e5e5e6bb2ac2" class="text-content-home-2">
           <!-- <div class="line-absolute position"></div> -->
-          <h1 class="heading-banner large" id="hero-title">Trusted Skin Care by Dr. <span class="blue-text">[Doctor's Name]</span> – Leading Dermatologist in <span class="blue-text">[City]</span></h1>
-          <p class="mb-50 home-2-banner text-left" id="hero-sub-title" contenteditable="false">Dr. [Doctor's Name], with over [X] years of experience in dermatology, has been transforming the skin health of patients in [City]. Having previously served at esteemed hospitals such as [Hospital 1] and [Hospital 2], Dr. [Doctor's Name] combines deep expertise with a personalized approach to provide top-tier skin care tailored to your unique needs.</p>
+          <h1 class="heading-banner large" id="hero-title" contenteditable="false">Trusted Skin Care by Dr. [Doctor's Name] – Leading Dermatologist in [City]</h1>
+          <p class="mb-50 home-2-banner text-left" id="hero-subtitle" contenteditable="false">Dr. [Doctor's Name], with over [X] years of experience in dermatology, has been transforming the skin health of patients in [City]. Having previously served at esteemed hospitals such as [Hospital 1] and [Hospital 2], Dr. [Doctor's Name] combines deep expertise with a personalized approach to provide top-tier skin care tailored to your unique needs.</p>
           <!-- <div class="buttons-banner-wrap justify">
             <a href="../about-us/" class="primary-button w-button">About Us</a>
             <a href="../contact-us/" class="secondary-button w-button">Request Callback</a>
           </div> -->
           <div class="hero-form-wrapper w-form desktop">
-            <h2 class="heading-banner large" style="text-align: center; color: white;">Book Your Appointment at [Clinic Name] Today</h2>
+            <h2 id="hero-book-appointment-title-1" class="heading-banner large" style="text-align: center; color: white;" contenteditable="false">Book Your Appointment at [Clinic Name] Today</h2>
             <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="post" class="contacts-3-form"
               data-wf-page-id="64c23c6fc82b2204b21af28f" data-wf-element-id="0a852d8a-afde-6322-209f-a564a8171fa9"
               action="https://digi-clinik-backend.vercel.app/api/appointments/create">
@@ -498,7 +480,7 @@
   <div class="section-background mobile pb-1">
     <div class="base-container w-container">
       <div class="text-center w-100">
-        <h1 class="heading-banner large text-left">Popular treatments</h1>
+        <h1 class="heading-banner large text-left" id="procedures-title" contenteditable="false">Popular Cosmetic Procedures</h1>
       </div>
       <div class="grid-card-wrapper popular-diagnosis-mobile">
         <div class="grid-card-item">
@@ -612,8 +594,8 @@
   <!-- Categories Desktop -->
   <section class="desktop py-3">
     <div class="container-fluid px-5">
-      <h2 class="centered-heading">Popular Cosmetic Procedures</h2>
-      <p class="centered-subheading">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt sagittis eros. Quisque quis euismod lorem.</p>
+      <h2 class="centered-heading" id="procedures-title" contenteditable="false">Popular Cosmetic Procedures</h2>
+      <p class="centered-subheading" id="procedures-subtitle" contenteditable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt sagittis eros. Quisque quis euismod lorem.</p>
       <div class="category-grid py-3">
         <div class="category-card">
           <img src="https://onemg.gumlet.io/diagnostics%2F2023-11%2F1699443647_skinn.webp?format=auto" loading="lazy" alt="" class="team-member-image-two">
@@ -670,15 +652,15 @@
       <div data-w-id="c1a154ef-f74b-c0a9-86a7-f29bdc455686" class="doctor-block doctor-image">
         <div class="image-doctor">
           <img
-            id="doctorDetails-Pic"
+            id="doctor-details-pic"
             style="height: 200px;"
             src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64ca487dabe6b787c37f9eab_Ellipse%201203.webp"
             loading="lazy" alt=""></div>
-        <h6 id="doctorDetails-Name" contenteditable="false">Dr [Doctor Name]</h6>
-        <span id="doctorDetails-Speciality" class="small-text" contenteditable="false">Consultant Dermatologist</span>
-        <span id="doctorDetails-Qualification" class="small-text" contenteditable="false">[Qualification]</span>
-        <span id="doctorDetails-Experience" class="small-text" contenteditable="false">[X] Years of Experience</span>
-        <p id="doctorDetails-About" contenteditable="false">Dr. [Doctor's Name] is a distinguished dermatologist with over [X] years of experience in treating various skin conditions. A graduate of [Medical School], Dr. [Doctor's Name] refined their skills at renowned institutions like [Hospital 1] and [Hospital 2], where they earned a reputation for delivering exceptional patient care. Specializing in [specific areas of expertise], Dr. [Doctor's Name] is dedicated to using the latest dermatological advancements to provide personalized treatment plans tailored to each patient's unique needs.</p>
+        <h6 id="doctor-details-name" contenteditable="false">Dr [Doctor Name]</h6>
+        <span id="doctor-details-speciality" class="small-text" contenteditable="false">Consultant Dermatologist</span>
+        <span id="doctor-details-qualification" class="small-text" contenteditable="false">[Qualification]</span>
+        <span id="doctor-details-experience" class="small-text" contenteditable="false">[X] Years of Experience</span>
+        <p id="doctor-details-about" contenteditable="false">Dr. [Doctor's Name] is a distinguished dermatologist with over [X] years of experience in treating various skin conditions. A graduate of [Medical School], Dr. [Doctor's Name] refined their skills at renowned institutions like [Hospital 1] and [Hospital 2], where they earned a reputation for delivering exceptional patient care. Specializing in [specific areas of expertise], Dr. [Doctor's Name] is dedicated to using the latest dermatological advancements to provide personalized treatment plans tailored to each patient's unique needs.</p>
         <!-- <div>Heart Surgeon, London</div> -->
         <a href="../schedule/" class="primary-button mt-20 w-button">Book Appointment</a>
       </div>
@@ -686,15 +668,15 @@
     <div class="base-container-highlights w-container" style="padding-bottom: 1rem; padding-top: 4rem;">
       <div data-w-id="f03ba967-5283-182f-b644-8f8290506b08" class="block-benefits bgr">
         <div class="contacts-title" style="border-bottom: 1px solid;">
-          <h1 class="white-text heading-banner large" style="text-align: center;">Key Highlights</h1>
+          <h1 class="white-text heading-banner large" id="key-highlights-header" contenteditable="false" style="text-align: center;">Key Highlights</h1>
         </div>
         <div class="row-benefit">
           <div class="image-row"><img
               src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64c785313bb6e5df119ae7fb_star.svg"
               loading="lazy" width="34" height="34" alt=""></div>
           <div class="text-row">
-            <h1 class="white-text heading-banner large" style="font-size: 24px; margin-bottom: 0px; padding-left: 0px;">Educational Excellence </h1>
-            <div class="white-text" id="keyHighlights-1" contenteditable="false">Dr. [Doctor's Name] completed their medical education at [Medical School], graduating with a [Degree, e.g., MBBS] in [Year]. They further specialized in dermatology, obtaining their [Specialization Degree, e.g., MD] in [Year]. This comprehensive education laid a strong foundation for their extensive expertise in the field of dermatology.</div>
+            <h1 class="white-text heading-banner large" id="key-highlights-title-1" contenteditable="false" style="font-size: 24px; margin-bottom: 0px; padding-left: 0px;">Educational Excellence </h1>
+            <div class="white-text" id="key-highlights-desc-1" contenteditable="false">Dr. [Doctor's Name] completed their medical education at [Medical School], graduating with a [Degree, e.g., MBBS] in [Year]. They further specialized in dermatology, obtaining their [Specialization Degree, e.g., MD] in [Year]. This comprehensive education laid a strong foundation for their extensive expertise in the field of dermatology.</div>
           </div>
         </div>
         <div class="row-benefit">
@@ -702,8 +684,8 @@
               src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64c78531a5e3e1334297e5ae_emotion-smile.svg"
               loading="lazy" width="34" height="34" alt=""></div>
           <div class="text-row">
-            <h1 class="white-text heading-banner large" style="font-size: 24px; margin-bottom: 0px; padding-left: 0px;">Extensive Experience</h1>
-            <div class="white-text" id="keyHighlights-2" contenteditable="false">Dr. [Doctor's Name] began their career at [Hospital 1], where they worked from [Start Year] to [End Year]. They then continued their professional journey at [Hospital 2], serving from [Start Year] to [End Year]. During their time at these esteemed institutions, Dr. [Doctor's Name] gained invaluable experience and developed a reputation for excellence in dermatological care.</div>
+            <h1 class="white-text heading-banner large" id="key-highlights-title-2" contenteditable="false" style="font-size: 24px; margin-bottom: 0px; padding-left: 0px;">Extensive Experience</h1>
+            <div class="white-text" id="key-highlights-desc-2" contenteditable="false">Dr. [Doctor's Name] began their career at [Hospital 1], where they worked from [Start Year] to [End Year]. They then continued their professional journey at [Hospital 2], serving from [Start Year] to [End Year]. During their time at these esteemed institutions, Dr. [Doctor's Name] gained invaluable experience and developed a reputation for excellence in dermatological care.</div>
           </div>
         </div>
         <div class="row-benefit" style="margin-bottom: 12px;">
@@ -711,8 +693,8 @@
               src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64c78531eeb2fae71dd5492b_users.svg"
               loading="lazy" width="34" height="34" alt=""></div>
           <div class="text-row">
-            <h1 class="white-text heading-banner large" style="font-size: 24px; margin-bottom: 0px; padding-left: 0px;">Awards and Recognitions</h1>
-            <div class="white-text" id="keyHighlights-3" contenteditable="false">Awards and Recognitions</div>
+            <h1 class="white-text heading-banner large" id="key-highlights-title-3" contenteditable="false" style="font-size: 24px; margin-bottom: 0px; padding-left: 0px;">Awards and Recognitions</h1>
+            <div class="white-text" id="key-highlights-desc-3" contenteditable="false">Awards and Recognitions</div>
           </div>
         </div>
       </div>
@@ -723,17 +705,19 @@
   <div class="section without-bottom-spacing section-background">
     <div class="base-container w-container">
       <div class="text-center w-100">
-        <h1 class="heading-banner large text-left">Explore Our Complete Treatment Solutions</h1>
-        <p class="mb-50 home-2-banner text-left">Explore a range of skin conditions expertly managed by Dr. [Doctor's Name]. From common issues like acne and eczema to more complex concerns, our personalized treatment plans are designed to address your specific needs and restore your skin’s health and confidence.</p>
+        <h1 class="heading-banner large text-left" id="treatments-title" contenteditable="false">Explore Our Complete Treatment Solutions</h1>
+        <p class="mb-50 home-2-banner text-left" id="treatments-subtitle" contenteditable="false">Explore a range of skin conditions expertly managed by Dr. [Doctor's Name]. From common issues like acne and eczema to more complex concerns, our personalized treatment plans are designed to address your specific needs and restore your skin’s health and confidence.</p>
       </div>
       <div class="service-wrapper">
         <div class="srvc-list-wrapper w-dyn-list">
-          <div role="list" class="srvc-list mt-0 w-dyn-items popular-diagnosis">
+          <div role="list" class="srvc-list mt-0 w-dyn-items popular-treatments">
             <div role="listitem"
               class="srvc-item w-dyn-item">
               <div class="description-srvc">
                 <a href="services/paediatrician/" class="image-srvc w-inline-block">
-                  <img alt=" Service Image"
+                  <img 
+                    id="treatments-imgUrl-1"
+                    alt=" Service Image"
                     loading="lazy"
                     src="https://assets-global.website-files.com/64c23c6fc82b2204b21af213/64c7acbb9a6df8af861c22a2_cdc-DjG-B1lqT90-unsplash.jpg"
                     sizes="(max-width: 479px) 94vw, (max-width: 767px) 96vw, (max-width: 991px) 46vw, (max-width: 1279px) 30vw, 370px"
@@ -741,8 +725,8 @@
                     class="image-cover">
                   <div class="bgr-image-srvc"></div>
                 </a>
-                <h6 class="pt-1" style="padding-left: 5px;">Paediatrician</h6>
-                <p class="font-size-15 mb-50 home-2-banner text-left">We deeply comprehend the distinct healthcare requirements of children, and our
+                <h6 class="pt-1" style="padding-left: 5px;" id="treatments-title-1" contenteditable="false">Paediatrician</h6>
+                <p class="font-size-15 mb-50 home-2-banner text-left" id="treatments-desc-1" contenteditable="false">We deeply comprehend the distinct healthcare requirements of children, and our
                   mission is to offer compassionate and expert medical care for your little ones.</p>
                 <a href="services/paediatrician/" class="link-with-icon">Learn More<span
                     class="text-button-icon"></span></a>
@@ -752,7 +736,9 @@
               class="srvc-item w-dyn-item">
               <div class="description-srvc">
                 <a href="services/paediatrician/" class="image-srvc w-inline-block">
-                  <img alt=" Service Image"
+                  <img 
+                    id="treatments-imgUrl-2"
+                    alt=" Service Image"
                     loading="lazy"
                     src="https://assets-global.website-files.com/64c23c6fc82b2204b21af213/64c7acbb9a6df8af861c22a2_cdc-DjG-B1lqT90-unsplash.jpg"
                     sizes="(max-width: 479px) 94vw, (max-width: 767px) 96vw, (max-width: 991px) 46vw, (max-width: 1279px) 30vw, 370px"
@@ -760,8 +746,8 @@
                     class="image-cover">
                   <div class="bgr-image-srvc"></div>
                 </a>
-                <h6 class="pt-1" style="padding-left: 5px;">Paediatrician</h6>
-                <p class="font-size-15 mb-50 home-2-banner text-left">We deeply comprehend the distinct healthcare requirements of children, and our
+                <h6 class="pt-1" style="padding-left: 5px;" id="treatments-title-2" contenteditable="false">Paediatrician</h6>
+                <p class="font-size-15 mb-50 home-2-banner text-left" id="treatments-desc-2" contenteditable="false">We deeply comprehend the distinct healthcare requirements of children, and our
                   mission is to offer compassionate and expert medical care for your little ones.</p>
                 <a href="services/paediatrician/" class="link-with-icon">Learn More<span
                     class="text-button-icon"></span></a>
@@ -771,7 +757,9 @@
               class="srvc-item w-dyn-item">
               <div class="description-srvc">
                 <a href="services/paediatrician/" class="image-srvc w-inline-block">
-                  <img alt=" Service Image"
+                  <img 
+                    id="treatments-imgUrl-3"
+                    alt=" Service Image"
                     loading="lazy"
                     src="https://assets-global.website-files.com/64c23c6fc82b2204b21af213/64c7acbb9a6df8af861c22a2_cdc-DjG-B1lqT90-unsplash.jpg"
                     sizes="(max-width: 479px) 94vw, (max-width: 767px) 96vw, (max-width: 991px) 46vw, (max-width: 1279px) 30vw, 370px"
@@ -779,8 +767,8 @@
                     class="image-cover">
                   <div class="bgr-image-srvc"></div>
                 </a>
-                <h6 class="pt-1" style="padding-left: 5px;">Paediatrician</h6>
-                <p class="font-size-15 mb-50 home-2-banner text-left">We deeply comprehend the distinct healthcare requirements of children, and our
+                <h6 class="pt-1" style="padding-left: 5px;" id="treatments-title-3" contenteditable="false">Paediatrician</h6>
+                <p class="font-size-15 mb-50 home-2-banner text-left" id="treatments-desc-3" contenteditable="false">We deeply comprehend the distinct healthcare requirements of children, and our
                   mission is to offer compassionate and expert medical care for your little ones.</p>
                 <a href="services/paediatrician/" class="link-with-icon">Learn More<span
                     class="text-button-icon"></span></a>
@@ -803,8 +791,8 @@
   <div class="section section-background">
     <div class="base-container w-container">
       <div class="text-center w-100">
-        <h1 class="heading-banner large text-left">Hear What Our Patients Have to Say</h1>
-        <p class="mb-50 home-2-banner text-left d-none">Watch video testimonials from our satisfied patients as they share their experiences and success stories with Dr. Ankush Kaushik</p>
+        <h1 class="heading-banner large text-left" id="testimonial-title" contenteditable="false">Hear What Our Patients Have to Say</h1>
+        <p class="mb-50 home-2-banner text-left d-none" id="testimonial-subtitle" contenteditable="false">Watch video testimonials from our satisfied patients as they share their experiences and success stories with Dr. Ankush Kaushik</p>
       </div>
       <!-- <div class="service-wrapper">
         <div class="srvc-list-wrapper w-dyn-list">
@@ -978,8 +966,8 @@
   <div class="section section-background">
     <div class="base-container w-container">
       <div class="text-center w-100">
-        <h1 class="heading-banner large text-left">Our Impact in Numbers</h1>
-        <p class="mb-50 home-2-banner text-left">From successful treatments to patient satisfaction, these numbers reflect our commitment to exceptional dermatological care.</p>
+        <h1 class="heading-banner large text-left" id="impact-title" contenteditable="false">Our Impact in Numbers</h1>
+        <p class="mb-50 home-2-banner text-left" id="impact-subtitle" contenteditable="false">From successful treatments to patient satisfaction, these numbers reflect our commitment to exceptional dermatological care.</p>
       </div>
       <div data-w-id="912145b2-b350-5f85-6613-12473e042231" class="video-wrap">
         <div
@@ -1027,16 +1015,16 @@
         <div data-w-id="2d26e30e-69dc-fe62-946d-c5c08661479b" class="video-text-content">
           <div class="counter-video-block">
             <div class="counter-block">
-              <div class="large-number-text blue" id="impact-numbers">100+</div>
-              <div style="color: #2b2b2b;">Patients treated till now</div>
+              <div class="large-number-text blue" id="impact-numbers" contenteditable="false">100+</div>
+              <div style="color: #2b2b2b;" id="impact-numbers-desc" contenteditable="false">Patients treated till now</div>
             </div>
             <div class="counter-block">
-              <div class="large-number-text blue" id="impact-percentage">50 %</div>
-              <div style="color: #2b2b2b;">Saw improvement in skin and hair problems</div>
+              <div class="large-number-text blue" id="impact-percentage" contenteditable="false">50 %</div>
+              <div style="color: #2b2b2b;" id="impact-percentage-desc" contenteditable="false">Saw improvement in skin and hair problems</div>
             </div>
             <div class="counter-block">
-              <div class="large-number-text blue" id="impact-experience">23+</div>
-              <div style="color: #2b2b2b;">Years of experience</div>
+              <div class="large-number-text blue" id="impact-experience" contenteditable="false">23+</div>
+              <div style="color: #2b2b2b;" id="impact-experience-desc" contenteditable="false">Years of experience</div>
             </div>
           </div>
           <!-- <a href="../services/" class="primary-button w-button">Discover Our Services</a> -->
@@ -1142,8 +1130,8 @@
   <div id="clinic-locations" data-w-id="85c93132-9d64-3bf2-dfe4-548b597a0d06" class="section section-background">
     <div class="base-container w-container">
       <div class="text-center w-100">
-        <h1 class="heading-banner large text-left">Clinic Locations</h1>
-        <p class="mb-50 home-2-banner text-left" id="clinic-loc">Conveniently located in [City], our clinic offers comprehensive dermatological care with easy access and modern facilities.</p>  
+        <h1 class="heading-banner large text-left" id="locations-title" contenteditable="false">Clinic Locations</h1>
+        <p class="mb-50 home-2-banner text-left" id="locations-subtitle" contenteditable="false">Conveniently located in [City], our clinic offers comprehensive dermatological care with easy access and modern facilities.</p>  
       </div>
       <div class="clinic-location" id="clinic-location">
         <div class="location-container">
@@ -1242,8 +1230,8 @@
             src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64c7b929152b5caa50156f85_Author%20Quote.webp"
             loading="lazy" alt="" class="author-image">
           <div class="author-name">
-            <h4 class="white-text" id="dm-name" contenteditable="false">Ronald Richards</h4>
-            <div class="white-text" id="dm-designation" contenteditable="false">CEO of Curemed</div>
+            <h4 class="white-text" id="dm-name" contenteditable="false">[Doctor Name]</h4>
+            <div class="white-text" id="dm-designation" contenteditable="false">[Qualification]</div>
           </div>
         </div>
       </div>
@@ -1254,8 +1242,8 @@
   <div class="section section-background">
     <div class="base-container w-container">
       <div class="text-center w-100">
-        <h1 class="heading-banner large text-left">The most common questions</h1>
-        <p class="mb-50 home-2-banner text-left">Find answers to common questions about our dermatological services, treatments, and clinic procedures. If you have any other queries, feel free to contact us for more personalized information.</p>  
+        <h1 class="heading-banner large text-left" id="faq-title" contenteditable="false">The most common questions</h1>
+        <p class="mb-50 home-2-banner text-left" id="faq-subtitle" contenteditable="false">Find answers to common questions about our dermatological services, treatments, and clinic procedures. If you have any other queries, feel free to contact us for more personalized information.</p>  
       </div>
       <div class="accordion-wrapper">
         <div class="accordion-wrap">
@@ -1324,7 +1312,7 @@
           <div data-hover="false" data-delay="0" data-w-id="8989ee74-68aa-89b0-f9fb-c214c3221b58"
             class="accordion-item w-dropdown">
             <div class="accordion-toggle w-dropdown-toggle">
-              <h6 class="accordion-title font-size-16" id="faq6q" contenteditable="false">Does Curemed offer opportunities for career growth and development?</h6>
+              <h6 class="accordion-title font-size-16" id="faq6q" contenteditable="false">Does [ClinicName] offer opportunities for career growth and development?</h6>
               <div class="accordion-icon">+</div>
             </div>
             <nav class="accordion-list w-dropdown-list">
@@ -1367,7 +1355,7 @@
     <div data-w-id="0f91618f-8603-fd61-d4a3-a750dd390dc4" class="base-container w-container">
       <div class="contacts-3-form-wrapper w-form">
         <div class="contacts-title pb-1">
-          <h1 class="white-text heading-banner large" style="text-align: center;">Get in touch with us today for expert physiotherapy care</h1>
+          <h1 class="white-text heading-banner large" id="getintouch-title" contenteditable="false" style="text-align: center;">Get in touch with us today for expert physiotherapy care</h1>
         </div>
         <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="post" class="contacts-3-form"
           action="https://digi-clinik-backend.vercel.app/api/contacts/create">
@@ -1404,8 +1392,8 @@
   <div class="section section-background">
     <div class="base-container w-container">
       <div class="text-center w-100">
-        <h1 class="heading-banner large text-left">Explore Our Clinic</h1>
-        <p class="mb-50 home-2-banner text-left">Take a virtual tour of our clinic through a captivating gallery featuring our modern facilities and welcoming atmosphere.</p>
+        <h1 class="heading-banner large text-left" id="gallery-title" contenteditable="false">Explore Our Clinic</h1>
+        <p class="mb-50 home-2-banner text-left" id="gallery-subtitle" contenteditable="false">Take a virtual tour of our clinic through a captivating gallery featuring our modern facilities and welcoming atmosphere.</p>
       </div>
       <div class="shop-details-wrapper">
         <div id="w-node-df153c5b-b136-e2ba-1a95-e7195b516c8d-0509bd36" class="w-dyn-list w-dyn-items-repeater-ref">
@@ -1559,8 +1547,8 @@
           src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64ca36777c8482abb07a47e0_Union%20(5).webp"
           loading="lazy" width="354" height="360" alt=""></div>
       <div data-w-id="bef30f97-00f8-36e1-ad63-45cf87324744" class="subscribe-content">
-        <h2 class="white-text">Subscribe to our newsletter</h2>
-        <div class="white-text spacing">Subscribe to our newsletter and join a community of health-conscious individuals
+        <h2 class="white-text" id="newsletter-title" contenteditable="false">Subscribe to our newsletter</h2>
+        <div class="white-text spacing" id="newsletter-subtitle" contenteditable="false">Subscribe to our newsletter and join a community of health-conscious individuals
           on a journey towards better well-being.</div>
         <div class="form-footer w-form">
           <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form-wrap-footer"
@@ -1587,10 +1575,10 @@
                   src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64ca2ea79cc013b12b453553_curemed%C2%AE%20(1).svg"
                   loading="lazy" width="130" height="22" alt="" class="footer-logo">
                 </a> -->
-              <a href="/">
-                <h1 class="logo-text white" id="doctorName" contenteditable="false">Dr. Ankush Kaushik</h1>
+              <a>
+                <h1 class="logo-text white" id="footer-title" contenteditable="false">[Doctor Name]</h1>
               </a>
-              <p class="footer-brand-description">Start your path to wellness today with Curemed!</p>
+              <p class="footer-brand-description" id="footer-description" contenteditable="false">Start your path to wellness today with [ClinicName]!</p>
             </div>
             <div class="footer-social-icons-wrapper"><a href="https://www.facebook.com/" target="_blank"
                 class="footer-social-icon"></a><a href="https://www.instagram.com/" target="_blank"
@@ -1630,8 +1618,7 @@
         </div> -->
       </div>
       <div class="footer-bottom-wrapper">
-        <div class="footer-copyright">© Curemed. All Rights Reserved 2024. <a href="templates/licensing/"
-            class="footer-copyright-link">Licensing</a></div>
+        <div class="footer-copyright" id="copyright-text" contenteditable="false">© Website Builder. All Rights Reserved 2024.</div>
         <!-- <div class="footer-rights-wrapper">
           <div class="footer-rights"><a href="https://www.128.digital/webflow-templates" target="_blank"
               class="footer-copyright-link">Webflow Templates</a>by <a href="https://www.128.digital/" target="_blank"

@@ -1,4 +1,14 @@
-
+const env = window.location.hostname.includes('127') ? 'dev' : 'prod';
+const apis = {
+    dev: {
+        details: 'http://localhost:5000/api/clinic/clinicData',
+        saveForm: 'http://localhost:5000/api/clinic/saveForm'
+    },
+    prod: {
+        details: 'https://website-builder-server.vercel.app/api/clinic/clinicData',
+        saveForm: 'https://website-builder-server.vercel.app/api/clinic/saveForm'
+    }
+}
 
 // Function to get the last segment of the URL path
 function getId() {
@@ -9,8 +19,12 @@ function getId() {
 // Get the last URL segment
 const id = getId() ?? '8e691157-d606-440d-aa61-60ab5fd6d42d';
 let editControl = false;
-document.getElementById('saveButton').style.display = 'none';
 let clinicData, userSelectedTheme='root', userSelectedThemeIndex, userSelectedFont, userSelectedFontIndex;
+
+// Globalising diagnosis & procedures
+let diagnosisG, proceduresG;
+
+document.getElementById('saveButton').style.display = 'none';
 
 
 // const domNode = document.getElementById('app');
@@ -31,7 +45,7 @@ if(id) {
 }
 
 function getDetails() {
-    axios.post('http://localhost:5000/api/clinic/clinicData',{
+    axios.post(apis[env].details,{
         headers: { 'Access-Control-Allow-Origin': '*' },
         "id": id
     }).then((d) => {
@@ -40,63 +54,182 @@ function getDetails() {
             if(d.data.data) {
                 if(d.data.data.doctorName) {
                     clinicData = d.data.data;
-                    const {doctorName, speciality, experience, patientsConsulted, ratings, clinicGallery} = d.data.data;
-                    const {headerTitle, heroTitle, heroSubTitle, qualification, about, doctorPic, diagnosis, procedures} = d.data.data;
-                    const {kh1, kh2, kh3, dm, dmName, dmDesignation, selectedFont, selectedTheme, selectedFontIndex, city} = d.data.data;
-                    const {heroDoctorName, workExperience, qualificationDets, awards, clinicAddr, faq, testimonials} = d.data.data;
-                    document.getElementById('header-title').textContent = headerTitle ?? doctorName;
-                    document.getElementById('bookappointment-title').textContent = `Book Your Appointment at ${clinicAddr[0]?.clinicName} Today`;
-                    document.getElementById('bookappointment-desc').textContent = `Schedule a consultation with Dr. ${doctorName} at ${clinicAddr[0]?.clinicName} and take the first step towards healthier, glowing skin. Quick and easy booking available`;
-                    // document.getElementById('hero-title').textContent = `Trusted Skin Care by Dr. ${doctorName} – Leading Dermatologist in ${city}`;
-                    // document.getElementById('hero-sub-title').textContent = heroSubTitle;
-                    document.getElementById('customersServed').textContent = patientsConsulted;
-                    document.getElementById('ratings').textContent = ratings + '/5';
-                    document.getElementById('doctorDetails-Pic').setAttribute('src', doctorPic);
-                    document.getElementById('doctorDetails-Name').textContent = doctorName;
-                    document.getElementById('doctorDetails-Speciality').textContent = `Consultant ${speciality}`;
-                    document.getElementById('doctorDetails-Experience').textContent = experience + ' Years of Experience';
-                    document.getElementById('doctorDetails-Qualification').textContent = qualification;
-                    const exp = workExperience.map(e => e.hospitalName).join(' and ');
-                    const abt = `Dr. ${doctorName} is a distinguished dermatologist with over ${experience} years of experience in treating various skin conditions. A graduate of ${qualificationDets[0].collegeName}, Dr. ${doctorName} refined their skills at renowned institutions like ${exp}, where they earned a reputation for delivering exceptional patient care. Specializing in ${speciality}, Dr. ${doctorName} is dedicated to using the latest dermatological advancements to provide personalized treatment plans tailored to each patient's unique needs.`
-                    document.getElementById('doctorDetails-About').textContent = abt ?? about;
-                    document.getElementById('dm-pic').setAttribute('src', doctorPic);
-                    const dmname = dmName ?? doctorName;;
-                    document.getElementById('dm-name').textContent = 'Dr. ' + dmname;
-                    document.getElementById('dm-designation').textContent = dmDesignation ?? speciality ;
-                    document.getElementById('impact-numbers').textContent = patientsConsulted + '+' ?? '100+';
-                    document.getElementById('impact-percentage').textContent = '90%';
-                    document.getElementById('impact-experience').textContent = experience;
-                    document.getElementById('clinic-loc').textContent = `Conveniently located in ${city}, our clinic offers comprehensive dermatological care with easy access and modern facilities.`;
+                    const {navbarTitle, doctorName, city, heroTitle, heroSubTitle, speciality, experience, qualification, workExperience, patientsConsulted, ratings} = d.data.data;
+                    const {heroBookAppointmentTitle, heroBookAppointmentSubtitle, clinicAddr} = d.data.data;
+                    const {proceduresTitle, proceduresSubtitle, procedures} = d.data.data;
+                    const {doctorDetailsName, doctorDetailsSpeciality, doctorDetailsQualification, doctorDetailsAbout, doctorPic, qualificationDets} = d.data.data;
+                    const {khHeader, khData, treatmentsTitle, treatmentsSubtitle, treatmentsData, diagnosis} = d.data.data;
+                    const {testimonialTitle, testimonialSubtitle, testimonialsData} = d.data.data;
+                    const {impactTitle, impactSubtitle, impactNumbers, impactNumbersDesc, impactPercentage, impactPercentageDesc, impactExperience, impactExperienceDesc} = d.data.data;
+                    const {locationsTitle, locationsSubtitle, doctorMessage, dmName, dmDesignation} = d.data.data;
+                    const {faqTitle, faqSubtitle, faqData, getintouchTitle, galleryTitle, gallerySubtitle, clinicGallery} = d.data.data;
+                    const {newsletterTitle, newsletterSubtitle, footerTitle, footerDescription, copyrightText} = d.data.data;
+                    const {selectedTheme, selectedFont} = d.data.data;
+                    
+                    diagnosisG = diagnosis;
+                    proceduresG = procedures;
+                    document.getElementById('navbar-title').textContent = navbarTitle ?? doctorName;
 
-                    updatePopularTreatments(procedures);
-                    updatePopularTreatmentsMobile(procedures);
-                    updatePopularDiagnosis(diagnosis);
+                    let defHeroTitle = `Trusted Skin Care by Dr. ${doctorName} – Leading Dermatologist in ${city}`;
+                    document.getElementById('hero-title').textContent = heroTitle ?? defHeroTitle;
+                    
+                    let hospitalsWorked = workExperience.map(e => e.hospitalName).join(' and ');
+                    let defHeroSubtitle = `Dr. ${doctorName}, with over ${experience} years of experience in dermatology, has been transforming the skin health of patients in ${city}. Having previously served at esteemed hospitals such as ${hospitalsWorked}, Dr. ${doctorName} combines deep expertise with a personalized approach to provide top-tier skin care tailored to your unique needs.`;
+                    document.getElementById('hero-subtitle').textContent = heroSubTitle ?? defHeroSubtitle;
+
+                    document.getElementById('ratings').textContent = ratings + '/5';
+                    document.getElementById('customers-served').textContent = patientsConsulted;
+
+                    document.getElementById('hero-book-appointment-title').textContent = heroBookAppointmentTitle ?? `Book Your Appointment at ${clinicAddr[0].clinicName} Today`;
+                    document.getElementById('hero-book-appointment-title-1').textContent = heroBookAppointmentTitle ?? `Book Your Appointment at ${clinicAddr[0].clinicName} Today`;
+                    let defApptSubtitle = `Schedule a consultation with Dr. ${doctorName} at ${clinicAddr[0].clinicName} and take the first step towards healthier, glowing skin. Quick and easy booking available`
+                    document.getElementById('hero-book-appointment-subtitle').textContent = heroBookAppointmentSubtitle ?? defApptSubtitle;
+
+                    if(proceduresTitle) {
+                        document.getElementById('procedures-title').textContent = proceduresTitle;
+                    }
+                    if(proceduresSubtitle) {
+                        document.getElementById('procedures-subtitle').textContent = proceduresSubtitle;
+                    }
+                    updatePopularDiagnosis(procedures);
+                    updatePopularDiagnosisMobile(procedures);
+
+                    document.getElementById('doctor-details-pic').setAttribute('src', doctorPic);
+                    document.getElementById('doctor-details-name').textContent = doctorDetailsName ?? doctorName;
+                    document.getElementById('doctor-details-speciality').textContent = doctorDetailsSpeciality ?? `Consultant ${speciality}`;
+                    document.getElementById('doctor-details-qualification').textContent = doctorDetailsQualification ?? qualification;
+                    document.getElementById('doctor-details-experience').textContent = experience + ' Years of Experience';
+                    let defDetAbout = `Dr. ${doctorName} is a distinguished dermatologist with over ${experience} years of experience in treating various skin conditions. A graduate of ${qualificationDets[0].collegeName}, Dr. ${doctorName}] refined their skills at renowned institutions like ${hospitalsWorked}, where they earned a reputation for delivering exceptional patient care.`
+                    document.getElementById('doctor-details-about').textContent = doctorDetailsAbout ?? defDetAbout;
+
+                    if(khHeader) {
+                        document.getElementById('key-highlights-header').textContent = khHeader;
+                    }
+                    updateKhData(khData)
+
+                    if(treatmentsTitle) {
+                        document.getElementById('treatments-title').textContent = treatmentsTitle;
+                    }
+                    if(treatmentsSubtitle) {
+                        let defSubtitle = `Explore a range of skin conditions expertly managed by Dr. ${doctorName}. From common issues like acne and eczema to more complex concerns, our personalized treatment plans are designed to address your specific needs and restore your skin’s health and confidence.`
+                        document.getElementById('treatments-subtitle').textContent = treatmentsSubtitle ?? defSubtitle;
+                    }
+                    if(!treatmentsData || treatmentsData.length === 0) {
+                        updatePopularTreatments(diagnosis);
+                    } else {
+                        updatePopularTreatments(treatmentsData);
+                    }
+
+                    if(testimonialTitle) {
+                        document.getElementById('testimonial-title').textContent = testimonialTitle;
+                    }
+                    // Hidden by default
+                    // if(testimonialSubtitle) {
+                    //     document.getElementById('testimonial-subtitle').textContent = testimonialSubtitle;
+                    // }
+                    updateTestimonialData(testimonialsData, doctorName)
+
+
+                    if(impactTitle) {
+                        document.getElementById('impact-title').textContent = impactTitle;
+                    }
+                    if(impactSubtitle) {
+                        document.getElementById('impact-subtitle').textContent = impactSubtitle;
+                    }
+                    let defImpactNumbers = patientsConsulted + '+';
+                    document.getElementById('impact-numbers').textContent = impactNumbers ?? defImpactNumbers;
+                    if(impactNumbersDesc) {
+                        document.getElementById('impact-numbers-desc').textContent = impactNumbersDesc;
+                    }
+                    
+                    if(impactPercentage) {
+                        document.getElementById('impact-percentage').textContent = impactPercentage;
+                    }
+                    if(impactPercentageDesc) {
+                        document.getElementById('impact-percentage-desc').textContent = impactPercentageDesc;
+                    }
+                    let defExp = experience + '+'
+                    document.getElementById('impact-experience').textContent = impactExperience ?? defExp;
+                    if(impactExperienceDesc) {
+                        document.getElementById('impact-experience-desc').textContent = impactExperienceDesc;
+                    }
+
+                    if(locationsTitle) {
+                        document.getElementById('locations-title').textContent = locationsTitle;
+                    }
+                    if(locationsSubtitle) {
+                        document.getElementById('locations-subtitle').textContent = locationsSubtitle;
+                    }
+
+                    document.getElementById('dm-pic').setAttribute('src', doctorPic);
+                    if(doctorMessage) {
+                        document.getElementById('doctor-message').textContent = doctorMessage;
+                    }
+                    document.getElementById('dm-name').textContent = dmName ?? doctorName;
+                    document.getElementById('dm-designation').textContent = dmDesignation ?? qualification;
+
+                    if(faqTitle) {
+                        document.getElementById('faq-title').textContent = faqTitle;
+                    }
+                    if(faqSubtitle) {
+                        document.getElementById('faq-subtitle').textContent = faqSubtitle;
+                    }
+                    updateFaqData(faqData);
+
+
+                    if(getintouchTitle) {
+                        document.getElementById('getintouch-title').textContent = getintouchTitle;
+                    }
+                    if(galleryTitle) {
+                        document.getElementById('gallery-title').textContent = galleryTitle;
+                    }
+                    if(gallerySubtitle) {
+                        document.getElementById('gallery-subtitle').textContent = gallerySubtitle;
+                    }
+
+                    if(newsletterTitle) {
+                        document.getElementById('newsletter-title').textContent = newsletterTitle;
+                    } 
+                    if(newsletterSubtitle) {
+                        document.getElementById('newsletter-subtitle').textContent = newsletterSubtitle;
+                    } 
+                    
+                    let defFooterTitle = doctorName
+                    document.getElementById('footer-title').textContent = footerTitle ?? defFooterTitle;
+                    let defFooterDesc = `Start your path to wellness today with ${clinicAddr[0].clinicName}!`
+                    document.getElementById('footer-description').textContent = footerDescription ?? defFooterDesc;
+                    if(copyrightText) {
+                        document.getElementById('copyright-text').textContent = copyrightText;
+                    } 
+
+                    // document.getElementById('bookappointment-title').textContent = `Book Your Appointment at ${clinicAddr[0]?.clinicName} Today`;
+                    // document.getElementById('bookappointment-desc').textContent = `Schedule a consultation with Dr. ${doctorName} at ${clinicAddr[0]?.clinicName} and take the first step towards healthier, glowing skin. Quick and easy booking available`;
+                    // // document.getElementById('hero-title').textContent = `Trusted Skin Care by Dr. ${doctorName} – Leading Dermatologist in ${city}`;
+                    // // document.getElementById('hero-sub-title').textContent = heroSubTitle;
+                    // document.getElementById('customersServed').textContent = patientsConsulted;
+                    // document.getElementById('ratings').textContent = ratings + '/5';
+                    // document.getElementById('doctorDetails-Pic').setAttribute('src', doctorPic);
+                    // document.getElementById('doctorDetails-Name').textContent = doctorName;
+                    // document.getElementById('doctorDetails-Speciality').textContent = `Consultant ${speciality}`;
+                    // document.getElementById('doctorDetails-Experience').textContent = experience + ' Years of Experience';
+                    // document.getElementById('doctorDetails-Qualification').textContent = qualification;
+                    // const exp = workExperience.map(e => e.hospitalName).join(' and ');
+                    // const abt = `Dr. ${doctorName} is a distinguished dermatologist with over ${experience} years of experience in treating various skin conditions. A graduate of ${qualificationDets[0].collegeName}, Dr. ${doctorName} refined their skills at renowned institutions like ${exp}, where they earned a reputation for delivering exceptional patient care. Specializing in ${speciality}, Dr. ${doctorName} is dedicated to using the latest dermatological advancements to provide personalized treatment plans tailored to each patient's unique needs.`
+                    // document.getElementById('doctorDetails-About').textContent = abt ?? about;
+                    // document.getElementById('dm-pic').setAttribute('src', doctorPic);
+                    // const dmname = dmName ?? doctorName;;
+                    // document.getElementById('dm-name').textContent = 'Dr. ' + dmname;
+                    // document.getElementById('dm-designation').textContent = dmDesignation ?? speciality ;
+                    // document.getElementById('impact-numbers').textContent = patientsConsulted + '+' ?? '100+';
+                    // document.getElementById('impact-percentage').textContent = '90%';
+                    // document.getElementById('impact-experience').textContent = experience;
+                    // document.getElementById('clinic-loc').textContent = `Conveniently located in ${city}, our clinic offers comprehensive dermatological care with easy access and modern facilities.`;
+
+                    // updatePopularTreatments(procedures);
+                    // updatePopularTreatmentsMobile(procedures);
+                    // updatePopularDiagnosis(diagnosis);
                     updateClinicImages(clinicGallery);
                     updateClinicAddress(d.data.data);
-                    updateFaqData(faq);
-                    updateTestimonialData(testimonials, doctorName)
-    
-                    // if(heroTitle) {
-                        document.getElementById('hero-title').innerHTML = `Trusted Skin Care by Dr. <span class="blue-text" id="hero-doctorName" contenteditable="false"> ${heroDoctorName ?? doctorName}</span> – Leading Dermatologist in <span class="blue-text" id="city" contenteditable="false">${city}</span>`;
-                    // }
-                    // if(heroSubTitle) {
-                        
-                        document.getElementById('hero-sub-title').textContent = heroSubTitle ?? `Dr. ${heroDoctorName ?? doctorName}, with over ${experience} years of experience in dermatology, has been transforming the skin health of patients in ${city}. Having previously served at esteemed hospitals such as ${exp}, Dr. ${doctorName} combines deep expertise with a personalized approach to provide top-tier skin care tailored to your unique needs.`;
-                    // }
-                    // if(kh1) {
-                        const k1 = `Dr. ${doctorName} completed their medical education at ${qualificationDets?.pop()?.collegeName}, graduating with a ${qualificationDets?.pop()?.qualification} in ${qualificationDets?.pop()?.yog}. This comprehensive education laid a strong foundation for their extensive expertise in the field of dermatology.`
-                        document.getElementById('keyHighlights-1').textContent = kh1 ?? k1;
-                    // }
-                    // if(kh2) {
-                        const k2 = `Dr. ${doctorName} began their career at ${workExperience?.pop()?.hospitalName}, where they worked from ${workExperience?.pop()?.workYrs} till now. During their time at these esteemed institutions, Dr. ${doctorName} gained invaluable experience and developed a reputation for excellence in dermatological care.`
-                        document.getElementById('keyHighlights-2').textContent = kh2 ?? k2;
-                    // }
-                    // if(kh3) {
-                        document.getElementById('keyHighlights-3').textContent = awards;
-                    // }
-                    if(dm) {
-                        document.getElementById('doctor-message').textContent = dm;
-                    }
                     if(selectedTheme) {
                         userSelectedTheme = selectedTheme;
                         setSelectedTheme(d.data.data)
@@ -143,7 +276,7 @@ function setSelectedFont(clinicData) {
     document.getElementById('font-palette-'+selectedFontIndex??0).classList.add('selected');
 }
 
-function updatePopularTreatmentsMobile(clinicData) {
+function updatePopularDiagnosisMobile(clinicData) {
     const gridCardWrapper = document.querySelector('.popular-diagnosis-mobile');
 
     // Clear existing content
@@ -165,7 +298,7 @@ function updatePopularTreatmentsMobile(clinicData) {
     });
 }
 
-function updatePopularTreatments(clinicData) {
+function updatePopularDiagnosis(clinicData) {
     const categoryGrid = document.querySelector('.category-grid');
     
     // Clear existing content
@@ -173,13 +306,13 @@ function updatePopularTreatments(clinicData) {
     categoryGrid.classList.add('py-3');
 
     // Loop through clinicData and create image elements
-    clinicData.forEach(data => {
+    clinicData.forEach((data, idx) => {
         const cardDiv = document.createElement('div');
         cardDiv.classList.add('category-card');
         
         const imgElement = document.createElement('img');
         imgElement.classList.add('team-member-image-two');
-        imgElement.setAttribute('src', data.imgUrl);
+        imgElement.setAttribute('src', proceduresG[idx].imgUrl);
         imgElement.setAttribute('loading', 'lazy');
         imgElement.setAttribute('alt', '');
 
@@ -192,14 +325,14 @@ function updatePopularTreatments(clinicData) {
     });
 }
 
-function updatePopularDiagnosis(clinicData) {
-    const clinicServiceList = document.querySelector('.popular-diagnosis');
+function updatePopularTreatments(clinicData) {
+    const clinicServiceList = document.querySelector('.popular-treatments');
   
     // Clear existing content
     clinicServiceList.innerHTML = '';
   
     // Loop through clinicData and create service items
-    clinicData.forEach(service => {
+    clinicData.forEach((service, idx) => {
       const serviceItemDiv = document.createElement('div');
       serviceItemDiv.setAttribute('role', 'listitem');
       serviceItemDiv.classList.add('srvc-item', 'w-dyn-item');
@@ -217,6 +350,7 @@ function updatePopularDiagnosis(clinicData) {
       serviceImage.src = service.imgUrl;
       serviceImage.sizes = "(max-width: 479px) 94vw, (max-width: 767px) 96vw, (max-width: 991px) 46vw, (max-width: 1279px) 30vw, 370px";
       serviceImage.classList.add('image-cover');
+      serviceImage.setAttribute('id','treatments-imgUrl-'+(idx+1));
   
       const backgroundImageDiv = document.createElement('div');
       backgroundImageDiv.classList.add('bgr-image-srvc');
@@ -224,10 +358,14 @@ function updatePopularDiagnosis(clinicData) {
       const serviceNameHeading = document.createElement('h6');
       serviceNameHeading.classList.add('pt-1');
       serviceNameHeading.style.paddingLeft = "5px";
+      serviceNameHeading.setAttribute('id','treatments-title-'+(idx+1));
+      serviceNameHeading.setAttribute('contenteditable','false');
       serviceNameHeading.textContent = service.name;
   
       const serviceDescription = document.createElement('p');
       serviceDescription.classList.add('font-size-15', 'mb-50', 'home-2-banner', 'text-left');
+      serviceDescription.setAttribute('id','treatments-desc-'+(idx+1));
+      serviceDescription.setAttribute('contenteditable','false');
       serviceDescription.textContent = service.description ?? 'We deeply comprehend the distinct healthcare requirements of children, and our mission is to offer compassionate and expert medical care for your little ones.';
   
       const learnMoreLink = document.createElement('a');
@@ -381,6 +519,24 @@ function updateClinicAddress(clinicData) {
     container.appendChild(locationContainer);
 }
 
+function updateKhData(khData) {
+  
+    if(!khData || khData.length === 0) {
+        return;
+    }
+    // Iterate over the FAQ data
+    khData.forEach((kh, index) => {
+      // Create the accordion-wrap div
+      let id = kh.id;
+      let titleId = 'key-highlights-title-'+id;
+      let descId = 'key-highlights-desc-'+id;
+
+      document.getElementById(titleId).textContent = kh.title;
+      document.getElementById(descId).textContent = kh.desc;
+    });
+
+}
+
 function updateFaqData(faqData) {
   
     if(!faqData || faqData.length === 0) {
@@ -416,55 +572,122 @@ function updateTestimonialData(testimonialData, doctorName) {
 }
 
 function publish() {
-    const headerTitle = document.getElementById('header-title').textContent;
-    const heroDoctorName = document.getElementById('hero-doctorName').textContent;
+
+    const navbarTitle = document.getElementById('navbar-title').textContent;
+
     const heroTitle = document.getElementById('hero-title').textContent;
-    const heroSubTitle = document.getElementById('hero-sub-title').textContent;
-    const patientsConsulted = document.getElementById('customersServed').textContent;
+    const heroSubTitle = document.getElementById('hero-subtitle').textContent;
     const ratings = document.getElementById('ratings').textContent?.split('/5')[0];
-    const doctorName = document.getElementById('doctorDetails-Name').textContent?.replace('Dr.', '');
-    const qualification = document.getElementById('doctorDetails-Qualification').textContent;
-    const speciality = document.getElementById('doctorDetails-Speciality').textContent;
-    const experience = document.getElementById('doctorDetails-Experience').textContent.split('Years')[0].trim();
-    const about = document.getElementById('doctorDetails-About').textContent;
-    const kh1 = document.getElementById('keyHighlights-1').textContent;
-    const kh2 = document.getElementById('keyHighlights-2').textContent;
-    const kh3 = document.getElementById('keyHighlights-3').textContent;
-    const dm = document.getElementById('doctor-message').textContent;
-    const city = document.getElementById('city').textContent;
-    const faq = getFAQData();
-    const testimonials = getTestimonialData();
-    console.log(faq, testimonials);
+    const patientsConsulted = document.getElementById('customers-served').textContent;
+    let heroBookAppointmentTitle = document.getElementById('hero-book-appointment-title').textContent;
+    heroBookAppointmentTitle = document.getElementById('hero-book-appointment-title-1').textContent;
+    const heroBookAppointmentSubtitle = document.getElementById('hero-book-appointment-subtitle').textContent;
     
+    const proceduresTitle = document.getElementById('procedures-title').textContent;
+    const proceduresSubtitle = document.getElementById('procedures-subtitle').textContent;
+    
+    const doctorDetailsName = document.getElementById('doctor-details-name').textContent;
+    const doctorDetailsSpeciality = document.getElementById('doctor-details-speciality').textContent;
+    const doctorDetailsQualification = document.getElementById('doctor-details-qualification').textContent;
+    const experience = document.getElementById('doctor-details-experience').textContent.split('Years')[0].trim();
+    const doctorDetailsAbout = document.getElementById('doctor-details-about').textContent;
+    
+    const khHeader = document.getElementById('key-highlights-header').textContent;
+    const khData = getKHData();
+
+    const treatmentsTitle = document.getElementById('treatments-title').textContent;
+    const treatmentsSubtitle = document.getElementById('treatments-subtitle').textContent;
+    const treatmentsData = getTreatmentsData();
+
+    const testimonialTitle = document.getElementById('testimonial-title').textContent;
+    const testimonialSubtitle = document.getElementById('testimonial-subtitle').textContent;
+    const testimonialsData = getTestimonialData();
+
+    const impactTitle = document.getElementById('impact-title').textContent;
+    const impactSubtitle = document.getElementById('impact-subtitle').textContent;
+    const impactNumbers = document.getElementById('impact-numbers').textContent;
+    const impactNumbersDesc = document.getElementById('impact-numbers-desc').textContent;
+    const impactPercentage = document.getElementById('impact-percentage').textContent;
+    const impactPercentageDesc = document.getElementById('impact-percentage-desc').textContent;
+    const impactExperience = document.getElementById('impact-experience').textContent;
+    const impactExperienceDesc = document.getElementById('impact-experience-desc').textContent;
+
+    const locationsTitle = document.getElementById('locations-title').textContent;
+    const locationsSubtitle = document.getElementById('locations-subtitle').textContent;
+    
+    const doctorMessage = document.getElementById('doctor-message').textContent;
+    const dmName = document.getElementById('dm-name').textContent;
+    const dmDesignation = document.getElementById('dm-designation').textContent;
+
+    const faqTitle = document.getElementById('faq-title').textContent;
+    const faqSubtitle = document.getElementById('faq-subtitle').textContent;
+    const faqData = getFAQData();
+
+    const getintouchTitle = document.getElementById('getintouch-title').textContent;
+
+    const galleryTitle = document.getElementById('gallery-title').textContent;
+    const gallerySubtitle = document.getElementById('gallery-subtitle').textContent;
+
+    const newsletterTitle = document.getElementById('newsletter-title').textContent;
+    const newsletterSubtitle = document.getElementById('newsletter-subtitle').textContent;
+
+    const footerTitle = document.getElementById('footer-title').textContent;
+    const footerDescription = document.getElementById('footer-description').textContent;
+    const copyrightText = document.getElementById('copyright-text').textContent;
     
     const formData = {
-        headerTitle,
+        navbarTitle,
+        heroBookAppointmentTitle,
+        heroBookAppointmentSubtitle,
+        ratings,
+        patientsConsulted,
         heroTitle,
         heroSubTitle,
-        patientsConsulted,
-        ratings,
-        doctorName,
-        qualification,
-        speciality,
+        proceduresTitle,
+        proceduresSubtitle,
+        doctorDetailsName,
+        doctorDetailsSpeciality,
+        doctorDetailsQualification,
         experience,
-        about,
-        kh1,
-        kh2,
-        kh3,
-        dm,
-        faq,
-        selectedTheme: userSelectedTheme,
-        selectedFont: userSelectedFont,
-        selectedFontIndex: userSelectedFontIndex,
-        city,
-        heroDoctorName,
-        testimonials,
+        doctorDetailsAbout,
+        khHeader,
+        khData,
+        treatmentsTitle,
+        treatmentsSubtitle,
+        treatmentsData,
+        testimonialTitle,
+        testimonialSubtitle,
+        testimonialsData,
+        impactTitle,
+        impactSubtitle,
+        impactNumbers,
+        impactNumbersDesc,
+        impactPercentage,
+        impactPercentageDesc,
+        impactExperience,
+        impactExperienceDesc,
+        locationsTitle,
+        locationsSubtitle,
+        doctorMessage,
+        dmName,
+        dmDesignation,
+        faqTitle,
+        faqSubtitle,
+        faqData,
+        getintouchTitle,
+        galleryTitle,
+        gallerySubtitle,
+        newsletterTitle,
+        newsletterSubtitle,
+        footerTitle,
+        footerDescription,
+        copyrightText,
         uid: id
     };
 
     console.log('Data to publish : ', formData);
 
-    axios.post('http://localhost:5000/api/clinic/saveForm', formData, {
+    axios.post(apis[env].saveForm, formData, {
         headers: { 'Access-Control-Allow-Origin': '*' },
     }).then((d) => {
         console.log('Publish response : ', d);
@@ -472,6 +695,54 @@ function publish() {
             getDetails();
         }
     });
+}
+
+// Function to get Key Highlight data
+function getKHData() {
+    const KHData = [];
+  
+    for (let i = 1; i <= 3; i++) {
+        // Get the question element by ID
+        let title = document.getElementById(`key-highlights-title-${i}`);
+        // Get the answer element by ID
+        let desc = document.getElementById(`key-highlights-desc-${i}`);
+        
+        // Create an object with the question and answer
+        let KHObject = {
+            id: i,
+            title: title ? title.textContent.trim() : '',
+            desc: desc ? desc.textContent.trim() : ''
+        };
+        
+        // Push the object to the faqArray
+        KHData.push(KHObject);
+    }
+  
+    return KHData;
+}
+
+// Function to get treatments data
+function getTreatmentsData() {
+    const treatmentData = [];
+  
+    for (let i = 1; i <= diagnosisG.length; i++) {
+        let imgUrl = document.getElementById(`treatments-imgUrl-${i}`);
+        let title = document.getElementById(`treatments-title-${i}`);
+        let desc = document.getElementById(`treatments-desc-${i}`);
+        
+        // Create an object with the question and answer
+        let treatmentObj = {
+            id: i,
+            imgUrl: imgUrl.src,
+            name: title ? title.textContent.trim() : '',
+            desc: desc ? desc.textContent.trim() : '',
+        };
+        
+        // Push the object to the faqArray
+        treatmentData.push(treatmentObj);
+    }
+  
+    return treatmentData;
 }
 
 // Function to get FAQ data
@@ -551,6 +822,9 @@ function toggleEditControl() {
         document.getElementById('saveButton').style.display = 'block';
         document.getElementById('main-menu-bar').style.display = 'none';
         document.getElementById('edit-menu-bar').style.display = 'block';
+
+        // Changing layout of some elements
+        document.getElementsByClassName('background-video')[0].style.height = '700px';
     }
 
     // document.getElementById('edit-notification-bar').style.display = 'none';
@@ -807,3 +1081,44 @@ function switchTheme(theme) {
     document.getElementById(theme).classList.add('selected');
     userSelectedTheme = theme;
 }
+
+
+
+
+
+
+
+/**
+ * 
+ * 
+ * navbar-title
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * footer-title
+ * footer-description
+ * copyright-text
+ * 
+ */
+
+
+// First change all the html elements to edit and add id's to them
+// Clear the user data from database and add new data in website builder form save it and open the redirected site
+// Append all the data from dataabase to applicable fields by editing and replacing the content necessary
+// Append data tio fields and in fields where there's array data involved append the correct ids and assign contenteditable attributes
+// Check all the data is correctly appended to the UI
+// Now edit and check if the data is saved correctly retrieving from correct fields
+// Also check if the saved data is correctly populated on to the screen
+// For first time appending use default template data and for data from database, use data from databse istead of std data
