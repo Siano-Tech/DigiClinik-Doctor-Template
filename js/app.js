@@ -774,6 +774,8 @@ function publish() {
         footerTitle,
         footerDescription,
         copyrightText,
+        userSelectedTheme,
+        userSelectedFont,
         uid: id
     };
 
