@@ -94,26 +94,27 @@ function getDetails() {
                     updatePopularDiagnosis(procedures);
                     updatePopularDiagnosisMobile(procedures);
 
-                    document.getElementById('doctor-details-pic').setAttribute('src', doctorPic);
+                    if(doctorPic) {
+                        document.getElementById('doctor-details-pic').setAttribute('src', doctorPic);
+                    }
                     document.getElementById('doctor-details-name').textContent = doctorDetailsName ?? doctorName;
                     document.getElementById('doctor-details-speciality').textContent = doctorDetailsSpeciality ?? `Consultant ${speciality}`;
                     document.getElementById('doctor-details-qualification').textContent = doctorDetailsQualification ?? qualification;
                     document.getElementById('doctor-details-experience').textContent = experience + ' Years of Experience';
-                    let defDetAbout = `Dr. ${doctorName} is a distinguished dermatologist with over ${experience} years of experience in treating various skin conditions. A graduate of ${qualificationDets[0].collegeName}, Dr. ${doctorName}] refined their skills at renowned institutions like ${hospitalsWorked}, where they earned a reputation for delivering exceptional patient care.`
+                    let defDetAbout = `Dr. ${doctorName} is a distinguished dermatologist with over ${experience} years of experience in treating various skin conditions. A graduate of ${qualificationDets[0].collegeName}, Dr. ${doctorName} refined their skills at renowned institutions like ${hospitalsWorked}, where they earned a reputation for delivering exceptional patient care.`
                     document.getElementById('doctor-details-about').textContent = doctorDetailsAbout ?? defDetAbout;
 
                     if(khHeader) {
                         document.getElementById('key-highlights-header').textContent = khHeader;
                     }
-                    updateKhData(khData)
+                    updateKhData(khData, d.data.data)
 
                     if(treatmentsTitle) {
                         document.getElementById('treatments-title').textContent = treatmentsTitle;
                     }
-                    if(treatmentsSubtitle) {
-                        let defSubtitle = `Explore a range of skin conditions expertly managed by Dr. ${doctorName}. From common issues like acne and eczema to more complex concerns, our personalized treatment plans are designed to address your specific needs and restore your skin’s health and confidence.`
-                        document.getElementById('treatments-subtitle').textContent = treatmentsSubtitle ?? defSubtitle;
-                    }
+                    let defSubtitle = `Explore a range of skin conditions expertly managed by Dr. ${doctorName}. From common issues like acne and eczema to more complex concerns, our personalized treatment plans are designed to address your specific needs and restore your skin’s health and confidence.`
+                    document.getElementById('treatments-subtitle').textContent = treatmentsSubtitle ?? defSubtitle;
+
                     if(!treatmentsData || treatmentsData.length === 0) {
                         updatePopularTreatments(diagnosis);
                     } else {
@@ -157,11 +158,12 @@ function getDetails() {
                     if(locationsTitle) {
                         document.getElementById('locations-title').textContent = locationsTitle;
                     }
-                    if(locationsSubtitle) {
-                        document.getElementById('locations-subtitle').textContent = locationsSubtitle;
-                    }
+                    let defLocSubtitle = `Conveniently located in ${city}, our clinic offers comprehensive dermatological care with easy access and modern facilities.`    
+                    document.getElementById('locations-subtitle').textContent = locationsSubtitle ?? defLocSubtitle;
 
-                    document.getElementById('dm-pic').setAttribute('src', doctorPic);
+                    if(doctorPic) {
+                        document.getElementById('dm-pic').setAttribute('src', doctorPic);
+                    }
                     if(doctorMessage) {
                         document.getElementById('doctor-message').textContent = doctorMessage;
                     }
@@ -392,6 +394,9 @@ function updatePopularTreatments(clinicData) {
 
 // Function to update the image elements with new URLs
 function updateClinicImages(imageArray) {
+    if(!imageArray || imageArray.length === 0) {
+        return;
+    }
     const container = document.querySelector('.collection-list-3');
 
     // Clear existing images
@@ -519,21 +524,66 @@ function updateClinicAddress(clinicData) {
     container.appendChild(locationContainer);
 }
 
-function updateKhData(khData) {
+function updateKhData(khData, clinicData) {
   
+    // Show default Key Highlights
     if(!khData || khData.length === 0) {
-        return;
-    }
-    // Iterate over the FAQ data
-    khData.forEach((kh, index) => {
-      // Create the accordion-wrap div
-      let id = kh.id;
-      let titleId = 'key-highlights-title-'+id;
-      let descId = 'key-highlights-desc-'+id;
+        const {workExperience, qualificationDets, doctorName} = clinicData;
+        let colleges = qualificationDets.map(e => e.collegeName).join(' and ');
+        let hospitalsWorked = workExperience.map(e => e.hospitalName).join(' and ');
+        let defKh1Desc, defKh2Desc;
+        if(qualificationDets.length === 1) {
+            defKh1Desc = `Dr. ${doctorName} completed their medical education at ${qualificationDets[0].collegeName}, graduating with a ${qualificationDets[0].qualification} in ${qualificationDets[0].yog}. This comprehensive education laid a strong foundation for their extensive expertise in the field of dermatology.`;
+        } else if(qualificationDets.length === 2) {
+            defKh1Desc = `Dr. ${doctorName} completed their medical education at ${qualificationDets[0].collegeName}, graduating with a ${qualificationDets[0].qualification} in ${qualificationDets[0].yog}. They further specialized in dermatology, obtaining their ${qualificationDets[1].qualification} in ${qualificationDets[1].yog}. This comprehensive education laid a strong foundation for their extensive expertise in the field of dermatology.`;
+        }
 
-      document.getElementById(titleId).textContent = kh.title;
-      document.getElementById(descId).textContent = kh.desc;
-    });
+        if(workExperience.length === 1) {
+            defKh2Desc = `Dr. ${doctorName} began their career at ${workExperience[0].hospitalName}, where they worked from ${workExperience[0].workYrs}. During their time at these esteemed institutions, Dr. ${doctorName} gained invaluable experience and developed a reputation for excellence in dermatological care.`
+        } else if(qualificationDets.length === 2) {
+            defKh2Desc = `Dr. ${doctorName} began their career at ${workExperience[0].hospitalName}, where they worked from ${workExperience[0].workYrs}. They then continued their professional journey at ${workExperience[1].hospitalName}, serving from ${workExperience[1].workYrs}. During their time at these esteemed institutions, Dr. ${doctorName} gained invaluable experience and developed a reputation for excellence in dermatological care.`
+        }
+
+        let defKhData = [
+            {
+                id: 1,
+                title: 'Educational Excellence',
+                desc: defKh1Desc
+            },
+            {
+                id: 2,
+                title: 'Extensive Experience',
+                desc: defKh2Desc
+            },
+            {
+                id: 3,
+                title: 'Awards and Recognitions',
+                desc: 'Awards and Recognitions'
+            },
+        ];
+
+        defKhData.forEach((kh, index) => {
+            // Create the accordion-wrap div
+            let id = kh.id;
+            let titleId = 'key-highlights-title-'+id;
+            let descId = 'key-highlights-desc-'+id;
+      
+            document.getElementById(titleId).textContent = kh.title;
+            document.getElementById(descId).textContent = kh.desc;
+        });
+    } 
+    // Show Key Highlights from databse
+    else {
+        khData.forEach((kh, index) => {
+          // Create the accordion-wrap div
+          let id = kh.id;
+          let titleId = 'key-highlights-title-'+id;
+          let descId = 'key-highlights-desc-'+id;
+    
+          document.getElementById(titleId).textContent = kh.title;
+          document.getElementById(descId).textContent = kh.desc;
+        });
+    }
 
 }
 
@@ -557,18 +607,60 @@ function updateFaqData(faqData) {
 
 function updateTestimonialData(testimonialData, doctorName) {
     if(!testimonialData || testimonialData.length === 0) {
-        return;
-    }
-    // Iterate over the FAQ data
-    testimonialData.forEach((testimonial, index) => {
-      // Create the accordion-wrap div
-      let id = testimonial.id;
-      let contentId = 'testimonial-content-'+id;
-      let authorId = 'testimonial-author-'+id;
 
-      document.getElementById(contentId).textContent = testimonial.content?.replace("[Doctor's Name]", doctorName);
-      document.getElementById(authorId).textContent = testimonial.author;
-    });
+        let defData = [
+            {
+                id: 1,
+                content: `"Dr. ${doctorName} transformed my skin with their expert acne treatment. After trying numerous products with no success, I finally found relief and clear skin. Their personalized approach made all the difference."`,
+                author: 'Aarav Patel',
+            },
+            {
+                id: 2,
+                content: `"Dr. ${doctorName} provided excellent care for my psoriasis. Their thorough explanation of the condition and the tailored treatment plan helped manage my symptoms effectively. I feel much better now."`,
+                author: 'Rohan Gupta',
+            },
+            {
+                id: 3,
+                content: `"Receiving treatment for skin cancer from Dr. ${doctorName} was a relief. Their professionalism, clear communication, and effective treatment plan gave me confidence and hope. I’m very thankful."`,
+                author: 'Vikram Singh',
+            },
+            {
+                id: 4,
+                content: `"I struggled with eczema for years, and Dr. ${doctorName} was a game-changer. The treatment plan and advice provided have brought me incredible relief and improved my quality of life."`,
+                author: 'Priya Sharma',
+            },
+            {
+                id: 5,
+                content: `"I was struggling with rosacea, but Dr. ${doctorName}'s expertise made a huge difference. The customized treatment plan has significantly reduced redness and improved my skin’s appearance."`,
+                author: 'Ananya Rao',
+            },
+            {
+                id: 6,
+                content: `"Dr. ${doctorName} addressed my hyperpigmentation issue with remarkable expertise. The results have been fantastic, and I appreciate their thorough and attentive care."`,
+                author: 'Neha Patel',
+            },
+        ];
+        defData.forEach((data, index) => {
+            // Create the accordion-wrap div
+            let id = data.id;
+            let contentId = 'testimonial-content-'+id;
+            let authorId = 'testimonial-author-'+id;
+      
+            document.getElementById(contentId).textContent = data.content?.replace("[Doctor's Name]", doctorName);
+            document.getElementById(authorId).textContent = data.author;
+        });
+    } else {
+        // Iterate over the FAQ data
+        testimonialData.forEach((testimonial, index) => {
+          // Create the accordion-wrap div
+          let id = testimonial.id;
+          let contentId = 'testimonial-content-'+id;
+          let authorId = 'testimonial-author-'+id;
+    
+          document.getElementById(contentId).textContent = testimonial.content?.replace("[Doctor's Name]", doctorName);
+          document.getElementById(authorId).textContent = testimonial.author;
+        });
+    }
 }
 
 function publish() {
