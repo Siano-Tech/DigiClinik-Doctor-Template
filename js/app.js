@@ -25,6 +25,9 @@ let clinicData, userSelectedTheme='root', userSelectedThemeIndex, userSelectedFo
 let diagnosisG, proceduresG;
 
 document.getElementById('saveButton').style.display = 'none';
+document.querySelectorAll('[contenteditable=false]').forEach((e) => { 
+    e.classList.add('text-blur');
+});
 
 
 // const domNode = document.getElementById('app');
@@ -38,9 +41,6 @@ if(id) {
     // document.styleSheets[0].insertRule('image-cover:hover { opacity: 0.5; }', 0);
     // document.styleSheets[0].cssRules[0].style.opacity= '0.5';
     // toggleEditControl();
-    // document.querySelectorAll('[contenteditable=false]').forEach((e) => { 
-    //     e.classList.add('content-to-edit');
-    // });
     getDetails();
 }
 
@@ -64,17 +64,21 @@ function getDetails() {
                     const {locationsTitle, locationsSubtitle, doctorMessage, dmName, dmDesignation} = d.data.data;
                     const {faqTitle, faqSubtitle, faqData, getintouchTitle, galleryTitle, gallerySubtitle, clinicGallery} = d.data.data;
                     const {newsletterTitle, newsletterSubtitle, footerTitle, footerDescription, copyrightText} = d.data.data;
-                    const {selectedTheme, selectedFont} = d.data.data;
+                    const {selectedTheme, selectedFont, phoneNo} = d.data.data;
                     
                     diagnosisG = diagnosis;
                     proceduresG = procedures;
                     document.getElementById('navbar-title').textContent = navbarTitle ?? doctorName;
 
+                    // Popover data
+                    document.getElementById('popup-name').setAttribute('value', clinicData?.doctorName);
+                    document.getElementById('popup-phone-no').setAttribute('value', clinicData?.phoneNo);
+
                     let defHeroTitle = `Trusted Skin Care by ${doctorName} – Leading Dermatologist in ${city}`;
                     document.getElementById('hero-title').textContent = heroTitle ?? defHeroTitle;
                     
                     let hospitalsWorked = workExperience.map(e => e.hospitalName).join(' and ');
-                    let defHeroSubtitle = `${doctorName}, with over ${experience} years of experience in dermatology, has been transforming the skin health of patients in ${city}. Having previously served at esteemed hospitals such as ${hospitalsWorked}, ${doctorName} combines deep expertise with a personalized approach to provide top-tier skin care tailored to your unique needs.`;
+                    let defHeroSubtitle = `${doctorName}, with over ${experience} years of experience in dermatology, has been transforming the skin health of patients in ${city}. Having previously served at esteemed organisations such as ${hospitalsWorked}, ${doctorName} combines deep expertise with a personalized approach to provide top-tier skin care tailored to your unique needs.`;
                     document.getElementById('hero-subtitle').textContent = heroSubTitle ?? defHeroSubtitle;
 
                     document.getElementById('ratings').textContent = ratings ?? '4.5' + '/5';
@@ -168,7 +172,7 @@ function getDetails() {
                         document.getElementById('doctor-message').textContent = doctorMessage;
                     }
                     document.getElementById('dm-name').textContent = dmName ?? doctorName;
-                    document.getElementById('dm-designation').textContent = dmDesignation ?? qualification;
+                    document.getElementById('dm-designation').textContent = dmDesignation ?? qualification + ' | ' + speciality;
 
                     if(faqTitle) {
                         document.getElementById('faq-title').textContent = faqTitle;
@@ -176,7 +180,7 @@ function getDetails() {
                     if(faqSubtitle) {
                         document.getElementById('faq-subtitle').textContent = faqSubtitle;
                     }
-                    updateFaqData(faqData);
+                    updateFaqData(faqData, clinicData);
 
 
                     if(getintouchTitle) {
@@ -200,9 +204,8 @@ function getDetails() {
                     document.getElementById('footer-title').textContent = footerTitle ?? defFooterTitle;
                     let defFooterDesc = `Start your path to wellness today with ${clinicAddr[0].clinicName}!`
                     document.getElementById('footer-description').textContent = footerDescription ?? defFooterDesc;
-                    if(copyrightText) {
-                        document.getElementById('copyright-text').textContent = copyrightText;
-                    } 
+                    let defCopyrightText = `© ${doctorName}. All Rights Reserved 2024.`
+                    document.getElementById('copyright-text').textContent = defCopyrightText ?? copyrightText;
 
                     // document.getElementById('bookappointment-title').textContent = `Book Your Appointment at ${clinicAddr[0]?.clinicName} Today`;
                     // document.getElementById('bookappointment-desc').textContent = `Schedule a consultation with ${doctorName} at ${clinicAddr[0]?.clinicName} and take the first step towards healthier, glowing skin. Quick and easy booking available`;
@@ -245,7 +248,20 @@ function getDetails() {
                 }
             }
         }
+    }).catch((e) => {
+        console.log('No data found for the id - ', id);
+        document.querySelectorAll('[contenteditable=false]').forEach((e) => { 
+            e.classList.remove('text-blur');
+        });
     });
+}
+
+function populateDialog() {
+    // setTimeout(() => {
+    //     // Popover data
+    //     document.getElementById('popup-name').setAttribute('value', clinicData?.doctorName);
+    //     document.getElementById('popup-phone-no').setAttribute('value', clinicData?.phoneNo);
+    // }, 0);
 }
 
 function addEditControls() {
@@ -263,6 +279,10 @@ function addEditControls() {
     document.getElementById('main-menu-bar').style.display = 'block';
     document.getElementById('edit-menu-bar').style.display = 'none';
     document.getElementById('editButton').style.display = 'none';
+
+    document.querySelectorAll('[contenteditable=false]').forEach((e) => { 
+        e.classList.remove('text-blur');
+    });
 }
 
 function setSelectedTheme(clinicData) {
@@ -430,21 +450,21 @@ function updateClinicImages(imageArray) {
         img.setAttribute('loading', 'lazy');
         img.classList.add('image-cover', 'hover');
         img.setAttribute('src', imageUrl);
-        img.setAttribute('sizes', '(max-width: 479px) 94vw, (max-width: 767px) 96vw, (max-width: 991px) 48vw, (max-width: 1279px) 21vw, 282.5625px');
-        img.setAttribute('srcset', `${imageUrl}-500.jpg 500w, ${imageUrl}-800.jpg 800w, ${imageUrl}-1080.jpg 1080w, ${imageUrl}.jpg 1280w`);
+        // img.setAttribute('sizes', '(max-width: 479px) 94vw, (max-width: 767px) 96vw, (max-width: 991px) 48vw, (max-width: 1279px) 21vw, 282.5625px');
+        // img.setAttribute('srcset', `${imageUrl}-500.jpg 500w, ${imageUrl}-800.jpg 800w, ${imageUrl}-1080.jpg 1080w, ${imageUrl}.jpg 1280w`);
 
         // Append the image to the anchor
         anchor.appendChild(img);
 
-        const div1 = document.createElement('div');
-        div1.classList.add('middle', 'primary-button' ,'w-button');
-        div1.setAttribute('id', idx);
-        const div2 = document.createElement('div');
-        div2.classList.add('text');
-        div2.textContent = 'Change Image';
-        div1.appendChild(div2);
+        // const div1 = document.createElement('div');
+        // div1.classList.add('middle', 'primary-button' ,'w-button');
+        // div1.setAttribute('id', idx);
+        // const div2 = document.createElement('div');
+        // div2.classList.add('text');
+        // div2.textContent = 'Change Image';
+        // div1.appendChild(div2);
 
-        anchor.appendChild(div1);
+        // anchor.appendChild(div1);
 
 
         // Create the script element for lightbox (if needed)
@@ -597,21 +617,76 @@ function updateKhData(khData, clinicData) {
 
 }
 
-function updateFaqData(faqData) {
+function updateFaqData(faqData, clinicData) {
   
     if(!faqData || faqData.length === 0) {
-        return;
-    }
-    // Iterate over the FAQ data
-    faqData.forEach((faq, index) => {
-      // Create the accordion-wrap div
-      let id = faq.id;
-      let qid = id+'q';
-      let aid = id+'a';
+        const { clinicName, doctorName, clinicPhoneNo, city } = clinicData;
+        let defData = [
+            {
+                id: 1,
+                question: `What types of skin conditions do you treat at ${clinicName}?`,
+                answer: `At ${clinicName}, ${doctorName} specializes in treating a wide range of skin conditions, including acne, eczema, psoriasis, rosacea, skin cancer, hyperpigmentation, alopecia, vitiligo, warts, and contact dermatitis.`,
+            },
+            {
+                id: 2,
+                question: `How do I know if I need to see a dermatologist?`,
+                answer: `If you are experiencing persistent skin issues such as acne, unusual moles, rashes, hair loss, or any other skin, hair, or nail conditions, it’s advisable to see a dermatologist. ${doctorName} at ${clinicName} in ${city} can help diagnose and treat these concerns effectively.`,
+            },
+            {
+                id: 3,
+                question: `How can I book an appointment with ${doctorName}?`,
+                answer: `You can book an appointment with ${doctorName} by using our online booking system or by calling our clinic directly at ${clinicPhoneNo}. Alternatively, you can visit our Book Appointment page for more information.`,
+            },
+            {
+                id: 4,
+                question: `What should I expect during my first consultation?`,
+                answer: `During your first consultation at ${clinicName}, ${doctorName} will review your medical history, discuss your skin concerns, and perform a thorough examination. Based on the findings, a personalized treatment plan will be recommended to address your specific needs.`,
+            },
+            {
+                id: 5,
+                question: `How long does it take to see results from dermatological treatments?`,
+                answer: `The time it takes to see results varies depending on the treatment and the condition being addressed. Some treatments, like chemical peels, may show results within a week, while others, such as acne or hair loss treatments, may take several weeks to months. ${doctorName} will provide you with a realistic timeline during your consultation.`,
+            },
+            {
+                id: 6,
+                question: `What should I bring to my first appointment with ${doctorName}?`,
+                answer: `For your first appointment, please bring any relevant medical records or previous skin treatment history. This will help Dr. ${doctorName} provide the most accurate diagnosis and treatment plan.`,
+            },
+            {
+                id: 7,
+                question: `How do I prepare for a skin treatment or procedure at ${clinicName}?`,
+                answer: `Preparation depends on the specific treatment or procedure. Generally, you should follow any pre-appointment instructions provided by our office, which may include avoiding certain medications or skincare products. Our staff will provide detailed instructions when you schedule your appointment.`,
+            },
+            {
+                id: 8,
+                question: `What are the benefits of seeing a dermatologist versus using over-the-counter products?`,
+                answer: `Seeing a dermatologist like ${doctorName} at ${clinicName} ensures that your skin concerns are properly diagnosed and treated with professional-grade products and techniques. Over-the-counter products may not be as effective or tailored to your specific needs, potentially leading to prolonged issues or even worsening of the condition.`,
+            },
+        ];
+        defData.forEach((data, index) => {
+            // Create the accordion-wrap div
+            let id = data.id;
+            let qid = 'faq'+id+'q';
+            let aid = 'faq'+id+'a';
 
-      document.getElementById(qid).textContent = faq.question;
-      document.getElementById(aid).textContent = faq.answer;
-    });
+            document.getElementById(qid).textContent = data.question;
+            document.getElementById(aid).textContent = data.answer;
+      
+            // document.getElementById(contentId).textContent = data.content?.replace("[Doctor's Name]", doctorName);
+            // document.getElementById(authorId).textContent = data.author;
+        });
+    } else {
+        // Iterate over the FAQ data
+        faqData.forEach((faq, index) => {
+          // Create the accordion-wrap div
+          let id = faq.id;
+          let qid = id+'q';
+          let aid = id+'a';
+    
+          document.getElementById(qid).textContent = faq.question;
+          document.getElementById(aid).textContent = faq.answer;
+        });
+    }
 
 }
 

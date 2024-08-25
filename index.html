@@ -41,32 +41,35 @@
   <!-- Please don't remove this body-tag, as this is the placeholder for theme and other stuff -->
   <div id="body-tag"></div>
   <div id="announcement-bar" data-animation="over-left" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease"
-    data-doc-height="1" role="banner" class="navbar w-nav" style="border-bottom: 1px dashed gray;background: bisque;padding: 5px;position: fixed; top: 0;z-index: 9999">
+    data-doc-height="1" role="banner" class="navbar w-nav" style="border-bottom: 1px dashed gray;background: #cde7da;padding: 5px;position: fixed; top: 0;z-index: 9999;color: rgb(21, 128, 61);">
     <div class="nav-container w-container">
       <div class="nav-menu-wrapper">
         <a>
-          <h1 class="small-text">This is a demo site, you can make deploy this site by opting to our plan</h1>
+          <!-- <h1 class="small-text">Publish this website</h1> -->
+          <h1 class="small-text" style="color: #15803d">This demo site is ready for launch. Subscribe for just ₹4,999 to make it yours and go live today.</h1>
         </a>
         <nav role="navigation" class="nav-menu w-nav-menu">
           <div class="menu-wrap">
-            <div class="button-header-tablet"><button popovertarget="paidPlanForm" class="primary-button w-button" style="padding: 2px 10px;font-size: 14px;">Request Callback</button></div>
+            <div class="button-header-tablet"><button popovertarget="paidPlanForm" class="primary-button w-button" style="padding: 2px 10px;font-size: 14px; background: #15803d;" onclick="populateDialog()">Request Callback</button></div>
           </div>
         </nav>
-        <div class="button-header" style="display: block;"><button popovertarget="paidPlanForm" class="primary-button w-button" style="padding: 2px 10px;font-size: 14px;">Request Callback</button></div>
+        <div class="button-header" style="display: block;"><button popovertarget="paidPlanForm" class="primary-button w-button" style="padding: 2px 10px;font-size: 14px; background: #15803d;" onclick="populateDialog()">Request Callback</button></div>
         <div popover class="popover-dialog" id="paidPlanForm">
           <button class="popover-close-btn" popovertarget="paidPlanForm" popovertargetaction="hide">x</button>
-          <h2 class="popover-title">Buy our plan</h2>
-          <hr class="popover-divider">
+          <h2 class="popover-title" style="text-align: center;">Subscribe to our plan and publish your website instantly!</h2>
+          <p class="popover-subtitle" style="text-align: center;">Price: Rs. <span style="text-decoration: line-through;">10,999</span> - Rs. 4999</p>
+          <p class="offer-title" style="text-align: center; font-weight: 600;">Extra <span style="color: #15803d;">10<b>%</b> discount</span> if you purchase within <span id="timer">24 Hours</span></p>
+          <!-- <hr class="popover-divider"> -->
           <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="post"
             data-wf-page-id="64c23c6fc82b2204b21af28f" data-wf-element-id="0a852d8a-afde-6322-209f-a564a8171fa9"
             action="https://digi-clinik-backend.vercel.app/api/getintouch">
             <div class="hero-inputs-wrapper-hori">
               <input class="input dark padding w-input" maxlength="256" name="name"
-                data-name="name" placeholder="Enter name*" type="text" id="name" required="" />
+                data-name="name" placeholder="Enter name*" type="text" id="popup-name" required="" />
               <input class="input dark padding w-input" maxlength="256" name="phoneNo"
-                data-name="phoneNo" placeholder="Enter Phone*" type="tel" id="phoneNo" required="" />
+                data-name="phoneNo" placeholder="Enter Phone*" type="tel" id="popup-phone-no" required="" />
               <input type="submit" data-wait="Please wait..." style="margin-top: 20px;"
-              class="primary-button full-white w-button" value="Get in touch">
+              class="primary-button full-white w-button" value="Request Callback">
             </div>
           </form>
           <div class="success-message w-form-done">
@@ -292,12 +295,12 @@
             <div class="w-slide">
               <div class="banner-slide"><img src="./assets/images/6.jpg" loading="lazy" alt="" class="banner-image"></div>
             </div>
-            <div class="w-slide">
+            <!-- <div class="w-slide">
               <div class="banner-slide"><img src="./assets/images/7.jpg" loading="lazy" alt="" class="banner-image"></div>
             </div>
             <div class="w-slide">
               <div class="banner-slide"><img src="./assets/images/8.jpg" loading="lazy" alt="" class="banner-image"></div>
-            </div>
+            </div> -->
           </div>
           <div class="banner-slider-arrow w-slider-arrow-left">
             <div class="w-icon-slider-left"></div>
@@ -357,52 +360,7 @@
 
   <!-- Hero Section With Reviews -->
   <div class="home-banner-section home-2 section-background" id="book-appointment">
-    <!-- Mobile CTA Form -->
-    <div style="padding: 15px;">
-      <div class="hero-form-wrapper w-form mobile">
-        <h2 id="hero-book-appointment-title" class="heading-banner large" style="text-align: center; color: white;" contenteditable="false">Book Your Appointment at [Clinic Name] Today</h2>
-        <p id="hero-book-appointment-subtitle" class="mb-50 home-2-banner" style="text-align: center; color: white;" contenteditable="false">Schedule a consultation with Dr. [Doctor's Name] at [Clinic Name] and take the first step towards healthier, glowing skin. Quick and easy booking available</p>
-        <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="post" class="contacts-3-form"
-          data-wf-page-id="64c23c6fc82b2204b21af28f" data-wf-element-id="0a852d8a-afde-6322-209f-a564a8171fa9"
-          action="https://digi-clinik-backend.vercel.app/api/appointments/create">
-          <div class="hero-inputs-wrapper">
-            <input class="input padding w-input" maxlength="256" name="name"
-              data-name="name" placeholder="Enter name*" type="text" id="name" required="" />
-            <input class="input padding w-input" maxlength="256" name="phoneNo"
-              data-name="phoneNo" placeholder="Enter Phone*" type="tel" id="phoneNo" required="" />
-            <input class="input padding w-input" maxlength="256" name="age"
-              data-name="age" placeholder="Enter age*" type="tel" id="age" required="" />
-            <input class="input padding w-input" maxlength="256" name="appointmentDate"
-              data-name="date" placeholder="Select date" type="date" id="appointmentDate" required="" />
-            <!-- <input class="input padding w-input" maxlength="256" name="appointmentTime"
-              data-name="time" placeholder="Your name*" type="text" id="appointmentTime" required="" /> -->
-            <select id="appointmentTime" name="appointmentTime" data-name="appointmentTime" required="" class="input padding w-input w-select">
-              <option value="No Slot Selected">Select time</option>
-              <option value="10:30 AM to 11:00 AM">10:30 AM to 11:00 AM</option>
-              <option value="11:00 AM to 11:30 AM">11:00 AM to 11:30 AM</option>
-              <option value="11:30 AM to 12:00 PM">11:30 AM to 12:00 PM</option>
-              <option value="12:00 PM to 12:30 PM">12:00 PM to 12:30 PM</option>
-              <option value="12:30 PM to 1:00 PM">12:30 PM to 1:00 PM</option>
-              <option value="1:00 PM to 1:30 PM">1:00 PM to 1:30 PM</option>
-              <option value="4:30 PM - 5:00 PM">4:30 PM - 5:00 PM</option>
-              <option value="5:00 PM - 5:30 PM">5:00 PM - 5:30 PM</option>
-              <option value="5:30 PM - 6:00 PM">5:30 PM - 6:00 PM</option>
-              <option value="6:00 PM - 6:30 PM">6:00 PM - 6:30 PM</option>
-              <option value="6:30 PM - 7:00 PM">6:30 PM - 7:00 PM</option>
-            </select>
-            <input type="submit" data-wait="Please wait..."
-            class="secondary-button full-white w-button" value="Request Callback">
-          </div>
-        </form>
-        <div class="success-message w-form-done">
-          <div>Thank you! Your submission has been received!</div>
-        </div>
-        <div class="error-message w-form-fail">
-          <div>Oops! Something went wrong while submitting the form.</div>
-        </div>
-      </div>
-    </div>
-    <div data-w-id="145bc15c-c55a-4c02-5e1b-88bcfbf2f66a" class="right-image-home-2">
+    <div data-w-id="145bc15c-c55a-4c02-5e1b-88bcfbf2f66a" class="right-image-home-2" style="margin-top: 65px;">
       <div class="block-with-border"></div><img
         src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64c917b0b25fb5a3792d14a5_009900909%201%20(1).webp"
         loading="lazy" data-w-id="1fa85449-a094-25b1-bb3a-166efe6ecfe7" alt="" class="image-absolute">
@@ -411,7 +369,7 @@
         <div class="stars-block"><img
             src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64c91f680a2ad636e81a17ca_start.svg"
             loading="lazy" alt="">
-          <div class="dark-text">Rating</div>
+          <div class="dark-text">Ratings</div>
         </div>
       </div>
       <div data-w-id="5639ef15-e577-92a1-ec3e-eb031f1b63b0" class="block-information bottom">
@@ -420,11 +378,12 @@
             loading="lazy" alt=""></div>
         <div class="block-customers">
           <div id="customers-served" class="number-home-2" contenteditable="false">64,739</div>
-          <div class="dark-text">Happy Customers</div>
+          <div class="dark-text">Satisfied Patients</div>
         </div>
       </div>
     </div>
 
+    <!-- Desktop CTA Form -->
     <div class="w-layout-blockcontainer base-container w-container">
       <div data-w-id="efd49cc9-45ba-9609-51c0-45e0b241cd3f" class="top-banner-content home-2">
         <div data-w-id="1b40bc42-850a-5b3b-89a4-e5e5e6bb2ac2" class="text-content-home-2">
@@ -442,17 +401,17 @@
               action="https://digi-clinik-backend.vercel.app/api/appointments/create">
               <div class="hero-inputs-wrapper">
                 <input class="input padding w-input" maxlength="256" name="name"
-                  data-name="name" placeholder="Enter name*" type="text" id="name" required="" />
+                  data-name="name" placeholder="Patient Name*" type="text" id="name" required="" />
                 <input class="input padding w-input" maxlength="256" name="phoneNo"
-                  data-name="phoneNo" placeholder="Enter Phone*" type="tel" id="phoneNo" required="" />
+                  data-name="phoneNo" placeholder="Patient Mobile No*" type="tel" id="phoneNo" required="" />
                 <input class="input padding w-input" maxlength="256" name="age"
-                  data-name="age" placeholder="Enter age*" type="tel" id="age" required="" />
+                  data-name="age" placeholder="Patient age*" type="tel" id="age" required="" />
                 <input class="input padding w-input" maxlength="256" name="appointmentDate"
-                  data-name="date" placeholder="Select date" type="date" id="appointmentDate" required="" />
+                  data-name="date" placeholder="Appointment date" type="date" id="appointmentDate" required="" />
                 <!-- <input class="input padding w-input" maxlength="256" name="appointmentTime"
                   data-name="time" placeholder="Your name*" type="text" id="appointmentTime" required="" /> -->
                 <select id="appointmentTime" name="appointmentTime" data-name="appointmentTime" required="" class="input padding w-input w-select">
-                  <option value="No Slot Selected">Select time</option>
+                  <option value="No Slot Selected">Appointment time</option>
                   <option value="10:30 AM to 11:00 AM">10:30 AM to 11:00 AM</option>
                   <option value="11:00 AM to 11:30 AM">11:00 AM to 11:30 AM</option>
                   <option value="11:30 AM to 12:00 PM">11:30 AM to 12:00 PM</option>
@@ -466,7 +425,7 @@
                   <option value="6:30 PM - 7:00 PM">6:30 PM - 7:00 PM</option>
                 </select>
                 <input type="submit" data-wait="Please wait..."
-                class="secondary-button full-white w-button" value="Request Callback">
+                class="secondary-button full-white w-button" value="Request Appointment">
               </div>
               
             </form>
@@ -477,6 +436,52 @@
               <div>Oops! Something went wrong while submitting the form.</div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile CTA Form -->
+    <div style="padding: 15px;">
+      <div class="hero-form-wrapper w-form mobile">
+        <h2 id="hero-book-appointment-title" class="heading-banner large" style="text-align: center; color: white;" contenteditable="false">Book Your Appointment at [Clinic Name] Today</h2>
+        <p id="hero-book-appointment-subtitle" class="mb-50 home-2-banner" style="text-align: center; color: white;" contenteditable="false">Schedule a consultation with Dr. [Doctor's Name] at [Clinic Name] and take the first step towards healthier, glowing skin. Quick and easy booking available</p>
+        <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="post" class="contacts-3-form"
+          data-wf-page-id="64c23c6fc82b2204b21af28f" data-wf-element-id="0a852d8a-afde-6322-209f-a564a8171fa9"
+          action="https://digi-clinik-backend.vercel.app/api/appointments/create">
+          <div class="hero-inputs-wrapper">
+            <input class="input padding w-input" maxlength="256" name="name"
+              data-name="name" placeholder="Patient Name*" type="text" id="name" required="" />
+            <input class="input padding w-input" maxlength="256" name="phoneNo"
+              data-name="phoneNo" placeholder="Patient Mobile No*" type="tel" id="phoneNo" required="" />
+            <input class="input padding w-input" maxlength="256" name="age"
+              data-name="age" placeholder="Patient age*" type="tel" id="age" required="" />
+            <input class="input padding w-input" maxlength="256" name="appointmentDate"
+              data-name="date" placeholder="Appointment date" type="date" id="appointmentDate" required="" />
+            <!-- <input class="input padding w-input" maxlength="256" name="appointmentTime"
+              data-name="time" placeholder="Your name*" type="text" id="appointmentTime" required="" /> -->
+            <select id="appointmentTime" name="appointmentTime" data-name="appointmentTime" required="" class="input padding w-input w-select">
+              <option value="No Slot Selected">Appointment time</option>
+              <option value="10:30 AM to 11:00 AM">10:30 AM to 11:00 AM</option>
+              <option value="11:00 AM to 11:30 AM">11:00 AM to 11:30 AM</option>
+              <option value="11:30 AM to 12:00 PM">11:30 AM to 12:00 PM</option>
+              <option value="12:00 PM to 12:30 PM">12:00 PM to 12:30 PM</option>
+              <option value="12:30 PM to 1:00 PM">12:30 PM to 1:00 PM</option>
+              <option value="1:00 PM to 1:30 PM">1:00 PM to 1:30 PM</option>
+              <option value="4:30 PM - 5:00 PM">4:30 PM - 5:00 PM</option>
+              <option value="5:00 PM - 5:30 PM">5:00 PM - 5:30 PM</option>
+              <option value="5:30 PM - 6:00 PM">5:30 PM - 6:00 PM</option>
+              <option value="6:00 PM - 6:30 PM">6:00 PM - 6:30 PM</option>
+              <option value="6:30 PM - 7:00 PM">6:30 PM - 7:00 PM</option>
+            </select>
+            <input type="submit" data-wait="Please wait..."
+            class="secondary-button full-white w-button" value="Request Appointment">
+          </div>
+        </form>
+        <div class="success-message w-form-done">
+          <div>Thank you! Your submission has been received!</div>
+        </div>
+        <div class="error-message w-form-fail">
+          <div>Oops! Something went wrong while submitting the form.</div>
         </div>
       </div>
     </div>
@@ -677,27 +682,36 @@
           <h1 class="white-text heading-banner large" id="key-highlights-header" contenteditable="false" style="text-align: center;">Key Highlights</h1>
         </div>
         <div class="row-benefit">
-          <div class="image-row"><img
+          <div class="image-row" style="padding: 5px;">
+            <!-- <img
               src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64c785313bb6e5df119ae7fb_star.svg"
-              loading="lazy" width="34" height="34" alt=""></div>
+              loading="lazy" width="34" height="34" alt=""> -->
+            <svg fill="#000000" class="primary-color" viewBox="0 -64 640 640" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z"></path></g></svg>
+          </div>
           <div class="text-row">
             <h1 class="white-text heading-banner large" id="key-highlights-title-1" contenteditable="false" style="font-size: 24px; margin-bottom: 0px; padding-left: 0px;">Educational Excellence </h1>
             <div class="white-text" id="key-highlights-desc-1" contenteditable="false">Dr. [Doctor's Name] completed their medical education at [Medical School], graduating with a [Degree, e.g., MBBS] in [Year]. They further specialized in dermatology, obtaining their [Specialization Degree, e.g., MD] in [Year]. This comprehensive education laid a strong foundation for their extensive expertise in the field of dermatology.</div>
           </div>
         </div>
         <div class="row-benefit">
-          <div class="image-row"><img
+          <div class="image-row" style="padding: 8px;">
+            <!-- <img
               src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64c78531a5e3e1334297e5ae_emotion-smile.svg"
-              loading="lazy" width="34" height="34" alt=""></div>
+              loading="lazy" width="34" height="34" alt=""> -->
+            <svg viewBox="0 -1 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>briefcase</title> <desc>Created with Sketch Beta.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage"> <g id="Icon-Set-Filled" sketch:type="MSLayerGroup" transform="translate(-206.000000, -206.000000)" fill="#000000"> <path fill="#000000" class="primary-color" d="M224,222 C224,221.634 223.895,221.296 223.723,221 L220.277,221 C220.105,221.296 220,221.634 220,222 C220,223.104 220.896,224 222,224 C223.104,224 224,223.104 224,222 L224,222 Z M226,222 C226,224.209 224.209,226 222,226 C219.791,226 218,224.209 218,222 C218,221.652 218.054,221.319 218.141,221 L206,221 L206,232 C206,234.209 207.791,236 210,236 L234,236 C236.209,236 238,234.209 238,232 L238,221 L225.859,221 C225.946,221.319 226,221.652 226,222 L226,222 Z M226,210 L218,210 L218,209 C218,208.448 218.448,208 219,208 L225,208 C225.552,208 226,208.448 226,209 L226,210 L226,210 Z M234,210 L228,210 L228,208 C228,206.896 227.104,206 226,206 L218,206 C216.896,206 216,206.896 216,208 L216,210 L210,210 C207.791,210 206,211.791 206,214 L206,219 L238,219 L238,214 C238,211.791 236.209,210 234,210 L234,210 Z" id="briefcase" sketch:type="MSShapeGroup"> </path> </g> </g> </g></svg>
+          </div>
           <div class="text-row">
             <h1 class="white-text heading-banner large" id="key-highlights-title-2" contenteditable="false" style="font-size: 24px; margin-bottom: 0px; padding-left: 0px;">Extensive Experience</h1>
             <div class="white-text" id="key-highlights-desc-2" contenteditable="false">Dr. [Doctor's Name] began their career at [Hospital 1], where they worked from [Start Year] to [End Year]. They then continued their professional journey at [Hospital 2], serving from [Start Year] to [End Year]. During their time at these esteemed institutions, Dr. [Doctor's Name] gained invaluable experience and developed a reputation for excellence in dermatological care.</div>
           </div>
         </div>
         <div class="row-benefit" style="margin-bottom: 12px;">
-          <div class="image-row"><img
+          <div class="image-row" style="padding: 5px;">
+            <!-- <img
               src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64c78531eeb2fae71dd5492b_users.svg"
-              loading="lazy" width="34" height="34" alt=""></div>
+              loading="lazy" width="34" height="34" alt=""> -->
+            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="#000000" class="primary-color"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect x="0" fill="none" width="20" height="20"></rect> <g> <path d="M4.46 5.16L5 7.46l-.54 2.29 2.01 1.24L7.7 13l2.3-.54 2.3.54 1.23-2.01 2.01-1.24L15 7.46l.54-2.3-2-1.24-1.24-2.01-2.3.55-2.29-.54-1.25 2zm5.55 6.34C7.79 11.5 6 9.71 6 7.49c0-2.2 1.79-3.99 4.01-3.99 2.2 0 3.99 1.79 3.99 3.99 0 2.22-1.79 4.01-3.99 4.01zm-.02-1C8.33 10.5 7 9.16 7 7.5c0-1.65 1.33-3 2.99-3S13 5.85 13 7.5c0 1.66-1.35 3-3.01 3zm3.84 1.1l-1.28 2.24-2.08-.47L13 19.2l1.4-2.2h2.5zm-7.7.07l1.25 2.25 2.13-.51L7 19.2 5.6 17H3.1z"></path> </g> </g></svg>
+          </div>
           <div class="text-row">
             <h1 class="white-text heading-banner large" id="key-highlights-title-3" contenteditable="false" style="font-size: 24px; margin-bottom: 0px; padding-left: 0px;">Awards and Recognitions</h1>
             <div class="white-text" id="key-highlights-desc-3" contenteditable="false">Awards and Recognitions</div>
@@ -790,7 +804,7 @@
 
   <!-- Banner Image -->
   <div class="hero-banner-section section-background p-1">
-    <div class="banner-slide"><img src="./assets/images/DigiClinik Banners (1).png" loading="lazy" alt="" class="banner-image"></div>
+    <div class="banner-slide"><img src="./assets/images/7.jpg" loading="lazy" alt="" class="banner-image"></div>
   </div>
 
   <!-- Testimonials -->
@@ -978,18 +992,18 @@
       <div data-w-id="912145b2-b350-5f85-6613-12473e042231" class="video-wrap">
         <div
           data-poster-url="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64cd4a16f99de8f60cbd4081_production_id_4121618 (720p)-poster-00001.jpg"
-          data-video-urls="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64cd4a16f99de8f60cbd4081_production_id_4121618 (720p)-transcode.mp4,https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64cd4a16f99de8f60cbd4081_production_id_4121618 (720p)-transcode.webm"
+          data-video-urls="./assets/images/Video (1).mp4"
           data-autoplay="true" data-loop="true" data-wf-ignore="true"
           class="background-video w-background-video w-background-video-atom"><video
             id="d1c080bc-2413-9da2-c960-e59fff8cfd52-video" autoplay="" loop=""
             style="background-image:url(&quot;https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64cd4a16f99de8f60cbd4081_production_id_4121618 (720p)-poster-00001.jpg&quot;)"
             muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
             <source
-              src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64cd4a16f99de8f60cbd4081_production_id_4121618 (720p)-transcode.mp4"
+              src="./assets/images/Video (1).mp4"
               data-wf-ignore="true">
-            <source
+            <!-- <source
               src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64cd4a16f99de8f60cbd4081_production_id_4121618 (720p)-transcode.webm"
-              data-wf-ignore="true">
+              data-wf-ignore="true"> -->
           </video><noscript>
             <style>
               [data-wf-bgvideo-fallback-img] {
@@ -1025,7 +1039,7 @@
               <div style="color: #2b2b2b;" id="impact-numbers-desc" contenteditable="false">Patients treated till now</div>
             </div>
             <div class="counter-block">
-              <div class="large-number-text blue" id="impact-percentage" contenteditable="false">50 %</div>
+              <div class="large-number-text blue" id="impact-percentage" contenteditable="false">95 %</div>
               <div style="color: #2b2b2b;" id="impact-percentage-desc" contenteditable="false">Saw improvement in skin and hair problems</div>
             </div>
             <div class="counter-block">
@@ -1361,7 +1375,7 @@
     <div data-w-id="0f91618f-8603-fd61-d4a3-a750dd390dc4" class="base-container w-container">
       <div class="contacts-3-form-wrapper w-form">
         <div class="contacts-title pb-1">
-          <h1 class="white-text heading-banner large" id="getintouch-title" contenteditable="false" style="text-align: center;">Get in touch with us today for expert physiotherapy care</h1>
+          <h1 class="white-text heading-banner large" id="getintouch-title" contenteditable="false" style="text-align: center;">Get in touch with us today for expert skin & hair care</h1>
         </div>
         <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="post" class="contacts-3-form"
           action="https://digi-clinik-backend.vercel.app/api/contacts/create">
@@ -1398,8 +1412,8 @@
   <div class="section section-background">
     <div class="base-container w-container">
       <div class="text-center w-100">
-        <h1 class="heading-banner large text-left" id="gallery-title" contenteditable="false">Explore Our Clinic</h1>
-        <p class="mb-50 home-2-banner text-left" id="gallery-subtitle" contenteditable="false">Take a virtual tour of our clinic through a captivating gallery featuring our modern facilities and welcoming atmosphere.</p>
+        <h1 class="heading-banner large text-left" id="gallery-title" contenteditable="false">Explore our clinic</h1>
+        <p class="mb-50 home-2-banner text-left" id="gallery-subtitle" contenteditable="false">See the results of our treatments and procedures at [Clinic Name]. Real transformations, real care.</p>
       </div>
       <div class="shop-details-wrapper">
         <div id="w-node-df153c5b-b136-e2ba-1a95-e7195b516c8d-0509bd36" class="w-dyn-list w-dyn-items-repeater-ref">
@@ -1586,10 +1600,10 @@
               </a>
               <p class="footer-brand-description" id="footer-description" contenteditable="false">Start your path to wellness today with [ClinicName]!</p>
             </div>
-            <div class="footer-social-icons-wrapper"><a href="https://www.facebook.com/" target="_blank"
-                class="footer-social-icon"></a><a href="https://www.instagram.com/" target="_blank"
-                class="footer-social-icon"></a><a href="https://twitter.com/" target="_blank"
-                class="footer-social-icon"></a>
+            <div class="footer-social-icons-wrapper">
+              <a href="https://www.facebook.com/" target="_blank" class="footer-social-icon"></a>
+              <a href="https://www.instagram.com/" target="_blank" class="footer-social-icon"></a>
+              <!-- <a href="https://www.youtube.com/" target="_blank" class="footer-social-icon"></a> -->
             </div>
             <div>
               <!-- <button id="rzp-button1" class="">Pay</button> -->
@@ -1687,7 +1701,8 @@
     data-doc-height="1" role="banner" class="navbar w-nav footer-bar mobile" style="padding: 10px 0px;z-index:2">
     <div class="nav-container w-container">
       <div class="footer-menu-layout">
-        <button class="footer-menu-button" onclick="publish()">
+        <!-- <button class="footer-menu-button" onclick="publish()"> -->
+        <button class="footer-menu-button" popovertarget="paidPlanForm">
           <span style="padding-right: 5px;">
             <img src="./assets/images/publish.png" alt="whats-app-icon" width="25px" height="25px">
           </span>
