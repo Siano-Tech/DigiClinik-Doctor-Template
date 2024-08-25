@@ -50,10 +50,10 @@
         </a>
         <nav role="navigation" class="nav-menu w-nav-menu">
           <div class="menu-wrap">
-            <div class="button-header-tablet"><button popovertarget="paidPlanForm" class="primary-button w-button" style="padding: 2px 10px;font-size: 14px; background: #15803d;" onclick="populateDialog()">Request Callback</button></div>
+            <div class="button-header-tablet"><button popovertarget="paidPlanForm" class="primary-button w-button" style="padding: 2px 10px;font-size: 14px; background: #15803d; border: 1px solid #15803d;" onclick="populateDialog()">Request Callback</button></div>
           </div>
         </nav>
-        <div class="button-header" style="display: block;"><button popovertarget="paidPlanForm" class="primary-button w-button" style="padding: 2px 10px;font-size: 14px; background: #15803d;" onclick="populateDialog()">Request Callback</button></div>
+        <div class="button-header" style="display: block;"><button popovertarget="paidPlanForm" class="primary-button w-button" style="padding: 2px 10px;font-size: 14px; background: #15803d; border: 1px solid #15803d;" onclick="populateDialog()">Request Callback</button></div>
         <div popover class="popover-dialog" id="paidPlanForm">
           <button class="popover-close-btn" popovertarget="paidPlanForm" popovertargetaction="hide">x</button>
           <h2 class="popover-title" style="text-align: center;">Subscribe to our plan and publish your website instantly!</h2>
@@ -73,7 +73,7 @@
             </div>
           </form>
           <div class="success-message w-form-done">
-            <div>Thank you! Your submission has been received!</div>
+            <div>Your request has been received, our team will get in touch with you shortly!</div>
           </div>
           <div class="error-message w-form-fail">
             <div>Oops! Something went wrong while submitting the form.</div>
@@ -384,7 +384,7 @@
     </div>
 
     <!-- Desktop CTA Form -->
-    <div class="w-layout-blockcontainer base-container w-container">
+    <div class="w-layout-blockcontainer base-container w-container" id="book-appointment-section">
       <div data-w-id="efd49cc9-45ba-9609-51c0-45e0b241cd3f" class="top-banner-content home-2">
         <div data-w-id="1b40bc42-850a-5b3b-89a4-e5e5e6bb2ac2" class="text-content-home-2">
           <!-- <div class="line-absolute position"></div> -->
@@ -673,7 +673,7 @@
         <span id="doctor-details-experience" class="small-text" contenteditable="false">[X] Years of Experience</span>
         <p id="doctor-details-about" contenteditable="false">Dr. [Doctor's Name] is a distinguished dermatologist with over [X] years of experience in treating various skin conditions. A graduate of [Medical School], Dr. [Doctor's Name] refined their skills at renowned institutions like [Hospital 1] and [Hospital 2], where they earned a reputation for delivering exceptional patient care. Specializing in [specific areas of expertise], Dr. [Doctor's Name] is dedicated to using the latest dermatological advancements to provide personalized treatment plans tailored to each patient's unique needs.</p>
         <!-- <div>Heart Surgeon, London</div> -->
-        <a href="../schedule/" class="primary-button mt-20 w-button">Book Appointment</a>
+        <a href="#book-appointment-section" class="primary-button mt-20 w-button">Book Appointment</a>
       </div>
     </div>
     <div class="base-container-highlights w-container" style="padding-bottom: 1rem; padding-top: 4rem;">
@@ -748,8 +748,8 @@
                 <h6 class="pt-1" style="padding-left: 5px;" id="treatments-title-1" contenteditable="false">Paediatrician</h6>
                 <p class="font-size-15 mb-50 home-2-banner text-left" id="treatments-desc-1" contenteditable="false">We deeply comprehend the distinct healthcare requirements of children, and our
                   mission is to offer compassionate and expert medical care for your little ones.</p>
-                <a href="services/paediatrician/" class="link-with-icon">Learn More<span
-                    class="text-button-icon"></span></a>
+                <!-- <a href="services/paediatrician/" class="link-with-icon">Learn More<span
+                    class="text-button-icon"></span></a> -->
               </div>
             </div>
             <div role="listitem"
@@ -769,8 +769,8 @@
                 <h6 class="pt-1" style="padding-left: 5px;" id="treatments-title-2" contenteditable="false">Paediatrician</h6>
                 <p class="font-size-15 mb-50 home-2-banner text-left" id="treatments-desc-2" contenteditable="false">We deeply comprehend the distinct healthcare requirements of children, and our
                   mission is to offer compassionate and expert medical care for your little ones.</p>
-                <a href="services/paediatrician/" class="link-with-icon">Learn More<span
-                    class="text-button-icon"></span></a>
+                <!-- <a href="services/paediatrician/" class="link-with-icon">Learn More<span
+                    class="text-button-icon"></span></a> -->
               </div>
             </div>
             <div role="listitem"
@@ -790,8 +790,8 @@
                 <h6 class="pt-1" style="padding-left: 5px;" id="treatments-title-3" contenteditable="false">Paediatrician</h6>
                 <p class="font-size-15 mb-50 home-2-banner text-left" id="treatments-desc-3" contenteditable="false">We deeply comprehend the distinct healthcare requirements of children, and our
                   mission is to offer compassionate and expert medical care for your little ones.</p>
-                <a href="services/paediatrician/" class="link-with-icon">Learn More<span
-                    class="text-button-icon"></span></a>
+                <!-- <a href="services/paediatrician/" class="link-with-icon">Learn More<span
+                    class="text-button-icon"></span></a> -->
               </div>
             </div>
           </div>
@@ -1039,7 +1039,7 @@
               <div style="color: #2b2b2b;" id="impact-numbers-desc" contenteditable="false">Patients treated till now</div>
             </div>
             <div class="counter-block">
-              <div class="large-number-text blue" id="impact-percentage" contenteditable="false">95 %</div>
+              <div class="large-number-text blue" id="impact-percentage" contenteditable="false">95%</div>
               <div style="color: #2b2b2b;" id="impact-percentage-desc" contenteditable="false">Saw improvement in skin and hair problems</div>
             </div>
             <div class="counter-block">
@@ -1243,7 +1243,7 @@
   <div class="blue-section">
     <div class="w-layout-blockcontainer base-container w-container">
       <div data-w-id="acaf8126-a21d-bb98-035c-db3acc07db71" style="opacity:0" class="section-content">
-        <div class="white-large-text" id="doctor-message" contenteditable="false">Welcome to our practice. As the founder, my mission is to ensure every patient receives the highest standard of dermatological care. With years of experience and a commitment to advancing skin health, I am dedicated to providing personalized treatments that address your unique needs. Our team and I are here to support you on your journey to healthier, more radiant skin. Thank you for trusting us with your care. We look forward to partnering with you to achieve your skin care goals.</div>
+        <div class="white-large-text font-size-18" style="line-height: normal;" id="doctor-message" contenteditable="false">Welcome to our practice. As the founder, my mission is to ensure every patient receives the highest standard of dermatological care. With years of experience and a commitment to advancing skin health, I am dedicated to providing personalized treatments that address your unique needs. Our team and I are here to support you on your journey to healthier, more radiant skin. Thank you for trusting us with your care. We look forward to partnering with you to achieve your skin care goals.</div>
         <div class="author-quote">
           <img
             id="dm-pic"
@@ -1674,7 +1674,7 @@
       <div class="footer-menu-layout">
         <!-- <img src="https://assets-global.website-files.com/64c23c6ec82b2204b21af185/64d0e68487019288d97e9b47_Group.webp" alt="" srcset=""> -->
         <!-- <button class="footer-menu-button" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/siano-tech/appointments'});return false;"> -->
-        <a href="#book-appointment" class="footer-menu-button">
+        <a href="#book-appointment-section" class="footer-menu-button">
           <span style="padding-right: 5px;">
             <img src="./assets/images/calendar.png" alt="whats-app-icon" width="25px" height="25px">
           </span>

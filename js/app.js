@@ -64,7 +64,7 @@ function getDetails() {
                     const {locationsTitle, locationsSubtitle, doctorMessage, dmName, dmDesignation} = d.data.data;
                     const {faqTitle, faqSubtitle, faqData, getintouchTitle, galleryTitle, gallerySubtitle, clinicGallery} = d.data.data;
                     const {newsletterTitle, newsletterSubtitle, footerTitle, footerDescription, copyrightText} = d.data.data;
-                    const {selectedTheme, selectedFont, phoneNo} = d.data.data;
+                    const {selectedTheme, selectedFont, phoneNo, clinicName} = d.data.data;
                     
                     diagnosisG = diagnosis;
                     proceduresG = procedures;
@@ -172,7 +172,7 @@ function getDetails() {
                         document.getElementById('doctor-message').textContent = doctorMessage;
                     }
                     document.getElementById('dm-name').textContent = dmName ?? doctorName;
-                    document.getElementById('dm-designation').textContent = dmDesignation ?? qualification + ' | ' + speciality;
+                    document.getElementById('dm-designation').textContent = dmDesignation ?? qualification + ' | Consultant ' + speciality;
 
                     if(faqTitle) {
                         document.getElementById('faq-title').textContent = faqTitle;
@@ -189,9 +189,10 @@ function getDetails() {
                     if(galleryTitle) {
                         document.getElementById('gallery-title').textContent = galleryTitle;
                     }
-                    if(gallerySubtitle) {
-                        document.getElementById('gallery-subtitle').textContent = gallerySubtitle;
-                    }
+                    // if(gallerySubtitle) {
+                    let defGallerySubtitle = `See the results of our treatments and procedures at ${clinicName}. Real transformations, real care.`
+                    document.getElementById('gallery-subtitle').textContent = gallerySubtitle ?? defGallerySubtitle;
+                    // }
 
                     if(newsletterTitle) {
                         document.getElementById('newsletter-title').textContent = newsletterTitle;
@@ -400,23 +401,23 @@ function updatePopularTreatments(clinicData) {
       serviceDescription.setAttribute('contenteditable','false');
       serviceDescription.textContent = service.description ?? 'We deeply comprehend the distinct healthcare requirements of children, and our mission is to offer compassionate and expert medical care for your little ones.';
   
-      const learnMoreLink = document.createElement('a');
-      learnMoreLink.href = service.link;
-      learnMoreLink.classList.add('link-with-icon');
-      learnMoreLink.textContent = "Learn More";
+    //   const learnMoreLink = document.createElement('a');
+    //   learnMoreLink.href = service.link;
+    //   learnMoreLink.classList.add('link-with-icon');
+    //   learnMoreLink.textContent = "Learn More";
   
-      const learnMoreIcon = document.createElement('span');
-      learnMoreIcon.classList.add('text-button-icon');
-      learnMoreIcon.innerHTML = ""; // Assuming this is a font icon
+    //   const learnMoreIcon = document.createElement('span');
+    //   learnMoreIcon.classList.add('text-button-icon');
+    //   learnMoreIcon.innerHTML = ""; // Assuming this is a font icon
   
-      // Append elements
-      learnMoreLink.appendChild(learnMoreIcon);
+    //   // Append elements
+    //   learnMoreLink.appendChild(learnMoreIcon);
       serviceLink.appendChild(serviceImage);
       serviceLink.appendChild(backgroundImageDiv);
       descriptionDiv.appendChild(serviceLink);
       descriptionDiv.appendChild(serviceNameHeading);
       descriptionDiv.appendChild(serviceDescription);
-      descriptionDiv.appendChild(learnMoreLink);
+    //   descriptionDiv.appendChild(learnMoreLink);
       serviceItemDiv.appendChild(descriptionDiv);
       clinicServiceList.appendChild(serviceItemDiv);
     });
