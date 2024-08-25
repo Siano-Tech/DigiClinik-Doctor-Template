@@ -845,3 +845,7 @@
       }
     }
 }
+
+.w-lightbox-backdrop {
+    z-index: 9999;
+}

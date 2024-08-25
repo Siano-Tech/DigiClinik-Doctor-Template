@@ -70,19 +70,19 @@ function getDetails() {
                     proceduresG = procedures;
                     document.getElementById('navbar-title').textContent = navbarTitle ?? doctorName;
 
-                    let defHeroTitle = `Trusted Skin Care by Dr. ${doctorName} – Leading Dermatologist in ${city}`;
+                    let defHeroTitle = `Trusted Skin Care by ${doctorName} – Leading Dermatologist in ${city}`;
                     document.getElementById('hero-title').textContent = heroTitle ?? defHeroTitle;
                     
                     let hospitalsWorked = workExperience.map(e => e.hospitalName).join(' and ');
-                    let defHeroSubtitle = `Dr. ${doctorName}, with over ${experience} years of experience in dermatology, has been transforming the skin health of patients in ${city}. Having previously served at esteemed hospitals such as ${hospitalsWorked}, Dr. ${doctorName} combines deep expertise with a personalized approach to provide top-tier skin care tailored to your unique needs.`;
+                    let defHeroSubtitle = `${doctorName}, with over ${experience} years of experience in dermatology, has been transforming the skin health of patients in ${city}. Having previously served at esteemed hospitals such as ${hospitalsWorked}, ${doctorName} combines deep expertise with a personalized approach to provide top-tier skin care tailored to your unique needs.`;
                     document.getElementById('hero-subtitle').textContent = heroSubTitle ?? defHeroSubtitle;
 
-                    document.getElementById('ratings').textContent = ratings + '/5';
+                    document.getElementById('ratings').textContent = ratings ?? '4.5' + '/5';
                     document.getElementById('customers-served').textContent = patientsConsulted;
 
                     document.getElementById('hero-book-appointment-title').textContent = heroBookAppointmentTitle ?? `Book Your Appointment at ${clinicAddr[0].clinicName} Today`;
                     document.getElementById('hero-book-appointment-title-1').textContent = heroBookAppointmentTitle ?? `Book Your Appointment at ${clinicAddr[0].clinicName} Today`;
-                    let defApptSubtitle = `Schedule a consultation with Dr. ${doctorName} at ${clinicAddr[0].clinicName} and take the first step towards healthier, glowing skin. Quick and easy booking available`
+                    let defApptSubtitle = `Schedule a consultation with ${doctorName} at ${clinicAddr[0].clinicName} and take the first step towards healthier, glowing skin. Quick and easy booking available`
                     document.getElementById('hero-book-appointment-subtitle').textContent = heroBookAppointmentSubtitle ?? defApptSubtitle;
 
                     if(proceduresTitle) {
@@ -101,7 +101,7 @@ function getDetails() {
                     document.getElementById('doctor-details-speciality').textContent = doctorDetailsSpeciality ?? `Consultant ${speciality}`;
                     document.getElementById('doctor-details-qualification').textContent = doctorDetailsQualification ?? qualification;
                     document.getElementById('doctor-details-experience').textContent = experience + ' Years of Experience';
-                    let defDetAbout = `Dr. ${doctorName} is a distinguished dermatologist with over ${experience} years of experience in treating various skin conditions. A graduate of ${qualificationDets[0].collegeName}, Dr. ${doctorName} refined their skills at renowned institutions like ${hospitalsWorked}, where they earned a reputation for delivering exceptional patient care.`
+                    let defDetAbout = `${doctorName} is a distinguished dermatologist with over ${experience} years of experience in treating various skin conditions. A graduate of ${qualificationDets[0].collegeName}, ${doctorName} refined their skills at renowned institutions like ${hospitalsWorked}, where they earned a reputation for delivering exceptional patient care.`
                     document.getElementById('doctor-details-about').textContent = doctorDetailsAbout ?? defDetAbout;
 
                     if(khHeader) {
@@ -112,7 +112,7 @@ function getDetails() {
                     if(treatmentsTitle) {
                         document.getElementById('treatments-title').textContent = treatmentsTitle;
                     }
-                    let defSubtitle = `Explore a range of skin conditions expertly managed by Dr. ${doctorName}. From common issues like acne and eczema to more complex concerns, our personalized treatment plans are designed to address your specific needs and restore your skin’s health and confidence.`
+                    let defSubtitle = `Explore a range of skin conditions expertly managed by ${doctorName}. From common issues like acne and eczema to more complex concerns, our personalized treatment plans are designed to address your specific needs and restore your skin’s health and confidence.`
                     document.getElementById('treatments-subtitle').textContent = treatmentsSubtitle ?? defSubtitle;
 
                     if(!treatmentsData || treatmentsData.length === 0) {
@@ -205,8 +205,8 @@ function getDetails() {
                     } 
 
                     // document.getElementById('bookappointment-title').textContent = `Book Your Appointment at ${clinicAddr[0]?.clinicName} Today`;
-                    // document.getElementById('bookappointment-desc').textContent = `Schedule a consultation with Dr. ${doctorName} at ${clinicAddr[0]?.clinicName} and take the first step towards healthier, glowing skin. Quick and easy booking available`;
-                    // // document.getElementById('hero-title').textContent = `Trusted Skin Care by Dr. ${doctorName} – Leading Dermatologist in ${city}`;
+                    // document.getElementById('bookappointment-desc').textContent = `Schedule a consultation with ${doctorName} at ${clinicAddr[0]?.clinicName} and take the first step towards healthier, glowing skin. Quick and easy booking available`;
+                    // // document.getElementById('hero-title').textContent = `Trusted Skin Care by ${doctorName} – Leading Dermatologist in ${city}`;
                     // // document.getElementById('hero-sub-title').textContent = heroSubTitle;
                     // document.getElementById('customersServed').textContent = patientsConsulted;
                     // document.getElementById('ratings').textContent = ratings + '/5';
@@ -216,11 +216,11 @@ function getDetails() {
                     // document.getElementById('doctorDetails-Experience').textContent = experience + ' Years of Experience';
                     // document.getElementById('doctorDetails-Qualification').textContent = qualification;
                     // const exp = workExperience.map(e => e.hospitalName).join(' and ');
-                    // const abt = `Dr. ${doctorName} is a distinguished dermatologist with over ${experience} years of experience in treating various skin conditions. A graduate of ${qualificationDets[0].collegeName}, Dr. ${doctorName} refined their skills at renowned institutions like ${exp}, where they earned a reputation for delivering exceptional patient care. Specializing in ${speciality}, Dr. ${doctorName} is dedicated to using the latest dermatological advancements to provide personalized treatment plans tailored to each patient's unique needs.`
+                    // const abt = `${doctorName} is a distinguished dermatologist with over ${experience} years of experience in treating various skin conditions. A graduate of ${qualificationDets[0].collegeName}, ${doctorName} refined their skills at renowned institutions like ${exp}, where they earned a reputation for delivering exceptional patient care. Specializing in ${speciality}, ${doctorName} is dedicated to using the latest dermatological advancements to provide personalized treatment plans tailored to each patient's unique needs.`
                     // document.getElementById('doctorDetails-About').textContent = abt ?? about;
                     // document.getElementById('dm-pic').setAttribute('src', doctorPic);
                     // const dmname = dmName ?? doctorName;;
-                    // document.getElementById('dm-name').textContent = 'Dr. ' + dmname;
+                    // document.getElementById('dm-name').textContent = '' + dmname;
                     // document.getElementById('dm-designation').textContent = dmDesignation ?? speciality ;
                     // document.getElementById('impact-numbers').textContent = patientsConsulted + '+' ?? '100+';
                     // document.getElementById('impact-percentage').textContent = '90%';
@@ -279,6 +279,10 @@ function setSelectedFont(clinicData) {
 }
 
 function updatePopularDiagnosisMobile(clinicData) {
+    if(!clinicData || clinicData.length === 0) {
+        return;
+    }
+
     const gridCardWrapper = document.querySelector('.popular-diagnosis-mobile');
 
     // Clear existing content
@@ -301,6 +305,9 @@ function updatePopularDiagnosisMobile(clinicData) {
 }
 
 function updatePopularDiagnosis(clinicData) {
+    if(!clinicData || clinicData.length === 0) {
+        return;
+    }
     const categoryGrid = document.querySelector('.category-grid');
     
     // Clear existing content
@@ -328,6 +335,9 @@ function updatePopularDiagnosis(clinicData) {
 }
 
 function updatePopularTreatments(clinicData) {
+    if(!clinicData || clinicData.length === 0) {
+        return;
+    }
     const clinicServiceList = document.querySelector('.popular-treatments');
   
     // Clear existing content
@@ -533,15 +543,15 @@ function updateKhData(khData, clinicData) {
         let hospitalsWorked = workExperience.map(e => e.hospitalName).join(' and ');
         let defKh1Desc, defKh2Desc;
         if(qualificationDets.length === 1) {
-            defKh1Desc = `Dr. ${doctorName} completed their medical education at ${qualificationDets[0].collegeName}, graduating with a ${qualificationDets[0].qualification} in ${qualificationDets[0].yog}. This comprehensive education laid a strong foundation for their extensive expertise in the field of dermatology.`;
+            defKh1Desc = `${doctorName} completed their medical education at ${qualificationDets[0].collegeName}, graduating with a ${qualificationDets[0].qualification} in ${qualificationDets[0].yog}. This comprehensive education laid a strong foundation for their extensive expertise in the field of dermatology.`;
         } else if(qualificationDets.length === 2) {
-            defKh1Desc = `Dr. ${doctorName} completed their medical education at ${qualificationDets[0].collegeName}, graduating with a ${qualificationDets[0].qualification} in ${qualificationDets[0].yog}. They further specialized in dermatology, obtaining their ${qualificationDets[1].qualification} in ${qualificationDets[1].yog}. This comprehensive education laid a strong foundation for their extensive expertise in the field of dermatology.`;
+            defKh1Desc = `${doctorName} completed their medical education at ${qualificationDets[0].collegeName}, graduating with a ${qualificationDets[0].qualification} in ${qualificationDets[0].yog}. They further specialized in dermatology, obtaining their ${qualificationDets[1].qualification} in ${qualificationDets[1].yog}. This comprehensive education laid a strong foundation for their extensive expertise in the field of dermatology.`;
         }
 
         if(workExperience.length === 1) {
-            defKh2Desc = `Dr. ${doctorName} began their career at ${workExperience[0].hospitalName}, where they worked from ${workExperience[0].workYrs}. During their time at these esteemed institutions, Dr. ${doctorName} gained invaluable experience and developed a reputation for excellence in dermatological care.`
+            defKh2Desc = `${doctorName} began their career at ${workExperience[0].hospitalName}, where they worked from ${workExperience[0].workYrs}. During their time at these esteemed institutions, ${doctorName} gained invaluable experience and developed a reputation for excellence in dermatological care.`
         } else if(qualificationDets.length === 2) {
-            defKh2Desc = `Dr. ${doctorName} began their career at ${workExperience[0].hospitalName}, where they worked from ${workExperience[0].workYrs}. They then continued their professional journey at ${workExperience[1].hospitalName}, serving from ${workExperience[1].workYrs}. During their time at these esteemed institutions, Dr. ${doctorName} gained invaluable experience and developed a reputation for excellence in dermatological care.`
+            defKh2Desc = `${doctorName} began their career at ${workExperience[0].hospitalName}, where they worked from ${workExperience[0].workYrs}. They then continued their professional journey at ${workExperience[1].hospitalName}, serving from ${workExperience[1].workYrs}. During their time at these esteemed institutions, ${doctorName} gained invaluable experience and developed a reputation for excellence in dermatological care.`
         }
 
         let defKhData = [
@@ -611,32 +621,32 @@ function updateTestimonialData(testimonialData, doctorName) {
         let defData = [
             {
                 id: 1,
-                content: `"Dr. ${doctorName} transformed my skin with their expert acne treatment. After trying numerous products with no success, I finally found relief and clear skin. Their personalized approach made all the difference."`,
+                content: `"${doctorName} transformed my skin with their expert acne treatment. After trying numerous products with no success, I finally found relief and clear skin. Their personalized approach made all the difference."`,
                 author: 'Aarav Patel',
             },
             {
                 id: 2,
-                content: `"Dr. ${doctorName} provided excellent care for my psoriasis. Their thorough explanation of the condition and the tailored treatment plan helped manage my symptoms effectively. I feel much better now."`,
+                content: `"${doctorName} provided excellent care for my psoriasis. Their thorough explanation of the condition and the tailored treatment plan helped manage my symptoms effectively. I feel much better now."`,
                 author: 'Rohan Gupta',
             },
             {
                 id: 3,
-                content: `"Receiving treatment for skin cancer from Dr. ${doctorName} was a relief. Their professionalism, clear communication, and effective treatment plan gave me confidence and hope. I’m very thankful."`,
+                content: `"Receiving treatment for skin cancer from ${doctorName} was a relief. Their professionalism, clear communication, and effective treatment plan gave me confidence and hope. I’m very thankful."`,
                 author: 'Vikram Singh',
             },
             {
                 id: 4,
-                content: `"I struggled with eczema for years, and Dr. ${doctorName} was a game-changer. The treatment plan and advice provided have brought me incredible relief and improved my quality of life."`,
+                content: `"I struggled with eczema for years, and ${doctorName} was a game-changer. The treatment plan and advice provided have brought me incredible relief and improved my quality of life."`,
                 author: 'Priya Sharma',
             },
             {
                 id: 5,
-                content: `"I was struggling with rosacea, but Dr. ${doctorName}'s expertise made a huge difference. The customized treatment plan has significantly reduced redness and improved my skin’s appearance."`,
+                content: `"I was struggling with rosacea, but ${doctorName}'s expertise made a huge difference. The customized treatment plan has significantly reduced redness and improved my skin’s appearance."`,
                 author: 'Ananya Rao',
             },
             {
                 id: 6,
-                content: `"Dr. ${doctorName} addressed my hyperpigmentation issue with remarkable expertise. The results have been fantastic, and I appreciate their thorough and attentive care."`,
+                content: `"${doctorName} addressed my hyperpigmentation issue with remarkable expertise. The results have been fantastic, and I appreciate their thorough and attentive care."`,
                 author: 'Neha Patel',
             },
         ];
@@ -1111,11 +1121,6 @@ function openWhatsApp() {
     window.open(`https://wa.me/${phone}`)
 }
 
-
-function requestCallback() {
-    axios.post
-}
-
 // Required by switchTheme Method
 const themes = ['light-theme', 'pastel-theme', 'earthy-theme', 'monochrome-theme', 'vibrant-theme', 'root'];
 // let currentThemeIndex = 0;
@@ -1175,38 +1180,6 @@ function switchTheme(theme) {
     document.getElementById(theme).classList.add('selected');
     userSelectedTheme = theme;
 }
-
-
-
-
-
-
-
-/**
- * 
- * 
- * navbar-title
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * footer-title
- * footer-description
- * copyright-text
- * 
- */
-
 
 // First change all the html elements to edit and add id's to them
 // Clear the user data from database and add new data in website builder form save it and open the redirected site
